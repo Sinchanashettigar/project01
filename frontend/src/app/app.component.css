@@ -1,0 +1,32 @@
+nav {
+  padding: 1rem;
+  /* background-color: rgb(8, 245, 67); */
+}
+
+.nav-list {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.nav-item {
+  text-decoration: none;
+  color: unset;
+  display: flex;
+  align-items: center;
+  color: hsl(0, 0%, 22%);
+  padding-inline: 0.25rem;
+}
+
+.nav-item mat-icon {
+  font-size: 1.25rem;
+}
+.activeLink {
+  border-bottom: 2px solid hsl(212, 100%, 30%) !important;
+}
+.activeLink span,
+.activeLink mat-icon {
+  color: hsl(212, 100%, 30%);
+}
+.activeLink span {
+  font-weight: 500;
+}

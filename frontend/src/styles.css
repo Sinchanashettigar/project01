@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+ @import "@angular/material/prebuilt-themes/indigo-pink.css"; 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family:'Times New Roman', Times, serif;
+ 
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0; 
+ margin: 0;  
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+form{
+   /* max-width: 900px; */
+  margin-inline: auto;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap:0.5rem 1.5rem;
+}
+
+.phone-input-container {
+  display: flex;
+}
+.country-code-input {
+  max-width: 80px;
+}
+
+/* .phone-number-input {
+  flex-grow: 1;
+} */
+
+
+.action-btns{
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.mat-step-text-label{
+  font-weight:bold;
+  font-size: small;
+}
