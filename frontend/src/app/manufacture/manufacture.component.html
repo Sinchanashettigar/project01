@@ -280,12 +280,12 @@
 
         <div class="phone-input-container">
           <mat-form-field appearance="outline" class="country-code-input">
-            <mat-select formControlName="countryCode">
+            <mat-select formControlName="countryCode" (selectionChange)="onCountryCodeChange($event)">
               <mat-option
                 *ngFor="let country of myCountryCodesObject"
                 [value]="'+' + country.countryCallingCode"
               >
-                (+{{ country.countryCallingCode }})
+              {{ country.countryNameEn }} (+{{ country.countryCallingCode }})
               </mat-option>
             </mat-select>
           </mat-form-field>

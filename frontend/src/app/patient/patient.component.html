@@ -1,6 +1,6 @@
 <mat-horizontal-stepper #stepper>
   <mat-step [stepControl]="myForm" errorMessage="Name is required.">
-    <form  [formGroup]="myForm">
+    <form [formGroup]="myForm">
       <ng-template matStepLabel>Provide your key details</ng-template>
       <div class="form-row">
         <mat-form-field appearance="outline">
@@ -137,12 +137,15 @@
 
         <div class="phone-input-container">
           <mat-form-field appearance="outline" class="country-code-input">
-            <mat-select formControlName="countryCode">
+            <mat-select
+              
+              formControlName="countryCode"
+            >
               <mat-option
                 *ngFor="let country of myCountryCodesObject"
                 [value]="'+' + country.countryCallingCode"
               >
-                (+{{ country.countryCallingCode }})
+                {{ country.countryNameEn }} (+{{ country.countryCallingCode }})
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -182,7 +185,7 @@
   </mat-step>
 
   <mat-step [stepControl]="myForm" errorMessage="Address is required.">
-    <form  [formGroup]="myForm">
+    <form [formGroup]="myForm">
       <ng-template matStepLabel>Provide your address.</ng-template>
 
       <div class="form-row">
@@ -255,8 +258,80 @@
     </form>
   </mat-step>
 
+  <mat-step [stepControl]="myForm" errorMessage="Name is required.">
+    <ng-template matStepLabel>Medication Information</ng-template>
+
+    <form [formGroup]="myForm">
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Vaccine Name</mat-label>
+          <input matInput formControlName="vaccinename" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Dosage Form</mat-label>
+          <input matInput formControlName="dosageform" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date of Vaccine Taken</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="vaccinedatepicker"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div
+        *ngFor="let field of additionalFields; let i = index"
+        class="additional-fields-row"
+      >
+        <div [formControlName]="'additional_' + i">
+          <mat-form-field appearance="outline">
+            <mat-label>Vaccine Name{{ i + 1 }}</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Dosage form {{ i + 1 }}</mat-label>
+            <input matInput />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Date of Vaccine Taken{{ i + 1 }}</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="example-button-container">
+        <button
+          mat-mini-fab
+          color="black"
+          (click)="addFields()"
+          aria-label="Add More Fields"
+        >
+          <mat-icon>plus_one</mat-icon>
+        </button>
+        <button mat-mini-fab color="black" (click)="removeFields()" aria-label="Remove Fields">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+       
+
+      <div class="action-btns">
+        <button mat-stroked-button matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
   <mat-step [stepControl]="myForm" errorMessage="Medical history required.">
-    <form  [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <ng-template matStepLabel>Medical History</ng-template>
 
       <div class="form-row">

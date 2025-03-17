@@ -59,6 +59,7 @@ export class ManufactureComponent implements OnInit {
       contact_person_name: ['', [Validators.required]],
       email: ['', [Validators.required, this.emailValidator]],
       countryCode: ['+91', [Validators.required]],
+      countryName: ['',Validators.required] ,
       phone_number: ['', [Validators.required, this.phoneNumberValidator]],
       description: ['', [Validators.required]],
       side_effects: ['', [Validators.required]],
@@ -185,19 +186,21 @@ export class ManufactureComponent implements OnInit {
     return Object.keys(errors).length ? errors : null;
   }
 
-  private loadCountryCodes() {
-    const rawCountryData = countryCodes.customList(
-      'countryCode',
-      '{countryCode},{countryNameEn},{countryCallingCode}'
-    );
-    this.myCountryCodesObject = Object.keys(rawCountryData).map((key) => {
+ private loadCountryCodes() {
+     const rawCountryData = countryCodes.customList(
+       'countryCode',
+       '{countryCode},{countryNameEn},{countryCallingCode}'
+     );
+     this.myCountryCodesObject = Object.keys(rawCountryData).map((key) => {
       const [countryCode, countryNameEn, countryCallingCode] =
         rawCountryData[key].split(',');
-      return { countryCode, countryNameEn, countryCallingCode };
+        return { countryCode, countryNameEn, countryCallingCode };
     });
   }
   onCountryCodeChange(event: any) {
-    const selectedCode = event.value;
+    const selectedCountry = event.value;
+    const selectedCode = selectedCountry.countryCallingCode;
+    const selectedCountryName = selectedCountry.countryNameEn;     
     let currentValue = this.vaccineForm.get('phoneNumber')?.value || '';
 
     if (!currentValue.startsWith(`+${selectedCode}`)) {
@@ -206,7 +209,7 @@ export class ManufactureComponent implements OnInit {
         ''
       )}`;
     }
-    this.vaccineForm.patchValue({ phoneNumber: currentValue });
+    this.vaccineForm.patchValue({ phoneNumber: currentValue,countryName: selectedCountryName });
   }
   ageGroups = [
     { name: 'Infant', ageRange: '0 - 1 year' },

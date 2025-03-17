@@ -5,6 +5,7 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
+  FormControl,
 } from '@angular/forms';
 
 import * as countryCodes from 'country-codes-list';
@@ -15,7 +16,7 @@ import {MatSnackBar} from '@angular/material/snack-bar'
   selector: 'app-root',
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css'],
-  encapsulation: ViewEncapsulation.None, 
+   encapsulation: ViewEncapsulation.None, 
 })
 export class PatientComponent {
   title = 'demo';
@@ -35,9 +36,14 @@ export class PatientComponent {
   states: any[] = [];
   cities: any[] = [];
 
+  fields: any[] = [];
+
+
   selectedCountry: string | null = null;
   selectedState: string | null = null;
   stateSelectedWithoutCountry: boolean = false;
+  additionalFields: string[] = [];
+  
 
   constructor(private fb: FormBuilder, private apiService: APIService,private _snackBar: MatSnackBar) {}
   ngOnInit() {
@@ -47,6 +53,23 @@ export class PatientComponent {
     this.states = State.getStatesOfCountry();
   }
 
+
+  addFields() {
+     if (this.additionalFields.length < 100)
+       {  
+      const fieldName = `additional_${this.additionalFields.length}`;
+      this.additionalFields.push(fieldName);
+      this.myForm.addControl(fieldName, new FormControl(''));
+    }}
+    removeFields() {
+      if (this.additionalFields.length > 0) {
+        const fieldName = this.additionalFields.pop(); 
+        if (fieldName) {
+          this.myForm.removeControl(fieldName); 
+        }
+      }
+    }
+
   initializeForm() {
     this.myForm = this.fb.group({
       first_name: ['', [Validators.required, this.customValidator]],
@@ -55,6 +78,7 @@ export class PatientComponent {
       dob: ['', [Validators.required, this.futureDateValidator]],
       id: ['', [Validators.required, this.idValidator]],
       countryCode: ['+91', Validators.required],
+      countryName: ['',Validators.required] ,
       phone_number: ['', [Validators.required, this.phoneNumberValidator]],
       email: ['', [Validators.required, this.emailValidator]],
 
@@ -65,6 +89,9 @@ export class PatientComponent {
       state: ['', Validators.required],
       postal_code: ['', Validators.required],
       country: ['', Validators.required],
+      vaccinename:['',Validators.required],
+      dosageform:['',Validators.required],
+      vaccinedatepicker:['',Validators.required],
       hasChronicIllness: [''],
       chronicIllnessDetails: [''],
       hasAllergies: [''],
@@ -103,6 +130,7 @@ export class PatientComponent {
         this._snackBar.open('Error occurred. Please try again.', 'OK', { duration: 5000 });
       }
     });
+    
   }
   
 
@@ -150,7 +178,10 @@ export class PatientComponent {
     });
   }
   onCountryCodeChange(event: any) {
-    const selectedCode = event.value;
+    const selectedCountry = event.value;
+    const selectedCode = selectedCountry.countryCallingCode;
+    const selectedCountryName = selectedCountry.countryNameEn; 
+    
     let currentValue = this.myForm.get('phoneNumber')?.value || '';
 
     if (!currentValue.startsWith(`+${selectedCode}`)) {
@@ -159,7 +190,7 @@ export class PatientComponent {
         ''
       )}`;
     }
-    this.myForm.patchValue({ phoneNumber: currentValue });
+    this.myForm.patchValue({ phoneNumber: currentValue,  countryName: selectedCountryName});
 
     //phone number
   }
@@ -246,15 +277,15 @@ export class PatientComponent {
   // }
   onHeightChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    this.height =target.value.replace(/\D/g, ''); // Remove non-numeric characters
+    this.height =target.value.replace(/\D/g, ''); 
     console.log('Height:', this.height);
   }
   
   onWeightChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    const numericValue = target.value.replace(/\D/g, ''); // Ensure only numeric values
+    const numericValue = target.value.replace(/\D/g, ''); 
   
-    this.weight = numericValue ? Number(numericValue) : 0; // Convert to number
+    this.weight = numericValue ? Number(numericValue) : 0;
     console.log('Weight:', this.weight);
   }
   

@@ -1,0 +1,27 @@
+.additional-fields-row > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; 
+    flex-grow: 1; 
+    
+  }
+ 
+.example-button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: start; 
+    align-items: center;
+    margin-top: 10px; 
+  }
+  .example-button-container button {
+    background-color: hwb(0 0% 100% / 0.619); 
+    color: white; 
+    border-radius: 50%; 
+    width: 40px; 
+    height: 40px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
