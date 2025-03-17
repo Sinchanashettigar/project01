@@ -89,7 +89,7 @@ export class PatientComponent {
   
     this.apiService.postData(this.myForm.value).subscribe({
       next: (response) => {
-        console.log('API Response:', response); // Log full response
+        console.log('API Response:', response); 
         if (response?.status === 'auth-01') {
           this._snackBar.open('✔ Submitted successfully', 'Done', { duration: 5000 });
           console.log('Added successfully');

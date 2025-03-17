@@ -27,6 +27,8 @@ const validateManufactureData = (data) => {
     errors.push("production date cannot be in the future");
   }
 
+  
+
   if (!data.vaccine_produced.vacc_batch) {
     errors.push("vaccine batch is required");
   }

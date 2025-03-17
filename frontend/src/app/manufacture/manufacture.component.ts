@@ -82,6 +82,30 @@ export class ManufactureComponent implements OnInit {
     });
   }
 
+  // onSubmit() {
+  //   console.log('Form submitted!', this.vaccineForm.value);
+  
+  //   this.apiService.postData(this.vaccineForm.value).subscribe({
+  //     next: (response) => {
+  //       console.log('API Response:', response); 
+  //       if (response?.status === 'auth-01') {
+  //         this._snackBar.open('✔ Submitted successfully', 'Done', { duration: 5000 });
+  //         console.log('Added successfully');
+  //       } else {
+  //         this._snackBar.open('Submission failed. Please try again.', 'OK', { duration: 5000 });
+  //         console.log('Failed');
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.error('API Error:', err);
+  //       this._snackBar.open('Error occurred. Please try again.', 'OK', { duration: 5000 });
+  //     }
+  //   });
+  // }
+  
+
+
+
   // it will prevent future date for production
   nofutureDate(control: AbstractControl): ValidationErrors | null {
     const today = new Date();
@@ -184,4 +208,15 @@ export class ManufactureComponent implements OnInit {
     }
     this.vaccineForm.patchValue({ phoneNumber: currentValue });
   }
+  ageGroups = [
+    { name: 'Infant', ageRange: '0 - 1 year' },
+    { name: 'Toddler', ageRange: '1 - 3 years' },
+    { name: 'Preschool', ageRange: '3 - 5 years' },
+    { name: 'Child', ageRange: '5 - 12 years' },
+    { name: 'Teenager', ageRange: '12 - 18 years' },
+    { name: 'Adult', ageRange: '18 - 65 years' },
+    { name: 'Senior', ageRange: '65+ years' }
+  ];
+  
+
 }

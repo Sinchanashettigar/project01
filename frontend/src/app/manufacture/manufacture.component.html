@@ -22,17 +22,16 @@
         <mat-form-field appearance="outline">
           <mat-label>Approval Status</mat-label>
           <mat-select formControlName="approval_status">
-            <mat-option value="Preclinical">Preclinical</mat-option>
+            <!-- <mat-option value="Preclinical">Preclinical</mat-option>
             <mat-option value="Phase 1 Trial">Phase 1 Trial</mat-option>
             <mat-option value="Phase 2 Trial">Phase 2 Trial</mat-option>
             <mat-option value="Phase 3 Trial">Phase 3 Trial</mat-option>
-            <mat-option value="Under Review">Under Review</mat-option>
+            <mat-option value="Under Review">Under Review</mat-option> -->
             <mat-option value="Approved">Approved</mat-option>
-            <mat-option value="Emergency Use Authorization (EUA)"
-              >Emergency Use Authorization (EUA)</mat-option
-            >
+             <!-- <mat-option value="Emergency Use Authorization (EUA)"
+              >Emergency Use Authorization (EUA)</mat-option > -->
             <mat-option value="Rejected">Rejected</mat-option>
-            <mat-option value="Withdrawn">Withdrawn</mat-option>
+            <!-- <mat-option value="Withdrawn">Withdrawn</mat-option> -->
           </mat-select>
           <mat-error
             *ngIf="vaccineForm.get('approval_status')?.hasError('required')"
@@ -54,11 +53,11 @@
           ></mat-datepicker-toggle>
           <mat-datepicker #productionPicker></mat-datepicker>
 
-          <mat-error
+          <!-- <mat-error
             *ngIf="vaccineForm.get('production_date')?.hasError('required')"
           >
             Production Date is required
-          </mat-error>
+          </mat-error> -->
           <mat-error
             *ngIf="vaccineForm.get('production_date')?.hasError('futureDate')"
           >
@@ -147,7 +146,7 @@
     <form [formGroup]="vaccineForm">
       <ng-template matStepLabel>Target AGE GROUP</ng-template>
       <div class="form-row">
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Age Group Name</mat-label>
           <input matInput formControlName="age_group_name" />
           <mat-error
@@ -155,7 +154,22 @@
           >
             Age Group Name is required
           </mat-error>
+        </mat-form-field> -->
+        <mat-form-field appearance="outline" >
+          <mat-label>Age Group</mat-label>
+          <mat-select formControlName="age_group_name" placeholder="Select Age Group">
+            <mat-option *ngFor="let group of ageGroups" [value]="group.name">
+              {{ group.name }} ({{ group.ageRange }})
+            </mat-option>
+          </mat-select>
+        
+          <mat-error *ngIf="vaccineForm.get('age_group_name')?.hasError('required')">
+            Age Group is required!
+          </mat-error>
         </mat-form-field>
+        
+
+
 
         <mat-form-field appearance="outline">
           <mat-label>Minimum Age</mat-label>
@@ -371,7 +385,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Contraindications</mat-label>
           <input matInput formControlName="contraindications" />
           <mat-error
@@ -379,7 +393,28 @@
           >
             Contraindications are required
           </mat-error>
+        </mat-form-field> -->
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Contraindications</mat-label>
+          
+          
+          <mat-icon matPrefix color="warn">warning</mat-icon>
+        
+          
+          <input matInput formControlName="contraindications"/>
+        
+        
+          <mat-hint>Example: Allergy to eggs, peanuts, shellfish</mat-hint>
+        
+         
+          <mat-error *ngIf="vaccineForm.get('contraindications')?.hasError('required')">
+             Contraindications are required!
+          </mat-error>
         </mat-form-field>
+        
+
+
       </div>
       <div class="action-btns">
         <button mat-stroked-button matStepperPrevious>Back</button>
