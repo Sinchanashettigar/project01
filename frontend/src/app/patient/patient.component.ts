@@ -5,13 +5,15 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  FormControl,
+  FormControl,FormArray
+  
 } from '@angular/forms';
 
 import * as countryCodes from 'country-codes-list';
 import { Country, State, City } from 'country-state-city';
 import { APIService } from '../api.service';
-import {MatSnackBar} from '@angular/material/snack-bar'
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-root',
   templateUrl: './patient.component.html',
@@ -37,13 +39,23 @@ export class PatientComponent {
   cities: any[] = [];
 
   fields: any[] = [];
-
-
+  
+  
+ 
   selectedCountry: string | null = null;
   selectedState: string | null = null;
   stateSelectedWithoutCountry: boolean = false;
-  additionalFields: string[] = [];
+   additionalFields: any[] = [];
+   isEditable: boolean = true;
+
+  //  editMode: { [key: string]: boolean } = {
+  //   first_name: false,
+  //  }
+
+  //  formData: any = {
+  //   first_name: '',}
   
+
 
   constructor(private fb: FormBuilder, private apiService: APIService,private _snackBar: MatSnackBar) {}
   ngOnInit() {
@@ -52,6 +64,16 @@ export class PatientComponent {
     this.countries = Country.getAllCountries();
     this.states = State.getStatesOfCountry();
   }
+  // toggleEdit(field: string) {
+  //   if (this.editMode[field]) {
+  //     // Save the updated value to the form
+  //     this.myForm.get(field)?.setValue(this.formData[field]);
+  //   } else {
+  //     // Load the current value into formData for editing
+  //     this.formData[field] = this.myForm.get(field)?.value;
+  //   }
+  //   this.editMode[field] = !this.editMode[field];
+  // }
 
 
   addFields() {
@@ -69,7 +91,9 @@ export class PatientComponent {
         }
       }
     }
-
+    
+    
+  
   initializeForm() {
     this.myForm = this.fb.group({
       first_name: ['', [Validators.required, this.customValidator]],
@@ -108,11 +132,21 @@ export class PatientComponent {
       hospitalizedDetais: [''],
       hasmedicalconditions: [''],
       medicalconditionsDetails: [''],
-      hasDietaryRestrictions:['']
+      hasDietaryRestrictions:[''],
+      isAdditionalVaccineDetailsUsed:[''],
+       additionalFields: this.fb.array([])
+
     });
   }
   onSubmit() {
+    // if (this.myForm.valid)
+       {
     console.log('Form submitted!', this.myForm.value);
+  } 
+  // else 
+  // {
+  //   alert('Please fill all required fields before proceeding.');
+  // }
   
     this.apiService.postData(this.myForm.value).subscribe({
       next: (response) => {
@@ -133,6 +167,8 @@ export class PatientComponent {
     
   }
   
+  
+
 
 
   customValidator(control: AbstractControl): { [key: string]: any } | null {

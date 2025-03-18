@@ -1,5 +1,5 @@
 <mat-horizontal-stepper #stepper>
-  <mat-step [stepControl]="myForm" errorMessage="Name is required.">
+  <mat-step [stepControl]="myForm" errorMessage="Name is required."[editable]="isEditable">
     <form [formGroup]="myForm">
       <ng-template matStepLabel>Provide your key details</ng-template>
       <div class="form-row">
@@ -331,7 +331,7 @@
   </mat-step>
 
   <mat-step [stepControl]="myForm" errorMessage="Medical history required.">
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="myForm">
       <ng-template matStepLabel>Medical History</ng-template>
 
       <div class="form-row">
@@ -448,9 +448,7 @@
         </div>
 
         <mat-form-field appearance="outline">
-          <mat-label
-            >Do you have any other medical concerns ?(Yes/No)</mat-label
-          >
+          <mat-label>Do you have any other medical concerns ?(Yes/No)</mat-label>
           <input matInput formControlName="hasmedicalconditions" />
         </mat-form-field>
         <div
@@ -467,8 +465,91 @@
 
       <div class="action-btns">
         <button mat-stroked-button matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperDone>Submit</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
+
+  <mat-step [stepControl]="myForm" (ngSubmit)="onSubmit()">
+    <ng-template matStepLabel>Confirm Details</ng-template>
+  
+    <div class="review-section" >
+      <h3>Personal Information</h3>
+      <!-- <p>
+        <strong>First Name:</strong>
+        <span *ngIf="!editMode.first_name">{{ myForm.get('first_name')?.value }}</span>
+        <input *ngIf="editMode.first_name" type="text" [(ngModel)]="formData.first_name">
+        <mat-icon (click)="toggleEdit('first_name')">{{ editMode.first_name ? 'check' : 'edit' }}</mat-icon>
+      </p> -->
+      <p><strong>First Name:</strong> {{ myForm.get('first_name')?.value }}</p>
+      <p><strong>Last Name:</strong> {{ myForm.get('last_name')?.value }}</p>
+      <p><strong>Date of Birth:</strong> {{ myForm.get('dob')?.value | date }}</p>
+      <p><strong>Gender:</strong> {{ myForm.get('gender')?.value }}</p>
+      <p><strong>Blood Group:</strong> {{ myForm.get('bloodgroup')?.value }}</p>
+      <p><strong>Email:</strong> {{ myForm.get('email')?.value }}</p>
+      <p><strong>Phone:</strong> {{ myForm.get('countryCode')?.value }} {{ myForm.get('phone_number')?.value }}</p>
+  
+      <h3>Address Details</h3>
+      <p><strong>Address:</strong> {{ myForm.get('Address')?.value }}</p>
+      <p><strong>Street:</strong> {{ myForm.get('street')?.value }}</p>
+      <p><strong>Postal Code:</strong> {{ myForm.get('postal_code')?.value }}</p>
+      <p><strong>Country:</strong> {{ myForm.get('country')?.value }}</p>
+      <p><strong>State:</strong> {{ myForm.get('state')?.value }}</p>
+      <p><strong>City:</strong> {{ myForm.get('city')?.value }}</p>
+  
+      <h3>Medication Information</h3>
+      <p><strong>Vaccine Name:</strong> {{ myForm.get('vaccinename')?.value }}</p>
+      <p><strong>Dosage Form:</strong> {{ myForm.get('dosageform')?.value }}</p>
+      <p><strong>Date of Vaccine Taken:</strong> {{ myForm.get('vaccinedatepicker')?.value | date }}</p>
+
+    
+
+
+  
+      <h3>Medical History</h3>
+      <p><strong>Chronic Illness:</strong> {{ myForm.get('hasChronicIllness')?.value }}</p>
+      <p *ngIf="myForm.get('hasChronicIllness')?.value === 'Yes'">
+        <strong>Details:</strong> {{ myForm.get('chronicIllnessDetails')?.value }}
+      </p>
+  
+      <p><strong>Allergies:</strong> {{ myForm.get('hasAllergies')?.value }}</p>
+      <p *ngIf="myForm.get('hasAllergies')?.value === 'Yes'">
+        <strong>Details:</strong> {{ myForm.get('allergyDetails')?.value }}
+      </p>
+  
+      <p><strong>Current Medications:</strong> {{ myForm.get('hasmedications')?.value }}</p>
+      <p *ngIf="myForm.get('hasmedications')?.value === 'Yes'">
+        <strong>Details:</strong> {{ myForm.get('medicationsDetails')?.value }}
+      </p>
+  
+      <p><strong>Previous Surgeries:</strong> {{ myForm.get('hassurgeries')?.value }}</p>
+      <p *ngIf="myForm.get('hassurgeries')?.value === 'Yes'">
+        <strong>Details:</strong> {{ myForm.get('surgeriesDetails')?.value }}
+      </p>
+  
+      <p><strong>Hospitalized Before:</strong> {{ myForm.get('hashospitalized')?.value }}</p>
+      <p *ngIf="myForm.get('hashospitalized')?.value === 'Yes'">
+        <strong>Details:</strong> {{ myForm.get('hospitalizedDetais')?.value }}
+      </p>
+  
+      <p><strong>Dietary Restrictions:</strong> {{ myForm.get('hasDietaryRestrictions')?.value }}</p>
+      <p *ngIf="myForm.get('hasDietaryRestrictions')?.value === 'Yes'">
+        <strong>Details:</strong> {{ myForm.get('dietaryRestrictionsDetails')?.value }}
+      </p>
+  
+      <p><strong>Other Medical Concerns:</strong> {{ myForm.get('hasmedicalconditions')?.value }}</p>
+      <p *ngIf="myForm.get('hasmedicalconditions')?.value === 'Yes'">
+        <strong>Details:</strong> {{ myForm.get('medicalconditionsDetails')?.value }}
+      </p>
+    </div>
+
+    <p><strong> Review Your Information and Submit</strong> </p>
+
+  
+    <div class="action-btns">
+      <button mat-stroked-button matStepperPrevious>Back</button>
+      <button mat-flat-button color="primary" (click)="onSubmit()">Submit</button>
+    </div>
+  </mat-step>
+
 </mat-horizontal-stepper>

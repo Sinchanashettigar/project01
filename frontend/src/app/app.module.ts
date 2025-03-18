@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ManufactureComponent } from './manufacture/manufacture.component';
 import { PatientComponent } from './patient/patient.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ ManufactureComponent,
    MatSelectModule,
    MatInputModule,
    MatFormFieldModule,
+   MatTableModule
    
   ],
   providers: [],
