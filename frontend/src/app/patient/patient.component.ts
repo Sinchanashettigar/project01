@@ -1,24 +1,24 @@
-import { Component,ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   AbstractControl,
   ValidationErrors,
   FormBuilder,
   FormGroup,
   Validators,
-  FormControl,FormArray
-  
+  FormControl,
+  FormArray,
 } from '@angular/forms';
 
 import * as countryCodes from 'country-codes-list';
 import { Country, State, City } from 'country-state-city';
 import { APIService } from '../api.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css'],
-   encapsulation: ViewEncapsulation.None, 
+  encapsulation: ViewEncapsulation.None,
 })
 export class PatientComponent {
   title = 'demo';
@@ -26,7 +26,7 @@ export class PatientComponent {
   myForm: FormGroup;
 
   isLinear = true;
-  
+
   height: string = '';
   weight: number = 0;
   myCountryCodesObject: {
@@ -39,61 +39,41 @@ export class PatientComponent {
   cities: any[] = [];
 
   fields: any[] = [];
-  
-  
- 
+
   selectedCountry: string | null = null;
   selectedState: string | null = null;
   stateSelectedWithoutCountry: boolean = false;
-   additionalFields: any[] = [];
-   isEditable: boolean = true;
+  additionalFields: any[] = [];
 
-  //  editMode: { [key: string]: boolean } = {
-  //   first_name: false,
-  //  }
+  constructor(
+    private fb: FormBuilder,
+    private apiService: APIService,
+    private _snackBar: MatSnackBar
+  ) {}
 
-  //  formData: any = {
-  //   first_name: '',}
-  
-
-
-  constructor(private fb: FormBuilder, private apiService: APIService,private _snackBar: MatSnackBar) {}
   ngOnInit() {
     this.initializeForm();
     this.loadCountryCodes();
     this.countries = Country.getAllCountries();
     this.states = State.getStatesOfCountry();
   }
-  // toggleEdit(field: string) {
-  //   if (this.editMode[field]) {
-  //     // Save the updated value to the form
-  //     this.myForm.get(field)?.setValue(this.formData[field]);
-  //   } else {
-  //     // Load the current value into formData for editing
-  //     this.formData[field] = this.myForm.get(field)?.value;
-  //   }
-  //   this.editMode[field] = !this.editMode[field];
-  // }
-
 
   addFields() {
-     if (this.additionalFields.length < 100)
-       {  
+    if (this.additionalFields.length < 100) {
       const fieldName = `additional_${this.additionalFields.length}`;
       this.additionalFields.push(fieldName);
       this.myForm.addControl(fieldName, new FormControl(''));
-    }}
-    removeFields() {
-      if (this.additionalFields.length > 0) {
-        const fieldName = this.additionalFields.pop(); 
-        if (fieldName) {
-          this.myForm.removeControl(fieldName); 
-        }
+    }
+  }
+  removeFields() {
+    if (this.additionalFields.length > 0) {
+      const fieldName = this.additionalFields.pop();
+      if (fieldName) {
+        this.myForm.removeControl(fieldName);
       }
     }
-    
-    
-  
+  }
+
   initializeForm() {
     this.myForm = this.fb.group({
       first_name: ['', [Validators.required, this.customValidator]],
@@ -102,20 +82,20 @@ export class PatientComponent {
       dob: ['', [Validators.required, this.futureDateValidator]],
       id: ['', [Validators.required, this.idValidator]],
       countryCode: ['+91', Validators.required],
-      countryName: ['',Validators.required] ,
+      countryName: ['', Validators.required],
       phone_number: ['', [Validators.required, this.phoneNumberValidator]],
       email: ['', [Validators.required, this.emailValidator]],
 
       bloodgroup: ['', [Validators.required]],
-      Address:['',[Validators.required]],
+      Address: ['', [Validators.required]],
       street: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
       postal_code: ['', Validators.required],
       country: ['', Validators.required],
-      vaccinename:['',Validators.required],
-      dosageform:['',Validators.required],
-      vaccinedatepicker:['',Validators.required],
+      vaccinename: ['', Validators.required],
+      dosageform: ['', Validators.required],
+      vaccinedatepicker: ['', Validators.required],
       hasChronicIllness: [''],
       chronicIllnessDetails: [''],
       hasAllergies: [''],
@@ -132,44 +112,11 @@ export class PatientComponent {
       hospitalizedDetais: [''],
       hasmedicalconditions: [''],
       medicalconditionsDetails: [''],
-      hasDietaryRestrictions:[''],
-      isAdditionalVaccineDetailsUsed:[''],
-       additionalFields: this.fb.array([])
-
+      hasDietaryRestrictions: [''],
+      isAdditionalVaccineDetailsUsed: [''],
+      additionalFields: this.fb.array([]),
     });
   }
-  onSubmit() {
-    // if (this.myForm.valid)
-       {
-    console.log('Form submitted!', this.myForm.value);
-  } 
-  // else 
-  // {
-  //   alert('Please fill all required fields before proceeding.');
-  // }
-  
-    this.apiService.postData(this.myForm.value).subscribe({
-      next: (response) => {
-        console.log('API Response:', response); 
-        if (response?.status === 'auth-01') {
-          this._snackBar.open('✔ Submitted successfully', 'Done', { duration: 5000 });
-          console.log('Added successfully');
-        } else {
-          this._snackBar.open('Submission failed. Please try again.', 'OK', { duration: 5000 });
-          console.log('Failed');
-        }
-      },
-      error: (err) => {
-        console.error('API Error:', err);
-        this._snackBar.open('Error occurred. Please try again.', 'OK', { duration: 5000 });
-      }
-    });
-    
-  }
-  
-  
-
-
 
   customValidator(control: AbstractControl): { [key: string]: any } | null {
     const value = control.value;
@@ -192,7 +139,7 @@ export class PatientComponent {
     if (!control.value) return null;
 
     const today = new Date();
-   
+
     const selectedDate = new Date(control.value);
 
     return selectedDate > today
@@ -216,8 +163,8 @@ export class PatientComponent {
   onCountryCodeChange(event: any) {
     const selectedCountry = event.value;
     const selectedCode = selectedCountry.countryCallingCode;
-    const selectedCountryName = selectedCountry.countryNameEn; 
-    
+    const selectedCountryName = selectedCountry.countryNameEn;
+
     let currentValue = this.myForm.get('phoneNumber')?.value || '';
 
     if (!currentValue.startsWith(`+${selectedCode}`)) {
@@ -226,7 +173,10 @@ export class PatientComponent {
         ''
       )}`;
     }
-    this.myForm.patchValue({ phoneNumber: currentValue,  countryName: selectedCountryName});
+    this.myForm.patchValue({
+      phoneNumber: currentValue,
+      countryName: selectedCountryName,
+    });
 
     //phone number
   }
@@ -300,30 +250,45 @@ export class PatientComponent {
     this.myForm.get('city')?.enable();
     this.myForm.get('city')?.reset();
   }
-  // onHeightWeightChange(event: any) {
-  //   const value = event.target.value;
-  //   const regex = /(\d+)\s*cm.*?(\d+)\s*kg/;
-  //   const match = value.match(regex);
-  //   if (match) {
-  //     this.myForm.patchValue({
-  //       height: match[1],
-  //       weight: match[2],
-  //     });
-  //   }
-  // }
+
   onHeightChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    this.height =target.value.replace(/\D/g, ''); 
+    this.height = target.value.replace(/\D/g, '');
     console.log('Height:', this.height);
   }
-  
+
   onWeightChange(event: Event) {
     const target = event.target as HTMLInputElement;
-    const numericValue = target.value.replace(/\D/g, ''); 
-  
+    const numericValue = target.value.replace(/\D/g, '');
+
     this.weight = numericValue ? Number(numericValue) : 0;
     console.log('Weight:', this.weight);
   }
-  
-  
+  onSubmit() {
+    {
+      console.log('Form submitted!', this.myForm.value);
+    }
+    this.apiService.postData(this.myForm.value).subscribe({
+      next: (response) => {
+        console.log('API Response:', response);
+        if (response?.status === 'auth-01') {
+          this._snackBar.open('✔ Submitted successfully', 'Done', {
+            duration: 5000,
+          });
+          console.log('Added successfully');
+        } else {
+          this._snackBar.open('Submission failed. Please try again.', 'OK', {
+            duration: 5000,
+          });
+          console.log('Failed');
+        }
+      },
+      error: (err) => {
+        console.error('API Error:', err);
+        this._snackBar.open('Error occurred. Please try again.', 'OK', {
+          duration: 5000,
+        });
+      },
+    });
+  }
 }
