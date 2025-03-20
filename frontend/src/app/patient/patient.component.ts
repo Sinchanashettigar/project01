@@ -150,18 +150,9 @@ export class PatientComponent {
      });
   }
   
-  // get additionalFields() {
-  //   return this.myForm.get("additionalFields") as FormArray;
-  // }
+ 
   
-  
-// addAdditionalField() {
-//   this.additionalFields.push(this.fb.group({
-//     vaccinename: [''],
-//     dosageform: [''],
-//     date: ['']
-//   }));
-// }
+
   customValidator(control: AbstractControl): { [key: string]: any } | null {
     const value = control.value;
     let errors: any = {};

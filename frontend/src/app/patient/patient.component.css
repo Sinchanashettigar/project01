@@ -9,33 +9,18 @@
   }
   .example-button-container button {
     background-color: rgba(0, 0, 0, 0.53); 
-    /* background-color: hwb(0 0% 100% / 0.532);  */
-    color: white; 
+   color: white; 
     border-radius: 50%; 
     width: 40px; 
     height: 40px; 
-    /* display: flex; */
-    align-items: center;
+   align-items: center;
     justify-content: center;
     
   }
-  .additional-vaccine-container {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #ddd; 
-     background-color: #f9f9f9; 
-     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  .additional-vaccine-container h4 {
-   font-size: 18px;
-    margin-bottom: 10px;
-    font-family: cursive;
-    padding-bottom: 5px;
-  }
-  
+
   .vaccine-form-container {
     display: flex;
+    flex-direction: row; 
     flex-wrap: wrap;
     gap: 15px;
     padding: 15px;
@@ -43,4 +28,35 @@
     border-radius: 8px;
     
 
+  } 
+
+   .additional-vaccine-container {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    gap: 20px; 
+    padding: 8px; 
+    border-radius: 8px;
+   margin-bottom: 10px; 
   }
+  
+ 
+.additional-vaccine-container h4 {
+  margin: 0;
+  white-space: nowrap; 
+  font-size: 15px;
+  font-weight: bold;
+}
+  .additional-vaccine-container p {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+    min-width: 250px;
+    text-align:left;
+  }
+   
+
+  
+  
