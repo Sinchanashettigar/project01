@@ -58,22 +58,48 @@ export class PatientComponent {
     this.states = State.getStatesOfCountry();
   }
 
+  // addFields() {
+  //   if (this.additionalFields.length < 100) {
+  //     const fieldName = `vaccine_${this.additionalFields.length}`;
+  //     this.additionalFields.push(fieldName);
+  //     this.myForm.addControl(fieldName, new FormControl(''));
+  //     console.log(this.myForm);
+  //     console.log(this.myForm.get("additionalFields" )?.value);
+       
+  //   }
+  // }
+  // removeFields() {
+  //   if (this.additionalFields.length > 0) {
+  //     const fieldName = this.additionalFields.pop();
+  //     if (fieldName) {
+  //       this.myForm.removeControl(fieldName);
+  //     }
+  //   }
+  // }
   addFields() {
     if (this.additionalFields.length < 100) {
-      const fieldName = `additional_${this.additionalFields.length}`;
-      this.additionalFields.push(fieldName);
-      this.myForm.addControl(fieldName, new FormControl(''));
+      const index = this.additionalFields.length;
+      this.additionalFields.push(index); // Store index instead of string names
+  
+      // Add controls dynamically
+      this.myForm.addControl(`vaccine_${index}`, new FormControl(''));
+      this.myForm.addControl(`dosageform_${index}`, new FormControl(''));
+      this.myForm.addControl(`date_${index}`, new FormControl(''));
+      
+      console.log(this.myForm);
     }
   }
   removeFields() {
     if (this.additionalFields.length > 0) {
-      const fieldName = this.additionalFields.pop();
-      if (fieldName) {
-        this.myForm.removeControl(fieldName);
+      const index = this.additionalFields.pop();
+      if (index !== undefined) {
+        this.myForm.removeControl(`vaccine_${index}`);
+        this.myForm.removeControl(`dosageform_${index}`);
+        this.myForm.removeControl(`date_${index}`);
       }
     }
   }
-
+  
   initializeForm() {
     this.myForm = this.fb.group({
       first_name: ['', [Validators.required, this.customValidator]],
@@ -114,10 +140,28 @@ export class PatientComponent {
       medicalconditionsDetails: [''],
       hasDietaryRestrictions: [''],
       isAdditionalVaccineDetailsUsed: [''],
-      additionalFields: this.fb.array([]),
-    });
-  }
+//       vacc1: [''],
+    
+//       dosageform1:[''],
+//  dateofvaccine1:[''],
 
+     additionalFields: this.fb.array([   ]),
+    
+     });
+  }
+  
+  // get additionalFields() {
+  //   return this.myForm.get("additionalFields") as FormArray;
+  // }
+  
+  
+// addAdditionalField() {
+//   this.additionalFields.push(this.fb.group({
+//     vaccinename: [''],
+//     dosageform: [''],
+//     date: ['']
+//   }));
+// }
   customValidator(control: AbstractControl): { [key: string]: any } | null {
     const value = control.value;
     let errors: any = {};

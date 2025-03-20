@@ -1,5 +1,5 @@
 <mat-horizontal-stepper #stepper>
-  <mat-step [stepControl]="vaccineForm" errorMessage="Name is required.">
+  <mat-step [stepControl]="vaccineForm">
     <form [formGroup]="vaccineForm">
       <ng-template matStepLabel>Vaccine Produced</ng-template>
       <div class="form-row">
@@ -28,7 +28,7 @@
             <mat-option value="Phase 3 Trial">Phase 3 Trial</mat-option>
             <mat-option value="Under Review">Under Review</mat-option> -->
             <mat-option value="Approved">Approved</mat-option>
-             <!-- <mat-option value="Emergency Use Authorization (EUA)"
+            <!-- <mat-option value="Emergency Use Authorization (EUA)"
               >Emergency Use Authorization (EUA)</mat-option > -->
             <mat-option value="Rejected">Rejected</mat-option>
             <!-- <mat-option value="Withdrawn">Withdrawn</mat-option> -->
@@ -53,11 +53,6 @@
           ></mat-datepicker-toggle>
           <mat-datepicker #productionPicker></mat-datepicker>
 
-          <!-- <mat-error
-            *ngIf="vaccineForm.get('production_date')?.hasError('required')"
-          >
-            Production Date is required
-          </mat-error> -->
           <mat-error
             *ngIf="vaccineForm.get('production_date')?.hasError('futureDate')"
           >
@@ -142,34 +137,29 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="vaccineForm" errorMessage="AGE GROUP  is required.">
+  <mat-step [stepControl]="vaccineForm">
     <form [formGroup]="vaccineForm">
       <ng-template matStepLabel>Target AGE GROUP</ng-template>
+      
+      
       <div class="form-row">
-        <!-- <mat-form-field appearance="outline">
-          <mat-label>Age Group Name</mat-label>
-          <input matInput formControlName="age_group_name" />
-          <mat-error
-            *ngIf="vaccineForm.get('age_group_name')?.hasError('required')"
-          >
-            Age Group Name is required
-          </mat-error>
-        </mat-form-field> -->
-        <mat-form-field appearance="outline" >
+        <mat-form-field appearance="outline">
           <mat-label>Age Group</mat-label>
-          <mat-select formControlName="age_group_name" placeholder="Select Age Group">
+          <mat-select
+            formControlName="age_group_name"
+            placeholder="Select Age Group"
+          >
             <mat-option *ngFor="let group of ageGroups" [value]="group.name">
               {{ group.name }} ({{ group.ageRange }})
             </mat-option>
           </mat-select>
-        
-          <mat-error *ngIf="vaccineForm.get('age_group_name')?.hasError('required')">
+
+          <mat-error
+            *ngIf="vaccineForm.get('age_group_name')?.hasError('required')"
+          >
             Age Group is required!
           </mat-error>
         </mat-form-field>
-        
-
-
 
         <mat-form-field appearance="outline">
           <mat-label>Minimum Age</mat-label>
@@ -199,10 +189,7 @@
     </form>
   </mat-step>
 
-  <mat-step
-    [stepControl]="vaccineForm"
-    errorMessage="Contact Information is required."
-  >
+  <mat-step [stepControl]="vaccineForm">
     <form [formGroup]="vaccineForm">
       <ng-template matStepLabel>Contact Information </ng-template>
       <div class="form-row">
@@ -239,16 +226,6 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- <mat-form-field appearance="outline" >
-        <mat-label>Manufacture Name</mat-label>
-        <input matInput formControlName="manufacture_name" />
-        <mat-error
-          *ngIf="vaccineForm.get('manufacture_name')?.hasError('required')"
-        >
-          Manufacture Name is required
-        </mat-error>
-      </mat-form-field> -->
-
         <mat-form-field appearance="outline">
           <mat-label>Contact person name</mat-label>
           <input matInput formControlName="contact_person_name" />
@@ -280,50 +257,51 @@
 
         <div class="phone-input-container">
           <mat-form-field appearance="outline" class="country-code-input">
-            <mat-select formControlName="countryCode" (selectionChange)="onCountryCodeChange($event)">
+            <mat-select
+              formControlName="countryCode"
+              (selectionChange)="onCountryCodeChange($event)"
+            >
               <mat-option
                 *ngFor="let country of myCountryCodesObject"
                 [value]="'+' + country.countryCallingCode"
               >
-              {{ country.countryNameEn }} (+{{ country.countryCallingCode }})
+                {{ country.countryNameEn }} (+{{ country.countryCallingCode }})
               </mat-option>
             </mat-select>
           </mat-form-field>
 
-            <mat-form-field appearance="outline" class="phone-number-input">
-              <mat-label>Phone Number</mat-label>
-              <input
-                matInput
-                type="tel"
-                formControlName="phone_number"
-                maxlength="10"
-                placeholder="9876542310"
-              />
+          <mat-form-field appearance="outline" class="phone-number-input">
+            <mat-label>Phone Number</mat-label>
+            <input
+              matInput
+              type="tel"
+              formControlName="phone_number"
+              maxlength="10"
+              placeholder="9876542310"
+            />
 
-              <mat-error
-                *ngIf="vaccineForm.get('phone_number')?.hasError('required')"
-              >
-                Phone number is required
-              </mat-error>
+            <mat-error
+              *ngIf="vaccineForm.get('phone_number')?.hasError('required')"
+            >
+              Phone number is required
+            </mat-error>
 
-              <mat-error
-                *ngIf="
-                  vaccineForm.get('phone_number')?.hasError('invalidCharacters')
-                "
-              >
-                {{
-                  vaccineForm.get("phone_number")?.getError("invalidCharacters")
-                }}
-              </mat-error>
+            <mat-error
+              *ngIf="
+                vaccineForm.get('phone_number')?.hasError('invalidCharacters')
+              "
+            >
+              {{
+                vaccineForm.get("phone_number")?.getError("invalidCharacters")
+              }}
+            </mat-error>
 
-              <mat-error
-                *ngIf="
-                  vaccineForm.get('phone_number')?.hasError('invalidLength')
-                "
-              >
-                {{ vaccineForm.get("phone_number")?.getError("invalidLength") }}
-              </mat-error>
-            </mat-form-field>
+            <mat-error
+              *ngIf="vaccineForm.get('phone_number')?.hasError('invalidLength')"
+            >
+              {{ vaccineForm.get("phone_number")?.getError("invalidLength") }}
+            </mat-error>
+          </mat-form-field>
         </div>
       </div>
       <div class="action-btns">
@@ -333,11 +311,8 @@
     </form>
   </mat-step>
 
-  <mat-step
-    [stepControl]="vaccineForm"
-    errorMessage="Vaccine details is required."
-  >
-    <form [formGroup]="vaccineForm" (ngSubmit)="onSubmit()">
+  <mat-step [stepControl]="vaccineForm">
+    <form [formGroup]="vaccineForm">
       <ng-template matStepLabel>Vaccine Details</ng-template>
 
       <div class="form-row">
@@ -385,92 +360,147 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline">
           <mat-label>Contraindications</mat-label>
+
+          <mat-icon matPrefix color="warn">warning</mat-icon>
+
           <input matInput formControlName="contraindications" />
+
+          <mat-hint>Example: Allergy to eggs, peanuts, shellfish</mat-hint>
+
           <mat-error
             *ngIf="vaccineForm.get('contraindications')?.hasError('required')"
           >
-            Contraindications are required
-          </mat-error>
-        </mat-form-field> -->
-
-        <mat-form-field appearance="outline" >
-          <mat-label>Contraindications</mat-label>
-          
-          
-          <mat-icon matPrefix color="warn">warning</mat-icon>
-        
-          
-          <input matInput formControlName="contraindications"/>
-        
-        
-          <mat-hint>Example: Allergy to eggs, peanuts, shellfish</mat-hint>
-        
-         
-          <mat-error *ngIf="vaccineForm.get('contraindications')?.hasError('required')">
-             Contraindications are required!
+            Contraindications are required!
           </mat-error>
         </mat-form-field>
-        
-
-
       </div>
       <div class="action-btns">
         <button mat-stroked-button matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperDone>Done</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
-</mat-horizontal-stepper>
 
+  <mat-step [stepControl]="vaccineForm" (ngSubmit)="onSubmit()">
+    <ng-template matStepLabel>Confirm Details</ng-template>
 
+    <div class="review-section">
+      <h3>Vaccine Produced</h3>
+      <div class="personal-info">
+        <p>
+          <strong>Vaccine Name:</strong>
+          {{ vaccineForm.get("vacc_name")?.value }}
+        </p>
+        <p>
+          <strong>Vaccine type:</strong> {{ vaccineForm.get("vacc_type")?.value }}
+        </p>
+        <p>
+          <strong>Approval Status:</strong>
+          {{ vaccineForm.get("approval_status")?.value }}
+        </p>
+        <!-- <p>
+          <strong>Production date:</strong>
+          {{ vaccineForm.get("gender")?.value }}
+        </p> -->
+        <p>
+          <strong>Production date:</strong>
+          {{ vaccineForm.get("production_date")?.value }}
+        </p>
+        <p>
+          <strong>Expiry date:</strong>
+          {{ vaccineForm.get("expiry_date")?.value }}
+        </p>
+        <p>
+          <strong>Vaccine batch:</strong>
+          {{ vaccineForm.get("vacc_batch")?.value }}
+        </p>
+        <!-- <p>
+          <strong>dosage instruction:</strong>
+          {{ vaccineForm.get("dosage_instruction")?.value }}
+        </p> -->
+        <p>
+          <strong>dosage before:</strong>
+          {{ vaccineForm.get("dosage_before")?.value }}
+        </p>
+        <p>
+          <strong>dosage after:</strong>
+          {{ vaccineForm.get("dosage_after")?.value }}
+        </p>
+        <p>
+          <strong> dosage frequency:</strong>
+          {{ vaccineForm.get("dosage_frequency")?.value }}
+        </p>
+      </div>
 
-<!-- <mat-step [stepControl]="myForm" (ngSubmit)="onSubmit()">
-  <ng-template matStepLabel>Confirm Details</ng-template>
+      <h3>Target Age Group</h3>
+      <div class="personal-info">
+        <p>
+          <strong>Age group name:</strong>
+          {{ vaccineForm.get("age_group_name")?.value }}
+        </p>
+        <p>
+          <strong>Minimum age:</strong>
+          {{ vaccineForm.get("minimum_age")?.value }}
+        </p>
+        <p>
+          <strong>Maximum age:</strong>
+          {{ vaccineForm.get("maximum_age")?.value }}
+        </p>
+      </div>
 
-  <div class="review-section" >
-    <h3>Vaccine Produced</h3>
-    
-    <p><strong>Vaccine Name:</strong> {{ vaccineForm.get('vacc_name')?.value }}</p>
-    <p><strong>Last Name:</strong> {{ vaccineForm.get('vacc_type')?.value }}</p>
-    <p><strong>Approval Status:</strong> {{ vaccineForm.get('approval_status')?.value | date }}</p>
-    <p><strong>Production date:</strong> {{ vaccineForm.get('gender')?.value }}</p>
-    <p><strong>Blood Group:</strong> {{ vaccineForm.get('production_date')?.value }}</p>
-    <p><strong>Expiry date:</strong> {{ vaccineForm.get('expiry_date')?.value }}</p>
-    <p><strong>Vaccine batch:</strong> {{ vaccineForm.get('vacc_batch')?.value }}</p>
-    <p><strong>dosage instruction:</strong> {{ vaccineForm.get('dosage_instruction')?.value }}</p>
-    <p><strong>dosage before:</strong> {{ vaccineForm.get('dosage_before')?.value }}</p>
-    <p><strong>dosage after:</strong> {{ vaccineForm.get('dosage_after')?.value }}</p>
-    <p><strong> dosage frequency:</strong> {{ vaccineForm.get('dosage_frequency')?.value }}</p>
-
-    <h3>Target Age Group</h3>
-    <p><strong>Age group name:</strong> {{ vaccineForm.get('age_group_name')?.value }}</p>
-    <p><strong>Minimum age:</strong> {{ vaccineForm.get('minimum_age')?.value }}</p>
-    <p><strong>Maximum age:</strong> {{ vaccineForm.get('maximum_age')?.value }}</p>
-    
-
-   
       <h3>Contact Information</h3>
-    <p><strong>Manufacture name:</strong> {{ vaccineForm.get('manufacture_name')?.value }}</p>
-        <p><strong>Established year:</strong> {{ vaccineForm.get('established_year')?.value }}</p>
-       <p><strong>Contact person name:</strong> {{ vaccineForm.get('contact_person_name')?.value }}</p>
-    <p><strong>Email:</strong> {{ vaccineForm.get('email')?.value }}</p>
-    <p><strong>Phone Number:</strong> {{ vaccineForm.get('countryCode')?.value }} {{ vaccineForm.get('phone_number')?.value }}</p>
-    
+      <div class="personal-info">
+        <p>
+          <strong>Manufacture name:</strong>
+          {{ vaccineForm.get("manufacture_name")?.value }}
+        </p>
+        <p>
+          <strong>Established year:</strong>
+          {{ vaccineForm.get("established_year")?.value }}
+        </p>
+        <p>
+          <strong>Contact person name:</strong>
+          {{ vaccineForm.get("contact_person_name")?.value }}
+        </p>
+        <p><strong>Email:</strong> {{ vaccineForm.get("email")?.value }}</p>
+        <p>
+          <strong>Phone Number:</strong>
+          {{ vaccineForm.get("countryCode")?.value }}
+          {{ vaccineForm.get("phone_number")?.value }}
+        </p>
+      </div>
 
-      <h3>accine Details</h3>
-        <p><strong>Description:</strong> {{ vaccineForm.get('description')?.value }}</p>
-        <p><strong>Side effects:</strong> {{ vaccineForm.get('side_effects')?.value }}</p>
-       <p><strong>Contraindications:</strong> {{ vaccineForm.get('contraindications')?.value }}</p>
-    
+      <h3>Vaccine Details</h3>
+      <div class="personal-info">
+        <p>
+          <strong>Description:</strong>
+          {{ vaccineForm.get("description")?.value }}
+        </p>
+        <p>
+          <strong>dosage instruction:</strong>
+          {{ vaccineForm.get("dosage_instruction")?.value }}
+        </p> 
+        <p>
+          <strong>Side effects:</strong>
+          {{ vaccineForm.get("side_effects")?.value }}
+        </p>
+        <p>
+          <strong>Contraindications:</strong>
+          {{ vaccineForm.get("contraindications")?.value }}
+        </p>
+      </div>
 
+      <p><strong> Review Your Information and Submit</strong></p>
 
-    
-
-    
-
-   
-
-  <p><strong> Review Your Information and Submit</strong> </p> -->
-
+      <div class="action-btns">
+        <button mat-stroked-button matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" (click)="onSubmit()">
+          Submit
+        </button>
+      </div>
+     
+    </div></mat-step
+  ></mat-horizontal-stepper
+>
