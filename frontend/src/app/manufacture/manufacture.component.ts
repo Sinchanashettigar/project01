@@ -67,44 +67,6 @@ export class ManufactureComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log('Form submitted!', this.vaccineForm.value);
-    this.apiService.postData1(this.vaccineForm.value).subscribe((response) => {
-      if(response.status === "auth-01"){
-        this._snackBar.open(" ✔ submitted sucessfully ", "Done", {
-          duration: 5000,
-        });
-        console.log("Added sucessfully");
-        }else{
-          console.log("Failed");
-          
-        }
-
-    });
-  }
-
-  // onSubmit() {
-  //   console.log('Form submitted!', this.vaccineForm.value);
-  
-  //   this.apiService.postData(this.vaccineForm.value).subscribe({
-  //     next: (response) => {
-  //       console.log('API Response:', response); 
-  //       if (response?.status === 'auth-01') {
-  //         this._snackBar.open('✔ Submitted successfully', 'Done', { duration: 5000 });
-  //         console.log('Added successfully');
-  //       } else {
-  //         this._snackBar.open('Submission failed. Please try again.', 'OK', { duration: 5000 });
-  //         console.log('Failed');
-  //       }
-  //     },
-  //     error: (err) => {
-  //       console.error('API Error:', err);
-  //       this._snackBar.open('Error occurred. Please try again.', 'OK', { duration: 5000 });
-  //     }
-  //   });
-  // }
-  
-
 
 
   // it will prevent future date for production
@@ -220,6 +182,24 @@ export class ManufactureComponent implements OnInit {
     { name: 'Adult', ageRange: '18 - 65 years' },
     { name: 'Senior', ageRange: '65+ years' }
   ];
+
+
   
+  onSubmit() {
+    console.log('Form submitted!', this.vaccineForm.value);
+    this.apiService.postData1(this.vaccineForm.value).subscribe((response) => {
+      if(response.status === "auth-01"){
+        this._snackBar.open(" ✔ submitted sucessfully ", "Done", {
+          duration: 5000,
+        });
+        console.log("Added sucessfully");
+        }else{
+          console.log("Failed");
+          
+        }
+
+    });
+  }
+
 
 }
