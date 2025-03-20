@@ -9,6 +9,7 @@ import {
 import * as countryCodes from 'country-codes-list';
 import { APIService } from '../api.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manufacture',
@@ -23,6 +24,7 @@ export class ManufactureComponent implements OnInit {
     countryNameEn: string;
     countryCallingCode: string;
   }[] = [];
+ 
 
 
   
@@ -66,6 +68,7 @@ export class ManufactureComponent implements OnInit {
       contraindications: ['', [Validators.required]],
     });
   }
+
 
 
 
