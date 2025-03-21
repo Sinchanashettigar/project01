@@ -17,13 +17,15 @@ import { PatientComponent } from './patient/patient.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import { TableComponent } from './table/table.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
 ManufactureComponent,
     PatientComponent,
     SnackbarComponent,
+    TableComponent,
     
   ],
   imports: [
@@ -41,6 +43,8 @@ ManufactureComponent,
    MatFormFieldModule,
    MatTableModule,
    MatTooltipModule,
+   FormsModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

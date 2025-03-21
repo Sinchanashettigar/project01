@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
  import {  ManufactureComponent  } from  './manufacture/manufacture.component';
  import { PatientComponent } from './patient/patient.component';
+import { TableComponent } from './table/table.component';
 const routes: Routes = [
   {
      path:'manufacture',component:ManufactureComponent
    },
   {
     path:'patient',component:PatientComponent
+   },
+   {
+      path:'table',component:TableComponent
    },
    {
     path:'',redirectTo:'/manufacture', pathMatch:'full'

@@ -3,8 +3,10 @@
 .example-button-container {
     display: flex;
     gap: 10px;
-    justify-content: start; 
-    align-items: center;
+    /* justify-content: start; 
+    align-items: center; */
+    align-items: flex-start;
+justify-content: flex-start;
     margin-top: 10px; 
   }
   .example-button-container button {
