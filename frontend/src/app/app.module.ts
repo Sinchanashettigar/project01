@@ -23,7 +23,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     AppComponent,
 ManufactureComponent,
     PatientComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    
   ],
   imports: [
     HttpClientModule,
