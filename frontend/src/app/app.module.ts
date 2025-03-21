@@ -16,6 +16,7 @@ import { ManufactureComponent } from './manufacture/manufacture.component';
 import { PatientComponent } from './patient/patient.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { MatTableModule } from '@angular/material/table';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -37,8 +38,8 @@ ManufactureComponent,
    MatSelectModule,
    MatInputModule,
    MatFormFieldModule,
-   MatTableModule
-   
+   MatTableModule,
+   MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
