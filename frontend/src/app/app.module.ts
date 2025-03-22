@@ -19,6 +19,10 @@ import { MatTableModule } from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { TableComponent } from './table/table.component';
 import { FormsModule } from '@angular/forms';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { RecipientDetailsComponent } from './recipient-details/recipient-details.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +30,8 @@ ManufactureComponent,
     PatientComponent,
     SnackbarComponent,
     TableComponent,
+    
+    RecipientDetailsComponent
     
   ],
   imports: [
@@ -44,6 +50,10 @@ ManufactureComponent,
    MatTableModule,
    MatTooltipModule,
    FormsModule,
+   MatSortModule,
+  
+   MatPaginatorModule
+   
    
   ],
   providers: [],

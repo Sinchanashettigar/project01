@@ -79,9 +79,9 @@ export class PatientComponent {
   addFields() {
     if (this.additionalFields.length < 100) {
       const index = this.additionalFields.length;
-      this.additionalFields.push(index); // Store index instead of string names
+      this.additionalFields.push(index); 
   
-      // Add controls dynamically
+      
       this.myForm.addControl(`vaccine_${index}`, new FormControl(''));
       this.myForm.addControl(`dosageform_${index}`, new FormControl(''));
       this.myForm.addControl(`date_${index}`, new FormControl(''));
