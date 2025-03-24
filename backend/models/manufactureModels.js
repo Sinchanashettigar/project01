@@ -32,10 +32,11 @@ const manufactureSchema = new mongoose.Schema({
       dosage_instruction: { type: String, required: true },
     },
     side_effects:[{type:Array}],
+    // side_effects: [{ type: String }],
     contraindications:[{type:Array}],
+    // contraindications: [{ type: String }],
+
 });
 
   module.exports =  mongoose.model('manufacture_details',manufactureSchema)
-  // const Manufacture = mongoose.model("Manufacture", manufactureSchema);
-
-  // module.exports = manufacture;
+ 

@@ -196,7 +196,7 @@ export class ManufactureComponent implements OnInit {
         if (response.status === "auth-01") {
           this._snackBar.open("✔ Submitted successfully", "Done", { duration: 5000 });
           console.log("Added successfully");
-          this.router.navigate(['/manufacture-detail']);
+          this.router.navigate(['/manufacture-details']);
         } else {
           console.log("Failed");
         }

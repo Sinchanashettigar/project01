@@ -77,8 +77,8 @@ const insertManufactureDetails = async (req, res) => {
   
     const manufacture = await manufactureModels.create(manufactureData);
     const allManufacturers = await manufactureModels.find();
-    // return res.status(201).json({ status: "auth-01" });
-    return res.status(201).json(allManufacturers);
+    return res.status(201).json({ status: "auth-01" });
+    
   } catch (error) {
     console.log(error);
     res.status(500).json({ status: "author-02" });
@@ -89,12 +89,12 @@ const insertManufactureDetails = async (req, res) => {
 const getAllManufactures = async (req, res) =>
 {
   try {
-    const manufacture = await Manufacture.find();
+    const manufacture = await manufactureModels.find();
     // return res.status(201).json({status: "valid" });
     return res.status(200).json(manufacturers);
 }catch (error) {
-  console.log(error);
-  res.status(500).json({ status: "invalid"});
+  console.error(error);
+  res.status(500).json({status: "error", message: error.message});
 }
 };
 const getManufactureDetails = async (req, res) => {

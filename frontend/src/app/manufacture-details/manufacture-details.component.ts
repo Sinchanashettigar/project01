@@ -3,6 +3,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { HttpClient } from '@angular/common/http';
+import { FormControl } from '@angular/forms';
+import { ManufactureService } from '../services/manufacture.service';
 
 export interface UserData {
   vaccineName: string;
@@ -30,19 +32,20 @@ export class ManufactureDetailsComponent implements OnInit {
     'description'
   ];
   dataSource: MatTableDataSource<UserData>;
+  filterControl = new FormControl('');
+  
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private http: HttpClient) {}
+  constructor(private manufactureService: ManufactureService) {}
 
   ngOnInit() {
     this.fetchManufactureData();
   }
 
   fetchManufactureData() {
-    this.http.get<UserData[]>('http://localhost:5000/api/manufacturers') // Update with your API URL
-      .subscribe(data => {
+    this.manufactureService.getManufacturers().subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -50,13 +53,10 @@ export class ManufactureDetailsComponent implements OnInit {
         console.error("Error fetching manufacturer data:", error);
       });
   }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.dataSource) {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
     }
   }
 }
