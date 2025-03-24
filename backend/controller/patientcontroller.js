@@ -1,6 +1,5 @@
 const patientModels = require("../models/patientModels");
 const { validatePatientData } = require("../services/validatePatient");
-
 const insertPatientDetails = async (req, res) => {
   try {
     console.log(req.body);
@@ -72,4 +71,16 @@ const getPatientDetails = async (req, res) => {
     console.log(error);
   }
 };
-module.exports = { insertPatientDetails, getPatientDetails };
+
+const getAllPatients = async (req,res) =>
+{
+  try {
+    const patients = await patientModels.find({});
+    res.status(200).json(patients);
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({status :" Error fetching all patients"});
+
+  }
+}
+module.exports = { insertPatientDetails, getPatientDetails ,getAllPatients };

@@ -75,57 +75,28 @@ const insertManufactureDetails = async (req, res) => {
     console.log("Formatted Data:", manufactureData);
 
   
-
-
-    // if (!manufactureData.vaccine_produced.vacc_name?.trim()) {
-    //   return res.status(400).json({ status: "Vaccine name is mandatory" });
-    // }
-    // if (!manufactureData.vaccine_produced.vacc_type?.trim()) {
-    //   return res.status(400).json({ status: "Vaccine type is mandatory" });
-    // }
-    // if (!manufactureData.target_age_group.age_group_name?.trim()) {
-    //   return res.status(400).json({ status: "Age group name is required" });
-    // }
-    // if (typeof manufactureData.target_age_group.minimum_age !== "string") {
-    //   return res.status(400).json({ status: "Enter a valid minimum age" });
-    // }
-    // if (typeof manufactureData.target_age_group.maximum_age !== "string") {
-    //   return res.status(400).json({ status: "Enter a valid maximum age" });
-    // }
-    // if (!manufactureData.contact_information.manufacture_name?.trim()) {
-    //   return res.status(400).json({ status: "Manufacture name is mandatory" });
-    // }
-    // if (!manufactureData.contact_information.contact_person_name?.trim()) {
-    //   return res
-    //     .status(400)
-    //     .json({ status: "Contact person name is mandatory" });
-    // }
-    // if (!manufactureData.contact_information.email?.trim()) {
-    //   return res.status(400).json({ status: "Email is required" });
-    // }
-    // if (!manufactureData.contact_information.phone_number?.trim()) {
-    //   return res.status(400).json({ status: "Phone number is required" });
-    // }
-    // if (!manufactureData.vaccine_detail.description?.trim()) {
-    //   return res.status(400).json({ status: "Description is required" });
-    // }
-    // if (!manufactureData.vaccine_detail.dosage_instruction?.trim()) {
-    //   return res
-    //     .status(400)
-    //     .json({ status: "Dosage instruction is required" });
-    // }
-
-
-    
-    
     const manufacture = await manufactureModels.create(manufactureData);
-    return res.status(201).json({ status: "auth-01" });
+    const allManufacturers = await manufactureModels.find();
+    // return res.status(201).json({ status: "auth-01" });
+    return res.status(201).json(allManufacturers);
   } catch (error) {
     console.log(error);
     res.status(500).json({ status: "author-02" });
   }
 };
 
+
+const getAllManufactures = async (req, res) =>
+{
+  try {
+    const manufacture = await Manufacture.find();
+    // return res.status(201).json({status: "valid" });
+    return res.status(200).json(manufacturers);
+}catch (error) {
+  console.log(error);
+  res.status(500).json({ status: "invalid"});
+}
+};
 const getManufactureDetails = async (req, res) => {
   try {
     const { id } = req.params;
@@ -145,4 +116,4 @@ const getManufactureDetails = async (req, res) => {
     return res.status(500).json({ status: "Internal server error" });
   }
 };
-module.exports = { insertManufactureDetails, getManufactureDetails };
+module.exports = { insertManufactureDetails, getManufactureDetails, getAllManufactures };

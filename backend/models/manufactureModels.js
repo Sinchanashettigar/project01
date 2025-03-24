@@ -36,3 +36,6 @@ const manufactureSchema = new mongoose.Schema({
 });
 
   module.exports =  mongoose.model('manufacture_details',manufactureSchema)
+  // const Manufacture = mongoose.model("Manufacture", manufactureSchema);
+
+  // module.exports = manufacture;

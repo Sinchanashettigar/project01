@@ -22,7 +22,7 @@ export class APIService {
   }
 
   postData1(data: any): Observable<any> {
-    return this.http.post(this.apiUrl+'/manufacture', data).pipe(
+    return this.http.post(this.apiUrl+'/manufacture/', data).pipe(
       catchError((error) => {
         console.error('Error occurred:', error);
         return throwError(error);
@@ -30,3 +30,9 @@ export class APIService {
     );
   }
 }
+
+//   getData(): Observable<any[]> { 
+//     return this.http.get<any[]>(this.apiUrl);
+//   }
+// } 
+

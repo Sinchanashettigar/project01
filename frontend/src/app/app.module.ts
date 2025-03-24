@@ -17,10 +17,11 @@ import { PatientComponent } from './patient/patient.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { TableComponent } from './table/table.component';
 import { FormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { APIService } from './api.service';
+import { ManufactureDetailsComponent } from './manufacture-details/manufacture-details.component';
 import { RecipientDetailsComponent } from './recipient-details/recipient-details.component';
 
 @NgModule({
@@ -29,9 +30,12 @@ import { RecipientDetailsComponent } from './recipient-details/recipient-details
 ManufactureComponent,
     PatientComponent,
     SnackbarComponent,
-    TableComponent,
+    ManufactureDetailsComponent,
+    RecipientDetailsComponent,
+ 
     
-    RecipientDetailsComponent
+ 
+  
     
   ],
   imports: [
@@ -56,7 +60,7 @@ ManufactureComponent,
    
    
   ],
-  providers: [],
+  providers: [APIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

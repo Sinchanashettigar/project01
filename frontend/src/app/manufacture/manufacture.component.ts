@@ -10,6 +10,7 @@ import * as countryCodes from 'country-codes-list';
 import { APIService } from '../api.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manufacture',
@@ -29,7 +30,7 @@ export class ManufactureComponent implements OnInit {
 
   
 
-  constructor(private fb: FormBuilder, private apiService: APIService,private _snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, private apiService: APIService,private _snackBar: MatSnackBar,private router: Router) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -190,19 +191,19 @@ export class ManufactureComponent implements OnInit {
   
   onSubmit() {
     console.log('Form submitted!', this.vaccineForm.value);
-    this.apiService.postData1(this.vaccineForm.value).subscribe((response) => {
-      if(response.status === "auth-01"){
-        this._snackBar.open(" ✔ submitted sucessfully ", "Done", {
-          duration: 5000,
-        });
-        console.log("Added sucessfully");
-        }else{
+    this.apiService.postData1(this.vaccineForm.value).subscribe(
+      (response) => {
+        if (response.status === "auth-01") {
+          this._snackBar.open("✔ Submitted successfully", "Done", { duration: 5000 });
+          console.log("Added successfully");
+          this.router.navigate(['/manufacture-detail']);
+        } else {
           console.log("Failed");
-          
         }
-
-    });
+      },
+      (error) => {
+        console.error("Error submitting form:", error);
+      }
+    );
   }
-
-
 }

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
  import {  ManufactureComponent  } from  './manufacture/manufacture.component';
  import { PatientComponent } from './patient/patient.component';
-import { TableComponent } from './table/table.component';
-import { RecipientDetailsComponent } from './recipient-details/recipient-details.component'; // ✅ Import the component
+ import { ManufactureDetailsComponent } from './manufacture-details/manufacture-details.component';
+import { RecipientDetailsComponent } from './recipient-details/recipient-details.component';
 
 const routes: Routes = [
   {
@@ -12,10 +12,9 @@ const routes: Routes = [
   {
     path:'patient',component:PatientComponent
    },
-   {
-      path:'table',component:TableComponent
-   },
-   { path: 'recipient-details', component: RecipientDetailsComponent },
+  {path:'recipient-details',component:RecipientDetailsComponent},
+  {path:'manufacture-details',component:ManufactureDetailsComponent},
+
    {
     path:'',redirectTo:'/manufacture', pathMatch:'full'
    },

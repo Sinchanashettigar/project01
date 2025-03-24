@@ -13,7 +13,7 @@ import * as countryCodes from 'country-codes-list';
 import { Country, State, City } from 'country-state-city';
 import { APIService } from '../api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './patient.component.html',
@@ -48,7 +48,8 @@ export class PatientComponent {
   constructor(
     private fb: FormBuilder,
     private apiService: APIService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -311,6 +312,8 @@ export class PatientComponent {
             duration: 5000,
           });
           console.log('Added successfully');
+          this.router.navigate(['/Recipient-detail']);
+
         } else {
           this._snackBar.open('Submission failed. Please try again.', 'OK', {
             duration: 5000,
