@@ -43,8 +43,9 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
 
 
   constructor(private manufactureService: ManufactureService) {}
-
-
+  fromDate: Date | null = null;
+  toDate: Date | null = null;
+  originalData: any[] = [];
   ngOnInit() {
     this.fetchManufactureData();
   }
@@ -86,6 +87,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.dataSource) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
+      this.dataSource.filter = filterValue;
     }
   }
 }
