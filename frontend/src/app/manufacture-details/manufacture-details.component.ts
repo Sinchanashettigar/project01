@@ -57,9 +57,24 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
     this.manufactureService.getManufacturers().subscribe(
        data => {
       console.log('data received:',data);
-      // this.dataSource.data = data.manufacturers || data; 
+
+
       this.dataSource.data = data; 
-        // this.dataSource = new MatTableDataSource(data);
+
+      this.dataSource.data = data.map((item: any) => ({
+        vaccineName: item.vaccine_produced?.vacc_name ?? '',  
+        vaccineType: item.vaccine_produced?.vacc_type ?? '',  
+        productionDate: item.vaccine_produced?.production_date 
+          ? new Date(item.vaccine_produced.production_date).toLocaleDateString() 
+          : '',  
+        expiryDate: item.vaccine_produced?.expiry_date 
+          ? new Date(item.vaccine_produced.expiry_date).toLocaleDateString() 
+          : '',  
+        ageGroup: item.target_age_group?.age_group_name ?? '',  
+        manufactureName: item.contact_information?.manufacture_name ?? '',  
+        description: item.vaccine_detail?.description ?? '',  
+      }));
+            
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }, (error) => {
