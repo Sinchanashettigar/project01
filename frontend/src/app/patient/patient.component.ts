@@ -44,7 +44,7 @@ export class PatientComponent {
   selectedState: string | null = null;
   stateSelectedWithoutCountry: boolean = false;
   additionalFields: any[] = [];
-
+  
   constructor(
     private fb: FormBuilder,
     private apiService: APIService,
@@ -312,7 +312,13 @@ export class PatientComponent {
             duration: 5000,
           });
           console.log('Added successfully');
-          this.router.navigate(['/Recipient-detail']);
+
+        
+        
+
+          this.router.navigate(['/recipient-details']);{
+            
+          }
 
         } else {
           this._snackBar.open('Submission failed. Please try again.', 'OK', {

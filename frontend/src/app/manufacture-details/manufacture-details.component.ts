@@ -21,7 +21,7 @@ export interface UserData {
   styleUrls: ['./manufacture-details.component.css'],
   templateUrl: './manufacture-details.component.html',
 })
-export class ManufactureDetailsComponent implements OnInit {
+export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
   displayedColumns: string[] = [
     'vaccineName', 
     'vaccineType', 
@@ -31,7 +31,11 @@ export class ManufactureDetailsComponent implements OnInit {
     'manufactureName', 
     'description'
   ];
-  dataSource: MatTableDataSource<UserData>;
+
+  // manufacturers: any[] = [];
+  // dataSource: MatTableDataSource<UserData>;
+  
+  dataSource = new MatTableDataSource<UserData>([]);
   filterControl = new FormControl('');
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,19 +44,29 @@ export class ManufactureDetailsComponent implements OnInit {
 
   constructor(private manufactureService: ManufactureService) {}
 
+
   ngOnInit() {
     this.fetchManufactureData();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   fetchManufactureData() {
-    this.manufactureService.getManufacturers().subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
+    this.manufactureService.getManufacturers().subscribe(
+       data => {
+      console.log('data received:',data);
+      // this.dataSource.data = data.manufacturers || data; 
+      this.dataSource.data = data; 
+        // this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-      }, error => {
+      }, (error) => {
         console.error("Error fetching manufacturer data:", error);
       });
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.dataSource) {

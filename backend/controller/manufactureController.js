@@ -89,7 +89,7 @@ const insertManufactureDetails = async (req, res) => {
 const getAllManufactures = async (req, res) =>
 {
   try {
-    const manufacture = await manufactureModels.find();
+    const manufacturers = await manufactureModels.find();
     // return res.status(201).json({status: "valid" });
     return res.status(200).json(manufacturers);
 }catch (error) {

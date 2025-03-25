@@ -6,16 +6,13 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ManufactureService {
-  private apiUrl = 'http://localhost:5000/api/manufacturers'; // ✅ Correct API URL
+  private apiUrl = 'http://localhost:3000/api/manufacturers'; 
 
   constructor(private http: HttpClient) {}
 
-  getManufacturers(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
-      catchError((error) => {
-        console.error('Error fetching manufacturers:', error);
-        return throwError(() => new Error('Failed to fetch manufacturers.'));
-      })
-    );
+  
+
+  getManufacturers(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}`);
   }
 }
