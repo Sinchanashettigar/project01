@@ -20,7 +20,7 @@
     <mat-datepicker #picker2></mat-datepicker>
 </mat-form-field>
 
-    <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource.filteredData.length > 0">
+    <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource">
       
       <ng-container matColumnDef="vaccineName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Vaccine Name</th>
@@ -61,7 +61,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <div *ngIf="dataSource.filteredData.length === 0" class="no-data">
+    <div *ngIf="isSearchApplied && dataSource.filteredData?.length === 0" class="no-data">
       No data matching your search criteria.
     </div>
     <mat-paginator [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons></mat-paginator>

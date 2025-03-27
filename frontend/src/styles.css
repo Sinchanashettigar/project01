@@ -104,7 +104,7 @@ align-items: center;
 .table-container {
   width: 100%;
   max-width: 100%;
-  overflow-x: auto; /* Enables horizontal scrolling if needed */
+  overflow-x: auto; 
   margin-top: 10px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -136,30 +136,30 @@ td {
   color: #333;
 }
 
-.mat-form-field {
+/* .mat-form-field {
   width: 100%;
-  max-width: 300px; /* Restricts input width */
+  max-width: 300px; 
   margin-bottom: 15px;
-}
+} */
 
-.mat-row:nth-child(even) {
-  background-color: #f9f9f9; /* Alternating row colors */
-}
+/* .mat-row:nth-child(even) {
+  background-color: #f9f9f9; 
+} */
 
-.mat-row:hover {
+/* .mat-row:hover {
   background-color: #e3f2fd;
-}
+} */
 
 .mat-paginator {
   background: white;
   border-radius: 5px;
 }
 
-/* Center the "No data matching" message */
+
 .mat-row.mat-no-data-row td {
   text-align: center;
   font-weight: bold;
-  color: #d32f2f;
+  /* color: #d32f2f; */
   font-size: 16px;
 }
 

@@ -32,6 +32,10 @@ export class RecipientDetailsComponent implements OnInit,AfterViewInit{
   
   dataSource = new MatTableDataSource<UserData>([]);
   filterControl = new FormControl('');
+  isSearchApplied = false;
+  // fromDate = new FormControl('');
+  // toDate = new FormControl('');
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -66,6 +70,8 @@ export class RecipientDetailsComponent implements OnInit,AfterViewInit{
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.dataSource){
       this.dataSource.filter =filterValue.trim().toLowerCase();
+      this.dataSource.filter = filterValue;
+      this.isSearchApplied = filterValue.length > 0;
     }
 
   

@@ -37,6 +37,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
   
   dataSource = new MatTableDataSource<UserData>([]);
   filterControl = new FormControl('');
+  isSearchApplied = false; 
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -88,6 +89,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
     if (this.dataSource) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
       this.dataSource.filter = filterValue;
+      this.isSearchApplied = filterValue.length > 0;
     }
   }
 }
