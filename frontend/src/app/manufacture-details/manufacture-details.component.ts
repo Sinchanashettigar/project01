@@ -31,9 +31,16 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
     'manufactureName', 
     'description'
   ];
+ fromDate: Date | null = null;
+ toDate : Date | null = null;
 
-  // manufacturers: any[] = [];
-  // dataSource: MatTableDataSource<UserData>;
+ allData = [];
+
+ filteredData = [...this.allData];
+ noRecords = false;
+ dataFound = false;
+
+ 
   
   dataSource = new MatTableDataSource<UserData>([]);
   filterControl = new FormControl('');
@@ -44,8 +51,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
 
 
   constructor(private manufactureService: ManufactureService) {}
-  fromDate: Date | null = null;
-  toDate: Date | null = null;
+ 
   originalData: any[] = [];
   ngOnInit() {
     this.fetchManufactureData();
@@ -90,6 +96,21 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
       this.dataSource.filter = filterValue.trim().toLowerCase();
       this.dataSource.filter = filterValue;
       this.isSearchApplied = filterValue.length > 0;
+    }
+  }
+  applyDateFilter(){
+    if(this.fromDate && this.toDate){
+      this.filteredData=this.allData.filter(item =>
+        item.date >= this.fromDate! && item.date <= this.toDate!
+      );
+      this.noRecords =  this.filteredData.length === 0;
+      this.dataFound = this.filteredData.length > 0;
+
+    }else
+    {
+      this.filteredData =  [...this.allData];
+      this.noRecords = false;
+      this.dataFound = false;
     }
   }
 }
