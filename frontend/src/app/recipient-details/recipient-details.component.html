@@ -11,16 +11,22 @@
 
 <mat-form-field  >
     <mat-label>From Date</mat-label>
-    <input matInput [matDatepicker]="picker1">
+    <input matInput [matDatepicker]="picker1" [(ngModel)]="fromDate" (dateChange)="applyDateFilter()">
     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
-  </mat-form-field>
-<mat-form-field >
+  </mat-form-field> 
+ <mat-form-field >
     <mat-label>To Date</mat-label>
-    <input matInput [matDatepicker]="picker2">
+    <input matInput [matDatepicker]="picker2" [(ngModel)]="toDate"  (dateChange)="applyDateFilter()">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
-</mat-form-field>
+    </mat-form-field>
+    <div *ngIf="dataFound" >Data found</div>
+    <div *ngIf="noRecords">No records found</div>
+
+
+
+
 <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource">
       
       <ng-container matColumnDef="first_name">
@@ -65,7 +71,11 @@
     <div *ngIf="isSearchApplied && dataSource.filteredData?.length === 0" class="no-data">
       No data matching your search criteria.
     </div>
-  
+
+    
+    
+    
+    
     <mat-paginator [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons></mat-paginator>
   </div> 
   

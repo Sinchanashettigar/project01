@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { PatientService } from '../services/patient.service';
+
 export interface UserData {
   first_name: string;
   last_name: string;
@@ -12,6 +13,8 @@ export interface UserData {
   id: string;
   dob: string;
   street: string;
+  // createdAt?: string;
+  
 }
 
 @Component({
@@ -28,13 +31,26 @@ export class RecipientDetailsComponent implements OnInit,AfterViewInit{
     'id',
     'dob',
     'street'
+    
   ];
-  
+  fromDate: Date | null = null;
+  toDate: Date | null = null;
+
+
+  allData = [];
+
+  filteredData = [...this.allData];
+  noRecords = false;
+  dataFound = false;
+
   dataSource = new MatTableDataSource<UserData>([]);
   filterControl = new FormControl('');
   isSearchApplied = false;
-  // fromDate = new FormControl('');
-  // toDate = new FormControl('');
+  
+  
+
+
+
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -52,9 +68,14 @@ export class RecipientDetailsComponent implements OnInit,AfterViewInit{
     this.dataSource.sort = this.sort;
   }
 
+ 
   fetchpatientData() {
     this.patientService.getPatients().subscribe( data => {
       console.log('data received:',data);
+
+
+  
+
         this.dataSource.data = data; 
          this.dataSource.paginator = this.paginator;
        this.dataSource.sort = this.sort;
@@ -76,4 +97,23 @@ export class RecipientDetailsComponent implements OnInit,AfterViewInit{
 
   
   }
+  applyDateFilter() {
+    if (this.fromDate && this.toDate) {
+      
+      // if (this.fromDate && this.toDate) {
+      this.filteredData = this.allData.filter(item => 
+        item.date >= this.fromDate! && item.date <= this.toDate! 
+      
+      );
+
+      this.noRecords = this.filteredData.length === 0;
+      this.dataFound = this.filteredData.length > 0;
+    } else {
+      this.filteredData = [...this.allData]; 
+      this.noRecords = false;
+      this.dataFound = false;
+    }
+  }
+    
+
 }
