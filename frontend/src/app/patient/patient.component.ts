@@ -14,6 +14,7 @@ import { Country, State, City } from 'country-state-city';
 import { APIService } from '../api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: './patient.component.html',
@@ -44,7 +45,6 @@ export class PatientComponent {
   selectedState: string | null = null;
   stateSelectedWithoutCountry: boolean = false;
   additionalFields: any[] = [];
-  
   constructor(
     private fb: FormBuilder,
     private apiService: APIService,
@@ -153,7 +153,7 @@ export class PatientComponent {
   
  
   
-
+  
   customValidator(control: AbstractControl): { [key: string]: any } | null {
     const value = control.value;
     let errors: any = {};
@@ -300,6 +300,8 @@ export class PatientComponent {
     this.weight = numericValue ? Number(numericValue) : 0;
     console.log('Weight:', this.weight);
   }
+
+ 
   onSubmit() {
     {
       console.log('Form submitted!', this.myForm.value);
