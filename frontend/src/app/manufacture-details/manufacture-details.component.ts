@@ -14,6 +14,7 @@ export interface UserData {
   ageGroup: string;
   manufactureName: string;
   description: string;
+
 }
 
 @Component({
@@ -29,7 +30,8 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
     'expiryDate', 
     'ageGroup', 
     'manufactureName', 
-    'description'
+    'description',
+    
   ];
  fromDate: Date | null = null;
  toDate : Date | null = null;
