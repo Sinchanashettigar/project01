@@ -31,6 +31,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
     'ageGroup', 
     'manufactureName', 
     'description',
+    'actions'
     
   ];
  fromDate: Date | null = null;
@@ -42,7 +43,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
  noRecords = false;
  dataFound = false;
 
- 
+
   
   dataSource = new MatTableDataSource<UserData>([]);
   filterControl = new FormControl('');
@@ -52,7 +53,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(private manufactureService: ManufactureService) {}
+  constructor(private manufactureService: ManufactureService ) {}
  
   originalData: any[] = [];
   ngOnInit() {
@@ -115,4 +116,6 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
       this.dataFound = false;
     }
   }
+
+  
 }

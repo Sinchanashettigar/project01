@@ -13,6 +13,7 @@ const routes: Routes = [
     path:'patient',component:PatientComponent
    },
   {path:'recipient-details',component:RecipientDetailsComponent},
+  
   {path:'manufacture-details',component:ManufactureDetailsComponent},
 
    {

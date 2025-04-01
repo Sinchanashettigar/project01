@@ -2,9 +2,9 @@ import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormControl } from '@angular/forms';
 import { PatientService } from '../services/patient.service';
 // import { Patient } from '..src/app/patient';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 export interface UserData {
   first_name: string;
@@ -30,6 +30,7 @@ export interface UserData {
   templateUrl: './recipient-details.component.html',
 })
 export class RecipientDetailsComponent implements OnInit, AfterViewInit {
+  vaccineForm: FormGroup; 
   displayedColumns: string[] = [
     'first_name',
     'last_name',
@@ -52,13 +53,42 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<UserData>([]);
   filterControl = new FormControl('');
   isSearchApplied = false;
+  expandedRow: UserData | null = null;
 
-  expandedRow: any = null;
+  // expandedRow: any = null;
+
+  // isPanelExpanded = false;
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private patientService: PatientService) {}
+  constructor(private patientService: PatientService,private fb: FormBuilder) {
+    this.vaccineForm = this.fb.group({
+      vaccinename: ['', Validators.required],
+      dosageform: ['', Validators.required],
+      vaccinedatepicker: ['', Validators.required],
+      hasChronicIllness: [''],
+      chronicIllnessDetails: [''],
+      hasAllergies: [''],
+      allergyDetails: [''],
+      hasmedications: [''],
+      medicationsDetails: [''],
+      hasillnesses: [''],
+      illnessesDetails: [''],
+      hasPhysicalDisabilities: [''],
+      mentalhealthDetails: [''],
+      hassurgeries: [''],
+      surgeriesDetails: [''],
+      hashospitalized: [''],
+      hospitalizedDetais: [''],
+      hasmedicalconditions: [''],
+      medicalconditionsDetails: [''],
+      hasDietaryRestrictions: [''],
+      isAdditionalVaccineDetailsUsed: ['']
+    });
+  }
+  
 
   ngOnInit() {
     this.fetchpatientData();
@@ -83,21 +113,12 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  // toogleRow(row: any) {
-  //    this.expandedRow = row;
-
-  //   console.log('Selected row:', row);
-  //   console.log('Expanded row set to:', this.expandedRow);
-  // }
-  toogleRow(row: any) {
-    if (!row) {
-      console.error('Row is undefined, cannot expand.');
-      return;
-    }
-
-    this.expandedRow = row; // Always expand the clicked row
-
+  
+  toggleRow(row: UserData) {
+   
     console.log('Selected row:', row);
+
+    this.expandedRow = this.expandedRow === row ? null : row;
     console.log('Expanded row set to:', this.expandedRow);
   }
 
@@ -124,4 +145,5 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
       this.dataFound = false;
     }
   }
+
 }

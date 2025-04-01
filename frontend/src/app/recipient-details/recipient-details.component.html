@@ -1,35 +1,38 @@
-
-
-
 <div class="table-container">
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event)" placeholder=" 🔍Search records">
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder=" 🔍Search records"
+    />
   </mat-form-field>
 
-
-  
-
-<mat-form-field  >
-  <mat-label>From Date</mat-label>
-  <input matInput [matDatepicker]="picker1" [(ngModel)]="fromDate" (dateChange)="applyDateFilter()">
-  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-  <mat-datepicker #picker1></mat-datepicker>
-</mat-form-field> 
-<mat-form-field >
-  <mat-label>To Date</mat-label>
-  <input matInput [matDatepicker]="picker2" [(ngModel)]="toDate"  (dateChange)="applyDateFilter()">
-  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-  <mat-datepicker #picker2></mat-datepicker>
+  <mat-form-field>
+    <mat-label>From Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker1"
+      [(ngModel)]="fromDate"
+      (dateChange)="applyDateFilter()"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
   </mat-form-field>
-  <div *ngIf="dataFound" >Data found</div>
+  <mat-form-field>
+    <mat-label>To Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker2"
+      [(ngModel)]="toDate"
+      (dateChange)="applyDateFilter()"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+  <div *ngIf="dataFound">Data found</div>
   <div *ngIf="noRecords">No records found</div>
 
-
-
-
-<table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource">
-    
-
+  <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource">
     <ng-container matColumnDef="first_name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>first_name</th>
       <td mat-cell *matCellDef="let row">{{ row.first_name }}</td>
@@ -59,62 +62,322 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>dob</th>
       <td mat-cell *matCellDef="let row">{{ row.dob }}</td>
     </ng-container>
- 
+
     <ng-container matColumnDef="street">
       <th mat-header-cell *matHeaderCellDef>street</th>
       <td mat-cell *matCellDef="let row">{{ row.street }}</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let row">
-        <button mat-icon-button (click)="toogleRow(row); $event.stopPropagation();">
-
-          <mat-icon>{{ expandedRow === row ? 'expand_less' : 'expand_more' }}</mat-icon>
+        <button mat-icon-button (click)="toggleRow(row)">
+          <mat-icon>{{
+            expandedRow === row ? "expand_less" : "expand_more"
+          }}</mat-icon>
         </button>
       </td>
     </ng-container>
 
-
-  
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-   
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"(click)="toogleRow(row)" >
-  </tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-  <tr *ngIf="expandedRow && expandedRow._id === row?._id" class="expanded-row">
-
-      <td colspan="8">
-        <mat-card>
-          <h3>Patient Details</h3>
-          <p><strong>ID:</strong> {{ expandedRow?.id }}</p>
-          <p><strong>Name:</strong> {{ expandedRow?.first_name }} {{ expandedRow?.last_name }}</p>
-          <p><strong>Gender:</strong> {{ expandedRow?.gender }}</p>
-          <p><strong>DOB:</strong> {{ expandedRow?.dob | date:'yyyy-MM-dd' }}</p>
-          <p><strong>Phone:</strong> {{ expandedRow?.phone_number }}</p>
-          <p><strong>Email:</strong> {{ expandedRow?.email }}</p>
-          <p><strong>Blood Group:</strong> {{ expandedRow?.bloodgroup }}</p>
-  
-          <h4>Address</h4>
-          <p><strong>Street:</strong> {{ expandedRow?.address?.street }}</p>
-          <p><strong>City:</strong> {{ expandedRow?.address?.city }}</p>
-          <p><strong>Postal Code:</strong> {{ expandedRow?.address?.postal_code }}</p>
-          <p><strong>Country:</strong> {{ expandedRow?.address?.country }}</p>
-        </mat-card>
-        
-      </td>
-    </tr>
     
+    
+  </table>
 
-  </table> 
-  <div *ngIf="isSearchApplied && dataSource.filteredData?.length === 0" class="no-data">
+
+  <div *ngIf="expandedRow" class="expanded-row-container">
+    <h3><mat-icon class="custom-icon">account_circle</mat-icon>
+
+      {{ expandedRow.first_name }} {{ expandedRow.last_name }}</h3>
+    <form class="expanded-details-form">
+
+      <div class="form-field">
+        <label for="street">First Name:</label>
+        <input id="first_name" type="text" [value]="expandedRow.first_name " class="output-field" readonly /></div>
+
+        <div class="form-field">
+          <label for="street">Last Name:</label>
+          <input id="last_name" type="text" [value]="expandedRow.last_name " class="output-field" readonly /></div>
+
+          <div class="form-field"><label for="dob">Date of Birth</label><input id="dob" type="text" [value]="expandedRow.dob | date:'MM/dd/yyyy'" class="output-field" readonly /></div>
+  
+          <div class="form-field"><label for="gender">Gender:</label><input id="gender" type="text" [value]="expandedRow.gender " class="output-field" readonly /></div>
+
+          <div class="form-field"><label for="email">Email:</label><input id="email" type="text" [value]="expandedRow.email " class="output-field" readonly /></div>
+
+          <div class="form-field"><label for="phone_number">Phone Number:</label><input id="phone_number" type="text" [value]="expandedRow.phone_number " class="output-field" readonly /></div>
+
+          <div class="form-field"><label for="id">id:</label><input id="id" type="text" [value]="expandedRow.id " class="output-field" readonly /></div>
+
+          <div class="form-field"><label for="height">height:</label><input id="height" type="text" [value]="expandedRow.height " class="output-field" readonly /></div>
+
+          <div class="form-field"><label for="weight">weight:</label><input id="weight" type="text" [value]="expandedRow.weight " class="output-field" readonly /></div>
+          <div class="form-field"><label for="bloodgroup">bloodgroup:</label><input id="bloodgroup" type="text" [value]="expandedRow.bloodgroup " class="output-field" readonly /></div>
+
+      <div class="form-field">
+        <label for="street">Street:</label>
+        <input id="street" type="text" [value]="expandedRow.address?.street" class="output-field" readonly /></div>
+
+      
+
+      <div class="form-field">
+        <label for="city">City:</label>
+        <input
+          id="city"
+          type="text"
+          [value]="expandedRow.address?.city"
+          class="output-field"
+          readonly
+        />
+      </div>
+      <div class="form-field">
+        <label for="state">State:</label>
+        <input
+          id="state"
+          type="text"
+          [value]="expandedRow.address?.state"
+          class="output-field"
+          readonly
+        />
+      </div>
+      <div class="form-field">
+        <label for="postalCode">Postal Code:</label>
+        <input
+          id="postalCode"
+          type="text"
+          [value]="expandedRow.address?.postal_code"
+          class="output-field"
+          readonly
+        />
+      </div>
+      <div class="form-field">
+        <label for="country">Country:</label>
+        <input
+          id="country"
+          type="text"
+          [value]="expandedRow.address?.country"
+          class="output-field"
+          readonly
+        />
+      </div>
+        <div class="form-field">
+        <label for="vaccinename">Vaccine Name:</label>
+        <input
+          id="vaccinename"
+          type="text"
+          [value]="vaccinename"
+          class="output-field"
+          [readonly]="true" />
+      </div>
+      <div class="form-field">
+        <label for="dosageform">Dosage Form:</label>
+        <input
+          id="dosageform"
+          type="text"
+          [value]="dosageform"
+          class="output-field"
+          [readonly]="true" />
+      </div>
+      <div class="form-field">
+        <label for="vaccinedatepicker">Vaccine Date:</label>
+        <input
+          id="vaccinedatepicker"
+          type="date"
+          [value]="vaccinedatepicker"
+          class="output-field"
+          [readonly]="true" />
+      </div>
+      <div class="form-field">
+        <label for="hasChronicIllness">Has Chronic Illness:</label>
+        <input
+          id="hasChronicIllness"
+        
+          [value]="hasChronicIllness"[readonly]="true" 
+          class="output-field" />
+      </div>
+
+      <div class="form-field">
+        <label for="hasAllergies">Has Allergies:</label>
+        <input
+          id="hasAllergies"
+          type="text"
+          [value]="hasAllergies"
+          [readonly]="true"
+          class="output-field"
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="allergyDetails">Allergy Details:</label>
+        <input
+          id="allergyDetails"
+          type="text"
+          [value]="allergyDetails"
+          [readonly]="true"
+          class="output-field"
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="hasmedications">Has Medications:</label>
+        <input
+          id="hasmedications"
+          type="text"
+          [value]="hasmedications"
+          [readonly]="true"
+          class="output-field"
+        />
+      </div>
+      <div class="form-field">
+        <label for="medicationsDetails">Medications Details:</label>
+        <input
+          id="medicationsDetails"
+          type="text"
+          [value]="medicationsDetails"
+          [readonly]="true"
+          class="output-field"
+        />
+      </div>
+      <div class="form-field">
+        <label for="hasillnesses">Has Illnesses:</label>
+        <input
+          id="hasillnesses"
+          type="text"
+          [value]="hasillnesses"
+          [readonly]="true"
+          class="output-field"
+        />
+        </div>
+        <div class="form-field">
+          <label for="illnessesDetails">Illnesses Details:</label>
+          <input
+            id="illnessesDetails"
+            type="text"
+            [value]="illnessesDetails"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+        <div class="form-field">
+          <label for="hasPhysicalDisabilities">Has Physical Disabilities:</label>
+          <input
+            id="hasPhysicalDisabilities"
+            type="text"
+            [value]="hasPhysicalDisabilities"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="mentalhealthDetails">Mental Health Details:</label>
+          <input
+            id="mentalhealthDetails"
+            type="text"
+            [value]="mentalhealthDetails"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+        <div class="form-field">
+          <label for="hassurgeries">Has Surgeries:</label>
+          <input
+            id="hassurgeries"
+            type="text"
+            [value]="hassurgeries"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+        <div class="form-field">
+          <label for="surgeriesDetails">Surgeries Details:</label>
+          <input
+            id="surgeriesDetails"
+            type="text"
+            [value]="surgeriesDetails"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+        <div class="form-field">
+          <label for="hashospitalized">Has Hospitalized:</label>
+          <input
+            id="hashospitalized"
+            type="text"
+            [value]="hashospitalized"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+        <div class="form-field">
+          <label for="hospitalizedDetais">Hospitalized Details:</label>
+          <input
+            id="hospitalizedDetais"
+            type="text"
+            [value]="hospitalizedDetais"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+        <div class="form-field">
+          <label for="hasmedicalconditions">Has Medical Conditions:</label>
+          <input
+            id="hasmedicalconditions"
+            type="text"
+            [value]="hasmedicalconditions"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+        <div class="form-field">
+          <label for="medicalconditionsDetails">Medical Conditions Details:</label>
+          <input
+            id="medicalconditionsDetails"
+            type="text"
+            [value]="medicalconditionsDetails"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+        <div class="form-field">
+          <label for="hasDietaryRestrictions">Has Dietary Restrictions:</label>
+          <input
+            id="hasDietaryRestrictions"
+            type="text"
+            [value]="hasDietaryRestrictions"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+        <div class="form-field">
+          <label for="isAdditionalVaccineDetailsUsed">Is Additional Vaccine Details Used:</label>
+          <input
+            id="isAdditionalVaccineDetailsUsed"
+            type="text"
+            [value]="isAdditionalVaccineDetailsUsed"
+            [readonly]="true"
+            class="output-field"
+          />
+        </div>
+ 
+
+
+       
+    </form>
+  </div>
+  
+
+  <div
+    *ngIf="isSearchApplied && dataSource.filteredData?.length === 0"
+    class="no-data"
+  >
     No data matching your search criteria.
   </div>
 
-  
-  
-  
-  
-  <mat-paginator [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons></mat-paginator>
-</div> 
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

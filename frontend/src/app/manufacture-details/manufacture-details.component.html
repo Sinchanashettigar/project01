@@ -1,99 +1,99 @@
 
 <div class="table-container" >
-    <mat-form-field  >
-      <input matInput (keyup)="applyFilter($event)" placeholder=" 🔍Search records">
-    </mat-form-field>
-  
+  <mat-form-field  >
+    <input matInput (keyup)="applyFilter($event)" placeholder=" 🔍Search records">
+  </mat-form-field>
 
-    
+
+  
 
 <mat-form-field  >
-    <mat-label>From Date</mat-label>
-    <input matInput [matDatepicker]="picker1" [(ngModel)]="fromDate"(dateChange)="applyFilter($event)">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-  </mat-form-field>
+  <mat-label>From Date</mat-label>
+  <input matInput [matDatepicker]="picker1" [(ngModel)]="fromDate"(dateChange)="applyFilter($event)">
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
 <mat-form-field >
-    <mat-label>To Date</mat-label>
-    <input matInput [matDatepicker]="picker2" [(ngModel)]="toDate"(dateChange)="applyFilter($event)">
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
+  <mat-label>To Date</mat-label>
+  <input matInput [matDatepicker]="picker2" [(ngModel)]="toDate"(dateChange)="applyFilter($event)">
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
 </mat-form-field>
 
- <div *ngIf="dataFound" >Data found</div>
-    <div *ngIf="noRecords">No records found</div>
+<div *ngIf="dataFound" >Data found</div>
+  <div *ngIf="noRecords">No records found</div>
 
-    <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource">
-      
-      <ng-container matColumnDef="vaccineName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Vaccine Name</th>
-        <td mat-cell *matCellDef="let row">{{ row.vaccineName }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="vaccineType">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Vaccine Type</th>
-        <td mat-cell *matCellDef="let row">{{ row.vaccineType }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="productionDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Production Date</th>
-        <td mat-cell *matCellDef="let row">{{ row.productionDate }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="expiryDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiry Date</th>
-        <td mat-cell *matCellDef="let row">{{ row.expiryDate }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="ageGroup">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Age Group</th>
-        <td mat-cell *matCellDef="let row">{{ row.ageGroup }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="manufactureName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Manufacturer Name</th>
-        <td mat-cell *matCellDef="let row">{{ row.manufactureName }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Description</th>
-        <td mat-cell *matCellDef="let row">{{ row.description }}</td>
-      </ng-container>
+  <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource">
+    
+    <ng-container matColumnDef="vaccineName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Vaccine Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.vaccineName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="vaccineType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Vaccine Type</th>
+      <td mat-cell *matCellDef="let row">{{ row.vaccineType }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="productionDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Production Date</th>
+      <td mat-cell *matCellDef="let row">{{ row.productionDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="expiryDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiry Date</th>
+      <td mat-cell *matCellDef="let row">{{ row.expiryDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="ageGroup">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Age Group</th>
+      <td mat-cell *matCellDef="let row">{{ row.ageGroup }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="manufactureName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Manufacturer Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.manufactureName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+    </ng-container>
 
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions</th>
-        <td mat-cell *matCellDef="let row ">
-          <button mat-icon-button (click)="toogleRow(row); $event.stopPropagation();">
-          <mat-icon>{{  expandedRow === row ? 'expand_less' : 'expand_more'}}</mat-icon>
-        </button>
-        </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"(click)="toogleRow(row)" ></tr>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
+      <td mat-cell *matCellDef="let row ">
+        <button mat-icon-button (click)="toogleRow(row); $event.stopPropagation();">
+        <mat-icon>{{  expandedRow === row ? 'expand_less' : 'expand_more'}}</mat-icon>
+      </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"(click)="toogleRow(row)" ></tr>
 <!-- <tr *ngIf="expandedRow === row" class="expanded-row">
-  <td colspan="=8">
-    <mat-card>
-      <h3>Vaccine Produced</h3>
-      <p><strong>VaccineName:</strong> {{ expandedRow?.vaccine Produced?.vacc_name }}</p>
-      <p><strong>VaccineType:</strong>{{expandedRow?.vaccine Produced?.vacc_type}}</p>
-      <p><strong>Approval Status:</strong>{{expandedRow?.vaccine Produced?.approval status}}</p>
-      <p><strong>Production Date:</strong>{{expandedRow?.vaccine Produced?.productionDate}}</p>
-      <P><strong>Expiry Date:</strong>{{expandedRow?.vaccine Produced?.Expiry Date}}</P>
-      <p><strong>Vaccine Batch:</strong>{{expandedRow?.vaccine Produced?.vaccinebatch}}</p>
+<td colspan="=8">
+  <mat-card>
+    <h3>Vaccine Produced</h3>
+    <p><strong>VaccineName:</strong> {{ expandedRow?.vaccine Produced?.vacc_name }}</p>
+    <p><strong>VaccineType:</strong>{{expandedRow?.vaccine Produced?.vacc_type}}</p>
+    <p><strong>Approval Status:</strong>{{expandedRow?.vaccine Produced?.approval status}}</p>
+    <p><strong>Production Date:</strong>{{expandedRow?.vaccine Produced?.productionDate}}</p>
+    <P><strong>Expiry Date:</strong>{{expandedRow?.vaccine Produced?.Expiry Date}}</P>
+    <p><strong>Vaccine Batch:</strong>{{expandedRow?.vaccine Produced?.vaccinebatch}}</p>
 <p><strong>Dosage Before:</strong>{{expandedRow?.vaccine Produced?.dosagebefore}}</p>
 <p><strong>Dosage After:</strong>{{expandedRow?.vaccine Produced?.dosageafter}}</p>
 <p><strong>Dosage Frequency:</strong>{{expandedRow?.vacc}}</p>
-    </mat-card>
-  </td>
+  </mat-card>
+</td>
 </tr> -->
 
 
-    </table>
+  </table>
 
-    <div *ngIf="isSearchApplied && dataSource.filteredData?.length === 0" class="no-data">
-      No data matching your search criteria.
-    </div>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons></mat-paginator>
-  </div> 
+  <div *ngIf="isSearchApplied && dataSource.filteredData?.length === 0" class="no-data">
+    No data matching your search criteria.
+  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons></mat-paginator>
+</div> 

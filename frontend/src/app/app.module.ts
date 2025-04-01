@@ -23,6 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { APIService } from './api.service';
 import { ManufactureDetailsComponent } from './manufacture-details/manufacture-details.component';
 import { RecipientDetailsComponent } from './recipient-details/recipient-details.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ ManufactureComponent,
     SnackbarComponent,
     ManufactureDetailsComponent,
     RecipientDetailsComponent,
+    
+    
  
     
  
@@ -55,7 +58,7 @@ ManufactureComponent,
    MatTooltipModule,
    FormsModule,
    MatSortModule,
-  
+   MatDialogModule,
    MatPaginatorModule
    
    
