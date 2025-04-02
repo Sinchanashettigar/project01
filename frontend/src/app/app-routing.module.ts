@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
  import { PatientComponent } from './patient/patient.component';
  import { ManufactureDetailsComponent } from './manufacture-details/manufacture-details.component';
 import { RecipientDetailsComponent } from './recipient-details/recipient-details.component';
-
+import { DetailsComponent } from './details/details.component'; 
 const routes: Routes = [
   {
      path:'manufacture',component:ManufactureComponent
@@ -16,9 +16,11 @@ const routes: Routes = [
   
   {path:'manufacture-details',component:ManufactureDetailsComponent},
 
+  { path: 'details', component: DetailsComponent },  // Define the route
    {
     path:'',redirectTo:'/manufacture', pathMatch:'full'
    },
+   
 ];
 
 @NgModule({

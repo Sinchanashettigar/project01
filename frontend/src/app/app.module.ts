@@ -24,6 +24,7 @@ import { APIService } from './api.service';
 import { ManufactureDetailsComponent } from './manufacture-details/manufacture-details.component';
 import { RecipientDetailsComponent } from './recipient-details/recipient-details.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ ManufactureComponent,
     SnackbarComponent,
     ManufactureDetailsComponent,
     RecipientDetailsComponent,
+    DetailsComponent,
     
     
  
