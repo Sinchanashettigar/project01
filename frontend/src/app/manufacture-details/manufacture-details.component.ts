@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { ManufactureService } from '../services/manufacture.service';
-
+import {FormBuilder,FormGroup} from '@angular/forms';
 export interface UserData {
   vaccineName: string;
   vaccineType: string;
@@ -23,6 +23,7 @@ export interface UserData {
   templateUrl: './manufacture-details.component.html',
 })
 export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
+  vaccineForm!: FormGroup;
   displayedColumns: string[] = [
     'vaccineName', 
     'vaccineType', 
@@ -48,12 +49,41 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
   dataSource = new MatTableDataSource<UserData>([]);
   filterControl = new FormControl('');
   isSearchApplied = false; 
-  
+  expandedRow: UserData | null = null;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(private manufactureService: ManufactureService ) {}
+  constructor(private manufactureService: ManufactureService,private fb: FormBuilder  ) {
+  
+      this.vaccineForm = this.fb.group({
+        vacc_name: [''],
+        vacc_type: [''],
+        approval_status: [''],
+        production_date: [''],
+        expiry_date: [''],
+        vacc_batch: [''],
+        dosage_instruction: [''],
+        dosage_before: [''],
+        dosage_after: [''],
+        dosage_frequency: [''],
+        age_group_name: [''],
+        minimum_age: [''],
+        maximum_age: [''],
+        manufacture_name: [''],
+        established_year: [''],
+        contact_person_name: [''],
+        email: [''],
+        countryCode: ['+91'],
+        countryName: [''] ,
+        phone_number: [''],
+        description: [''],
+        side_effects: [''],
+        contraindications: [''],
+      });
+  }
+  
  
   originalData: any[] = [];
   ngOnInit() {
@@ -117,5 +147,12 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
     }
   }
 
-  
+  toggleRow(row: UserData) {
+   
+    console.log('Selected row:', row);
+
+    this.expandedRow = this.expandedRow === row ? null : row;
+    console.log('Expanded row set to:', this.expandedRow);
+  }
+
 }

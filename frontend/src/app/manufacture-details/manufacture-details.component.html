@@ -1,30 +1,39 @@
-
-<div class="table-container" >
-  <mat-form-field  >
-    <input matInput (keyup)="applyFilter($event)" placeholder=" 🔍Search records">
+<div class="table-container">
+  <mat-form-field>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder=" 🔍Search records"
+    />
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>From Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker1"
+      [(ngModel)]="fromDate"
+      (dateChange)="applyFilter($event)"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>To Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker2"
+      [(ngModel)]="toDate"
+      (dateChange)="applyFilter($event)"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
 
-  
-
-<mat-form-field  >
-  <mat-label>From Date</mat-label>
-  <input matInput [matDatepicker]="picker1" [(ngModel)]="fromDate"(dateChange)="applyFilter($event)">
-  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-  <mat-datepicker #picker1></mat-datepicker>
-</mat-form-field>
-<mat-form-field >
-  <mat-label>To Date</mat-label>
-  <input matInput [matDatepicker]="picker2" [(ngModel)]="toDate"(dateChange)="applyFilter($event)">
-  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-  <mat-datepicker #picker2></mat-datepicker>
-</mat-form-field>
-
-<div *ngIf="dataFound" >Data found</div>
+  <div *ngIf="dataFound">Data found</div>
   <div *ngIf="noRecords">No records found</div>
 
   <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource">
-    
     <ng-container matColumnDef="vaccineName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Vaccine Name</th>
       <td mat-cell *matCellDef="let row">{{ row.vaccineName }}</td>
@@ -51,7 +60,9 @@
     </ng-container>
 
     <ng-container matColumnDef="manufactureName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Manufacturer Name</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Manufacturer Name
+      </th>
       <td mat-cell *matCellDef="let row">{{ row.manufactureName }}</td>
     </ng-container>
 
@@ -60,40 +71,282 @@
       <td mat-cell *matCellDef="let row">{{ row.description }}</td>
     </ng-container>
 
-
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions</th>
-      <td mat-cell *matCellDef="let row ">
-        <button mat-icon-button (click)="toogleRow(row); $event.stopPropagation();">
-        <mat-icon>{{  expandedRow === row ? 'expand_less' : 'expand_more'}}</mat-icon>
-      </button>
+      <th mat-headers-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="toggleRow(row)">
+          <mat-icon>{{
+            expandedRow === row ? "expand_less" : "expand_more"
+          }}</mat-icon>
+        </button>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"(click)="toogleRow(row)" ></tr>
-<!-- <tr *ngIf="expandedRow === row" class="expanded-row">
-<td colspan="=8">
-  <mat-card>
-    <h3>Vaccine Produced</h3>
-    <p><strong>VaccineName:</strong> {{ expandedRow?.vaccine Produced?.vacc_name }}</p>
-    <p><strong>VaccineType:</strong>{{expandedRow?.vaccine Produced?.vacc_type}}</p>
-    <p><strong>Approval Status:</strong>{{expandedRow?.vaccine Produced?.approval status}}</p>
-    <p><strong>Production Date:</strong>{{expandedRow?.vaccine Produced?.productionDate}}</p>
-    <P><strong>Expiry Date:</strong>{{expandedRow?.vaccine Produced?.Expiry Date}}</P>
-    <p><strong>Vaccine Batch:</strong>{{expandedRow?.vaccine Produced?.vaccinebatch}}</p>
-<p><strong>Dosage Before:</strong>{{expandedRow?.vaccine Produced?.dosagebefore}}</p>
-<p><strong>Dosage After:</strong>{{expandedRow?.vaccine Produced?.dosageafter}}</p>
-<p><strong>Dosage Frequency:</strong>{{expandedRow?.vacc}}</p>
-  </mat-card>
-</td>
-</tr> -->
-
-
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <div *ngIf="isSearchApplied && dataSource.filteredData?.length === 0" class="no-data">
-    No data matching your search criteria.
-  </div>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25,100]" showFirstLastButtons></mat-paginator>
-</div> 
+ 
+
+      <div *ngIf="expandedRow" class="expanded-row-container">
+        <h3> 
+          <mat-icon class="custom-icon">business</mat-icon
+          >Vaccine Manufacturer History
+          <!-- {{ expandedRow.first_name }} {{ expandedRow.last_name }} -->
+        </h3>
+        <form class="expanded-details-form">
+          <div class="form-field">
+            <label for="vacc_name">Vaccine Name:</label>
+            <input
+              id="vacc_name"
+              type="text"
+              [value]="expandedRow.vacc_name"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="vacc_type">Vaccine Type:</label>
+            <input
+              id="vacc_type"
+              type="text"
+              [value]="expandedRow.vacc_type"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="approval_status">Approval Status:</label>
+            <input
+              id="approval_status"
+              type="text"
+              [value]="expandedRow.approval_status"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="production_date">Production Date:</label>
+            <input
+              id="production_date"
+              type="text"
+              [value]="expandedRow.production_date"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="expiry_date">Expiry Date:</label>
+            <input
+              id="expiry_date"
+              type="text"
+              [value]="expandedRow.expiry_date"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="vacc_batch">Vaccine Batch:</label>
+            <input
+              id="vacc_batch"
+              type="text"
+              [value]="expandedRow.vacc_batch"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="dosage_instruction">Dosage Instruction:</label>
+            <input
+              id="dosage_instruction"
+              type="text"
+              [value]="expandedRow.dosage_instruction"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="dosage_before">Dosage Before:</label>
+            <input
+              id="dosage_before"
+              type="text"
+              [value]="expandedRow.dosage_before"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="dosage_after">Dosage After:</label>
+            <input
+              id="dosage_after"
+              type="text"
+              [value]="expandedRow.dosage_after"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="dosage_frequency">Dosage Frequency:</label>
+            <input
+              id="dosage_frequency"
+              type="text"
+              [value]="expandedRow.dosage_frequency"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="age_group_name">Age Group Name:</label>
+            <input
+              id="age_group_name"
+              type="text"
+              [value]="expandedRow.age_group_name"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="minimum_age">Minimum Age:</label>
+            <input
+              id="minimum_age"
+              type="text"
+              [value]="expandedRow.minimum_age"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="maximum_age">Maximum Age:</label>
+            <input
+              id="maximum_age"
+              type="text"
+              [value]="expandedRow.maximum_age"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="manufacture_name">Manufacturer Name:</label>
+            <input
+              id="manufacture_name"
+              type="text"
+              [value]="expandedRow.manufacture_name"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="established_year">Established Year:</label>
+            <input
+              id="established_year"
+              type="text"
+              [value]="expandedRow.established_year"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="contact_person_name">Contact Person Name:</label>
+            <input
+              id="contact_person_name"
+              type="text"
+              [value]="expandedRow.contact_person_name"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email:</label>
+            <input
+              id="email"
+              type="text"
+              [value]="expandedRow.email"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="countryName">Country Name:</label>
+            <input
+              id="countryName"
+              type="text"
+              [value]="expandedRow.countryName"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="phone_number">Phone Number:</label>
+            <input
+              id="phone_number"
+              type="text"
+              [value]="expandedRow.phone_number"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="description">Description:</label>
+            <input
+              id="description"
+              type="text"
+              [value]="expandedRow.description"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="side_effects">Side Effects:</label>
+            <input
+              id="side_effects"
+              type="text"
+              [value]="expandedRow.side_effects"
+              class="output-field"
+              readonly
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="contraindications">Contraindications:</label>
+            <input
+              id="contraindications"
+              type="text"
+              [value]="expandedRow.contraindications"
+              class="output-field"
+              readonly
+            />
+          </div>
+        </form>
+      </div>
+      <div
+        *ngIf="isSearchApplied && dataSource.filteredData?.length === 0"
+        class="no-data"
+      >
+        No data matching your search criteria.
+      </div>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        showFirstLastButtons
+      ></mat-paginator>
+      </div> 
+  

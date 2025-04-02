@@ -30,7 +30,7 @@ export interface UserData {
   templateUrl: './recipient-details.component.html',
 })
 export class RecipientDetailsComponent implements OnInit, AfterViewInit {
-  vaccineForm: FormGroup; 
+  myForm: FormGroup; 
   displayedColumns: string[] = [
     'first_name',
     'last_name',
@@ -64,7 +64,7 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private patientService: PatientService,private fb: FormBuilder) {
-    this.vaccineForm = this.fb.group({
+    this.myForm = this.fb.group({
       vaccinename: ['', Validators.required],
       dosageform: ['', Validators.required],
       vaccinedatepicker: ['', Validators.required],

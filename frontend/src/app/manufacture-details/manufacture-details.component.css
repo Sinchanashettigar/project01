@@ -5,7 +5,127 @@
   }
   
  
+/* .mat-form-field {
+    width: 100%;
+      max-width: 300px; 
+    margin-bottom: 15px;
+  }
 
+  .expanded-row-container {
+    padding: 20px;
+    background-color: #f7f7f7;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .expanded-details-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+   */
+  /* .form-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-field label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .form-field input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+  } */
+  
+  /* .form-field input:focus {
+    border-color: #007bff; 
+  }
+  
+  .output-field {
+    background-color: #f1f1f1; 
+    cursor: not-allowed; 
+  }
+  
+  .expanded-details-form .form-field input:readonly {
+    background-color: #f1f1f1; 
+    border-color: #ccc; 
+  } */
+
+
+  /* Container for the expanded row */
+  .expanded-row-container {
+    padding: 20px;
+    background-color: #ffffff; /* White background for a clean look */
+    margin-top: 20px;
+    border: 1px solid #e0e0e0; /* Light grey border for subtlety */
+    border-radius: 8px; /* Slightly more rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  }
+  
+  /* Form styling */
+  .expanded-details-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Increased spacing for better readability */
+    max-width: 800px; /* Wider form for larger screens */
+    margin: 0 auto;
+  }
+  
+  /* Individual form field styling */
+  .form-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Label styling */
+  .form-field label {
+    font-size: 16px; /* Larger font size for better readability */
+    font-weight: 500; /* Slightly lighter weight for a modern look */
+    margin-bottom: 8px; /* Increased spacing between label and input */
+    color: #333333; /* Dark grey color for labels */
+  }
+  
+  /* Input field styling */
+  .form-field input {
+    padding: 12px; /* More padding for larger clickable area */
+    font-size: 14px;
+    border: 1px solid #cccccc; /* Light grey border */
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    background-color: #fafafa; /* Very light grey background */
+  }
+  
+  /* Focus state for input fields */
+  .form-field input:focus {
+    border-color: #007bff; /* Blue border on focus */
+    background-color: #ffffff; /* White background on focus */
+  }
+  
+  /* Styling for output fields (readonly inputs) */
+  .output-field {
+    background-color: #f9f9f9; /* Slightly darker grey for output fields */
+    cursor: not-allowed;
+    color: #666666; /* Grey text color for output fields */
+  }
+  
+  /* Read-only input fields styling */
+  .expanded-details-form .form-field input:readonly {
+    background-color: #f9f9f9;
+    border-color: #dddddd; /* Slightly darker border for readonly fields */
+    color: #666666;
+  }
+  
  
   
 
