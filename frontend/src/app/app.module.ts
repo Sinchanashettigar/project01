@@ -25,6 +25,7 @@ import { ManufactureDetailsComponent } from './manufacture-details/manufacture-d
 import { RecipientDetailsComponent } from './recipient-details/recipient-details.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DetailsComponent } from './details/details.component';
+import { DetailsrecipientComponent } from './detailsrecipient/detailsrecipient.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ ManufactureComponent,
     ManufactureDetailsComponent,
     RecipientDetailsComponent,
     DetailsComponent,
+    DetailsrecipientComponent,
     
     
  

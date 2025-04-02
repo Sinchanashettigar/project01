@@ -25,7 +25,7 @@ export interface UserData {
   templateUrl: './manufacture-details.component.html',
 })
 export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
-  // vaccineForm!: FormGroup;
+  
   displayedColumns: string[] = [
     'vaccineName', 
     'vaccineType', 
@@ -59,31 +59,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
 
   constructor(private manufactureService: ManufactureService,private router:Router) {
    
-      // this.vaccineForm = this.fb.group({
-      //   vacc_name: [''],
-      //   vacc_type: [''],
-      //   approval_status: [''],
-      //   production_date: [''],
-      //   expiry_date: [''],
-      //   vacc_batch: [''],
-      //   dosage_instruction: [''],
-      //   dosage_before: [''],
-      //   dosage_after: [''],
-      //   dosage_frequency: [''],
-      //   age_group_name: [''],
-      //   minimum_age: [''],
-      //   maximum_age: [''],
-      //   manufacture_name: [''],
-      //   established_year: [''],
-      //   contact_person_name: [''],
-      //   email: [''],
-      //   countryCode: ['+91'],
-      //   countryName: [''] ,
-      //   phone_number: [''],
-      //   description: [''],
-      //   side_effects: [''],
-      //   contraindications: [''],
-      // });
+
   }
   
  
@@ -150,11 +126,9 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
   }
 
  
-  // navigateToDetails() {
-  //   this.router.navigate(['/details'],); // Navigate to a static route
-  // }
+ 
   goToDetails(row: any) {
-    console.log('Navigating with data:', row); // ✅ Debugging step
-    this.router.navigate(['/details'], { state: { data: row } });
+    console.log('Navigating with data:', row); 
+    this.router.navigate(['/details'],{ state: { data: row } });
   }
 }

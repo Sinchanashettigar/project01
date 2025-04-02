@@ -18,18 +18,19 @@ export interface UserData {
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
-    // vaccineForm!: FormGroup;
-  
-    // expandedRow: UserData | null = null;
+    
     expandedRow: any = null;
 
     constructor(private router: Router) { 
       const navigation = this.router.getCurrentNavigation();
+      console.log(' Navigation object:', navigation);
+    
       if (navigation?.extras.state && navigation.extras.state['data']) {
         this.expandedRow = navigation.extras.state['data'];
-        console.log('✅ Received Data:', this.expandedRow); 
+        console.log('Received Data:', this.expandedRow); 
       } else {
-        console.warn('⚠ No data received, initializing empty object');
+        console.warn(' No data received, initializing empty object');
+        console.log(' navigation.extras.state:', navigation?.extras.state);
         this.expandedRow = {  // Only initialize if no data is received
           vacc_name: '',
           vacc_type: '',
@@ -55,7 +56,8 @@ export class DetailsComponent implements OnInit {
           side_effects: '',
           contraindications: '',
         };
-      }
+      }        console.log(' expandedRow:', this.expandedRow);
+
     }
     
    
@@ -68,10 +70,10 @@ export class DetailsComponent implements OnInit {
         this.expandedRow = {
           vacc_name: this.expandedRow.vaccineName,
           vacc_type: this.expandedRow.vaccineType,
-          approval_status: this.expandedRow.ApprovalStatus,
+          approval_status: this.expandedRow.approvalStatus,
           production_date: this.expandedRow.productionDate,
           expiry_date: this.expandedRow.expiryDate,
-          vacc_batch: '',
+          vacc_batch: this.expandedRow.vaccibebatch,
           dosage_instruction: '',
           dosage_before: '',
           dosage_after: '',

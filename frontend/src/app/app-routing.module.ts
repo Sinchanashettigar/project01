@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
  import { ManufactureDetailsComponent } from './manufacture-details/manufacture-details.component';
 import { RecipientDetailsComponent } from './recipient-details/recipient-details.component';
 import { DetailsComponent } from './details/details.component'; 
+import { DetailsrecipientComponent } from './detailsrecipient/detailsrecipient.component';
+
 const routes: Routes = [
   {
      path:'manufacture',component:ManufactureComponent
@@ -16,7 +18,9 @@ const routes: Routes = [
   
   {path:'manufacture-details',component:ManufactureDetailsComponent},
 
-  { path: 'details', component: DetailsComponent },  // Define the route
+  { path: 'details', component: DetailsComponent },  
+  {path: 'detailsrecipient',component:DetailsrecipientComponent},
+ 
    {
     path:'',redirectTo:'/manufacture', pathMatch:'full'
    },

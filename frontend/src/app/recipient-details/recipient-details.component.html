@@ -71,10 +71,9 @@
     <ng-container matColumnDef="actions">
       <th mat-headers-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let row">
-        <button mat-icon-button (click)="toggleRow(row)">
-          <mat-icon>{{
-            expandedRow === row ? "expand_less" : "expand_more"
-          }}</mat-icon>
+        <button mat-icon-button (click)="goToDetails(row)">
+          <mat-icon>info</mat-icon>
+          
         </button>
       </td>
     </ng-container>
@@ -87,7 +86,7 @@
   </table>
 
 
-  <div *ngIf="expandedRow" class="expanded-row-container">
+  <!-- <div *ngIf="expandedRow" class="expanded-row-container">
     <h3><mat-icon class="custom-icon">account_circle</mat-icon>
 
       {{ expandedRow.first_name }} {{ expandedRow.last_name }}</h3>
@@ -367,7 +366,7 @@
        
     </form>
   </div>
-  
+   -->
 
   <div
     *ngIf="isSearchApplied && dataSource.filteredData?.length === 0"

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PatientService } from '../services/patient.service';
 // import { Patient } from '..src/app/patient';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 export interface UserData {
   first_name: string;
@@ -55,41 +56,39 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
   isSearchApplied = false;
   expandedRow: UserData | null = null;
 
-  // expandedRow: any = null;
-
-  // isPanelExpanded = false;
+ 
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private patientService: PatientService,private fb: FormBuilder) {
-    this.myForm = this.fb.group({
-      vaccinename: ['', Validators.required],
-      dosageform: ['', Validators.required],
-      vaccinedatepicker: ['', Validators.required],
-      hasChronicIllness: [''],
-      chronicIllnessDetails: [''],
-      hasAllergies: [''],
-      allergyDetails: [''],
-      hasmedications: [''],
-      medicationsDetails: [''],
-      hasillnesses: [''],
-      illnessesDetails: [''],
-      hasPhysicalDisabilities: [''],
-      mentalhealthDetails: [''],
-      hassurgeries: [''],
-      surgeriesDetails: [''],
-      hashospitalized: [''],
-      hospitalizedDetais: [''],
-      hasmedicalconditions: [''],
-      medicalconditionsDetails: [''],
-      hasDietaryRestrictions: [''],
-      isAdditionalVaccineDetailsUsed: ['']
-    });
-  }
+  constructor(private patientService: PatientService,private router:Router) {
+  //   this.myForm = this.fb.group({
+  //     vaccinename: ['', Validators.required],
+  //     dosageform: ['', Validators.required],
+  //     vaccinedatepicker: ['', Validators.required],
+  //     hasChronicIllness: [''],
+  //     chronicIllnessDetails: [''],
+  //     hasAllergies: [''],
+  //     allergyDetails: [''],
+  //     hasmedications: [''],
+  //     medicationsDetails: [''],
+  //     hasillnesses: [''],
+  //     illnessesDetails: [''],
+  //     hasPhysicalDisabilities: [''],
+  //     mentalhealthDetails: [''],
+  //     hassurgeries: [''],
+  //     surgeriesDetails: [''],
+  //     hashospitalized: [''],
+  //     hospitalizedDetais: [''],
+  //     hasmedicalconditions: [''],
+  //     medicalconditionsDetails: [''],
+  //     hasDietaryRestrictions: [''],
+  //     isAdditionalVaccineDetailsUsed: ['']
+  //   });
+  // }
   
-
+  }
   ngOnInit() {
     this.fetchpatientData();
   }
@@ -114,13 +113,13 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
     );
   }
   
-  toggleRow(row: UserData) {
+  // toggleRow(row: UserData) {
    
-    console.log('Selected row:', row);
+  //   console.log('Selected row:', row);
 
-    this.expandedRow = this.expandedRow === row ? null : row;
-    console.log('Expanded row set to:', this.expandedRow);
-  }
+  //   this.expandedRow = this.expandedRow === row ? null : row;
+  //   console.log('Expanded row set to:', this.expandedRow);
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -145,5 +144,8 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
       this.dataFound = false;
     }
   }
-
+  goToDetails(row: any) {
+    console.log('Navigating with data:', row); 
+    this.router.navigate(['/detailsrecipient'],{ state: { data: row } });
+  }
 }
