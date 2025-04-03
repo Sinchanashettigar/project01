@@ -31,11 +31,7 @@ export class DetailsrecipientComponent implements OnInit {
     this.expandedRow = navigation.extras.state['data'];
     console.log('Received Data:', this.expandedRow);
   } 
-  // else
-  //  {
-  //   console.warn('No data received, navigating back.');
-  //   this.router.navigate(['/previous-route']); 
-  // }
+  
    }
 
   ngOnInit(): void {

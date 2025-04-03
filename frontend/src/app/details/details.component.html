@@ -6,6 +6,12 @@
       >Vaccine Manufacturer History
     </h3>
     <form class="expanded-details-form">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Vaccine Produced</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="form-grid">
       <div class="form-field">
         <label for="vacc_name">Vaccine Name:</label>
         <input
@@ -115,7 +121,15 @@
           readonly
         />
       </div>
+    </div>
+  </mat-expansion-panel>
 
+
+ <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Target Age Group</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="form-grid">
       <div class="form-field">
         <label for="age_group_name">Age Group Name:</label>
         <input
@@ -148,7 +162,17 @@
           readonly
         />
       </div>
+    </div>
+  </mat-expansion-panel>
 
+
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Contact Information</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="form-grid">
       <div class="form-field">
         <label for="manufacture_name">Manufacturer Name:</label>
         <input
@@ -214,7 +238,16 @@
           readonly
         />
       </div>
+    </div>
+  </mat-expansion-panel>
 
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Vaccine Deatils</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="form-grid">
       <div class="form-field">
         <label for="description">Description:</label>
         <input
@@ -247,6 +280,10 @@
           readonly
         />
       </div>
+    </div>
+  </mat-expansion-panel>
+
+</mat-accordion>
     </form>
   </div>
 

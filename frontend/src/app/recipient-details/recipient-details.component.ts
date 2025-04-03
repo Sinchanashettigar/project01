@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PatientService } from '../services/patient.service';
-// import { Patient } from '..src/app/patient';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -113,14 +112,7 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
     );
   }
   
-  // toggleRow(row: UserData) {
-   
-  //   console.log('Selected row:', row);
-
-  //   this.expandedRow = this.expandedRow === row ? null : row;
-  //   console.log('Expanded row set to:', this.expandedRow);
-  // }
-
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.dataSource) {
@@ -144,8 +136,8 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
       this.dataFound = false;
     }
   }
-  goToDetails(row: any) {
-    console.log('Navigating with data:', row); 
-    this.router.navigate(['/detailsrecipient'],{ state: { data: row } });
+  goToDetails(rowData: any) {
+    console.log('Navigating with data:', rowData); 
+    this.router.navigate(['/detailsrecipient'],{ state: { data: rowData } });
   }
 }

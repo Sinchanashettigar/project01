@@ -2,10 +2,8 @@ import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { HttpClient } from '@angular/common/http';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ManufactureService } from '../services/manufacture.service';
-import {FormBuilder,FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
 
 export interface UserData {
@@ -25,7 +23,7 @@ export interface UserData {
   templateUrl: './manufacture-details.component.html',
 })
 export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
-  
+  vaccineForm: FormGroup;
   displayedColumns: string[] = [
     'vaccineName', 
     'vaccineType', 
@@ -51,7 +49,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
   dataSource = new MatTableDataSource<UserData>([]);
   filterControl = new FormControl('');
   isSearchApplied = false; 
-  // expandedRow: UserData | null = null;
+  expandedRow: UserData | null = null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -127,8 +125,8 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
 
  
  
-  goToDetails(row: any) {
-    console.log('Navigating with data:', row); 
-    this.router.navigate(['/details'],{ state: { data: row } });
+  goToDetails(rowData: any) {
+    console.log('Navigating with data:', rowData); 
+    this.router.navigate(['details'],{ state: { data: rowData } });
   }
 }

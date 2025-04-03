@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormBuilder,FormGroup} from '@angular/forms';
 
 export interface UserData {
   vaccineName: string;
@@ -22,80 +21,22 @@ export class DetailsComponent implements OnInit {
     expandedRow: any = null;
 
     constructor(private router: Router) { 
-      const navigation = this.router.getCurrentNavigation();
-      console.log(' Navigation object:', navigation);
-    
-      if (navigation?.extras.state && navigation.extras.state['data']) {
+      
+        const navigation = this.router.getCurrentNavigation();
+      
+      if (navigation?.extras.state?.['data']) {
         this.expandedRow = navigation.extras.state['data'];
-        console.log('Received Data:', this.expandedRow); 
-      } else {
-        console.warn(' No data received, initializing empty object');
-        console.log(' navigation.extras.state:', navigation?.extras.state);
-        this.expandedRow = {  // Only initialize if no data is received
-          vacc_name: '',
-          vacc_type: '',
-          approval_status: '',
-          production_date: '',
-          expiry_date: '',
-          vacc_batch: '',
-          dosage_instruction: '',
-          dosage_before: '',
-          dosage_after: '',
-          dosage_frequency: '',
-          age_group_name: '',
-          minimum_age: '',
-          maximum_age: '',
-          manufacture_name: '',
-          established_year: '',
-          contact_person_name: '',
-          email: '',
-          countryCode: '+91',
-          countryName: '',
-          phone_number: '',
-          description: '',
-          side_effects: '',
-          contraindications: '',
-        };
-      }        console.log(' expandedRow:', this.expandedRow);
-
-    }
+        console.log('Received Data:', this.expandedRow);
+      
+      }
     
-   
+    }
   
 
   
 
     ngOnInit(): void {
-      if (this.expandedRow && 'vaccineName' in this.expandedRow) {
-        this.expandedRow = {
-          vacc_name: this.expandedRow.vaccineName,
-          vacc_type: this.expandedRow.vaccineType,
-          approval_status: this.expandedRow.approvalStatus,
-          production_date: this.expandedRow.productionDate,
-          expiry_date: this.expandedRow.expiryDate,
-          vacc_batch: this.expandedRow.vaccibebatch,
-          dosage_instruction: '',
-          dosage_before: '',
-          dosage_after: '',
-          dosage_frequency: '',
-          age_group_name: this.expandedRow.ageGroup,
-          minimum_age: '',
-          maximum_age: '',
-          manufacture_name: this.expandedRow.manufactureName,
-          established_year: '',
-          contact_person_name: '',
-          email: '',
-          countryCode: '+91',
-          countryName: '',
-          phone_number: '',
-          description: this.expandedRow.description,
-          side_effects: '',
-          contraindications: '',
-        };
-      }
     }
-   
-    
 toggleRow(row: UserData) {
    
     console.log('Selected row:', row);
