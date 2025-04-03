@@ -62,30 +62,7 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private patientService: PatientService,private router:Router) {
-  //   this.myForm = this.fb.group({
-  //     vaccinename: ['', Validators.required],
-  //     dosageform: ['', Validators.required],
-  //     vaccinedatepicker: ['', Validators.required],
-  //     hasChronicIllness: [''],
-  //     chronicIllnessDetails: [''],
-  //     hasAllergies: [''],
-  //     allergyDetails: [''],
-  //     hasmedications: [''],
-  //     medicationsDetails: [''],
-  //     hasillnesses: [''],
-  //     illnessesDetails: [''],
-  //     hasPhysicalDisabilities: [''],
-  //     mentalhealthDetails: [''],
-  //     hassurgeries: [''],
-  //     surgeriesDetails: [''],
-  //     hashospitalized: [''],
-  //     hospitalizedDetais: [''],
-  //     hasmedicalconditions: [''],
-  //     medicalconditionsDetails: [''],
-  //     hasDietaryRestrictions: [''],
-  //     isAdditionalVaccineDetailsUsed: ['']
-  //   });
-  // }
+
   
   }
   ngOnInit() {
