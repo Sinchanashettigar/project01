@@ -59,24 +59,7 @@ export class PatientComponent {
     this.states = State.getStatesOfCountry();
   }
 
-  // addFields() {
-  //   if (this.additionalFields.length < 100) {
-  //     const fieldName = `vaccine_${this.additionalFields.length}`;
-  //     this.additionalFields.push(fieldName);
-  //     this.myForm.addControl(fieldName, new FormControl(''));
-  //     console.log(this.myForm);
-  //     console.log(this.myForm.get("additionalFields" )?.value);
-       
-  //   }
-  // }
-  // removeFields() {
-  //   if (this.additionalFields.length > 0) {
-  //     const fieldName = this.additionalFields.pop();
-  //     if (fieldName) {
-  //       this.myForm.removeControl(fieldName);
-  //     }
-  //   }
-  // }
+
   addFields() {
     if (this.additionalFields.length < 100) {
       const index = this.additionalFields.length;
@@ -141,10 +124,7 @@ export class PatientComponent {
       medicalconditionsDetails: [''],
       hasDietaryRestrictions: [''],
       isAdditionalVaccineDetailsUsed: [''],
-//       vacc1: [''],
-    
-//       dosageform1:[''],
-//  dateofvaccine1:[''],
+
 
      additionalFields: this.fb.array([   ]),
     
