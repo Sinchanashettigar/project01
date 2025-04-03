@@ -150,6 +150,11 @@ td {
 
   font-size: 16px;
 }
+ /* <<-- css for icon of information-->> */
 
-
-
+.info-icon {
+  color: #0d0d0e46; /* Change icon color */
+  font-size: 24px; /* Adjust size */
+  vertical-align: middle; /* Align properly with text */
+  cursor: pointer; /* Show pointer on hover */
+}
