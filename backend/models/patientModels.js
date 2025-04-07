@@ -47,7 +47,6 @@ const patientSchema = new mongoose.Schema({
       type: String,
     },
   },
-
   dob: {
     type: Date,
     required: true,

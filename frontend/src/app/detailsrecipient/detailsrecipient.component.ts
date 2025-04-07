@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PatientService } from '../services/patient.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 export interface UserData {
   first_name: string;
   last_name: string;
@@ -24,7 +27,10 @@ export interface UserData {
 })
 export class DetailsrecipientComponent implements OnInit {
   expandedRow: any = null;
-  constructor(private router: Router) {
+  isEditing: boolean = false;
+
+
+  constructor(private router: Router , private patientService : PatientService,private _snackBar: MatSnackBar) {
     const navigation = this.router.getCurrentNavigation();
   
   if (navigation?.extras.state?.['data']) {
@@ -35,12 +41,39 @@ export class DetailsrecipientComponent implements OnInit {
    }
 
   ngOnInit(): void {
-  }
-toggleRow(row: UserData) {
-   
-    console.log('Selected row:', row);
 
-    this.expandedRow = this.expandedRow === row ? null : row;
-    console.log('Expanded row set to:', this.expandedRow);
   }
+   enableEditing() {
+    this.isEditing = true;
+  }
+
+  saveChanges() {
+    this.isEditing = true;
+    this.expandedRow.address = {
+      street: this.expandedRow.street,
+      city: this.expandedRow.city,
+      state: this.expandedRow.state,
+      postal_code: this.expandedRow.postal_code,
+      country: this.expandedRow.country,
+    };
+console.log('Saved data:', this.expandedRow);
+/* POST API FOR UPDATE*/
+     this.patientService.postPatients(this.expandedRow).subscribe({
+      next: (data) => {
+        console.log('patient data updated',data);
+        this._snackBar.open('Patient  Data Updated successfully ','Done',{
+          duration: 3000,
+          });
+          this.router.navigate(['/recipient-details']);
+        
+      },
+      error: (error) => {
+        console.error('Error updating patient data:',error);
+        this._snackBar.open('Update Failed.Try again.','close',{
+          duration: 3000,
+        });
+      }
+     });
+  }
+
 }

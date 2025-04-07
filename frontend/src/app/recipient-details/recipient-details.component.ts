@@ -30,7 +30,7 @@ export interface UserData {
   templateUrl: './recipient-details.component.html',
 })
 export class RecipientDetailsComponent implements OnInit, AfterViewInit {
-  myForm: FormGroup; 
+  // myForm: FormGroup; 
   displayedColumns: string[] = [
     'first_name',
     'last_name',
@@ -55,7 +55,7 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
   isSearchApplied = false;
   expandedRow: UserData | null = null;
 
- 
+  patients: any[] = [];
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -67,6 +67,7 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {
     this.fetchpatientData();
+    this.loadPatients();
   }
 
   ngAfterViewInit() {
@@ -113,8 +114,17 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
       this.dataFound = false;
     }
   }
-  goToDetails(rowData: any) {
-    console.log('Navigating with data:', rowData); 
-    this.router.navigate(['/detailsrecipient'],{ state: { data: rowData } });
+  goToDetails(row: any) {
+    console.log('Navigating with data:', row); 
+    this.router.navigate(['/detailsrecipient'],{ state: { data: row } });
+  }
+  loadPatients()
+  {
+    this.patientService.getPatients().subscribe({
+      next:(data) => {
+        this.dataSource.data = data;
+      },
+      error: (err) => console.error(err),
+    });
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 export interface UserData {
   vaccineName: string;
   vaccineType: string;
@@ -36,12 +35,14 @@ export class DetailsComponent implements OnInit {
   
 
     ngOnInit(): void {
+      // console.log('ExpandedRow:', this.expandedRow);
     }
-toggleRow(row: UserData) {
+// toggleRow(row: UserData) {
    
-    console.log('Selected row:', row);
+//     console.log('Selected row:', row);
 
-    this.expandedRow = this.expandedRow === row ? null : row;
-    console.log('Expanded row set to:', this.expandedRow);
-  }
+//     this.expandedRow = this.expandedRow === row ? null : row;
+//     console.log('Expanded row set to:', this.expandedRow);
+//   }
+  
 }

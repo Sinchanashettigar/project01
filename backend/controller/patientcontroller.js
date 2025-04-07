@@ -94,5 +94,16 @@ const getAllPatients = async (req,res) =>
     res.status(500).json({status :" Error fetching all patients"});
 
   }
+};
+const updatePatientsDetails = async (req,res) =>
+{
+  try {
+    const patients = await patientModels.find({});
+    res.status(200).json(patients);
+  }catch(error)
+  {
+    console.log(error);
+    res.status(500).json({status:" Error fetching all patients"});
+  }
 }
-module.exports = { insertPatientDetails, getPatientDetails ,getAllPatients };
+module.exports = { insertPatientDetails, getPatientDetails ,getAllPatients,updatePatientsDetails};

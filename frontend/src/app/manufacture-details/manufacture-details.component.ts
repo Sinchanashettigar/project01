@@ -23,7 +23,7 @@ export interface UserData {
   templateUrl: './manufacture-details.component.html',
 })
 export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
-  vaccineForm: FormGroup;
+  // vaccineForm: FormGroup;
   displayedColumns: string[] = [
     'vaccineName', 
     'vaccineType', 
@@ -125,8 +125,8 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
 
  
  
-  goToDetails(rowData: any) {
-    console.log('Navigating with data:', rowData); 
-    this.router.navigate(['details'],{ state: { data: rowData } });
+  goToDetails(row: any) {
+    console.log('Navigating with data:', row); 
+    this.router.navigate(['/details'],{ state: { data: row } });
   }
 }

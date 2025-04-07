@@ -31,8 +31,5 @@ export class APIService {
   }
 }
 
-//   getData(): Observable<any[]> { 
-//     return this.http.get<any[]>(this.apiUrl);
-//   }
-// } 
+
 

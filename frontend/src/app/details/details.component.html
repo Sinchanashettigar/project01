@@ -1,290 +1,289 @@
  
 
 <div *ngIf="expandedRow" class="expanded-row-container">
-    <h3> 
-      <mat-icon class="custom-icon">business</mat-icon
-      >Vaccine Manufacturer History
-    </h3>
-    <form class="expanded-details-form">
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Vaccine Produced</mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="form-grid">
-      <div class="form-field">
-        <label for="vacc_name">Vaccine Name:</label>
-        <input
-          id="vacc_name"
-          type="text"
-          [value]="expandedRow.vacc_name"
-          class="output-field"
-          readonly
-        />
+  <h3> 
+    <mat-icon class="custom-icon">business</mat-icon
+    >Vaccine Manufacturer History
+  </h3>
+  <form class="expanded-details-form">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Vaccine Produced</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="form-grid">
+    <div class="form-field">
+      <label for="vacc_name">Vaccine Name:</label>
+      <input
+        id="vacc_name"
+        type="text"
+        [value]="expandedRow.vacc_name"
+        class="output-field"
+        readonly
+      />
 
-      </div>
-
-      <div class="form-field">
-        <label for="vacc_type">Vaccine Type:</label>
-        <input
-          id="vacc_type"
-          type="text"
-          [value]="expandedRow.vacc_type"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="approval_status">Approval Status:</label>
-        <input
-          id="approval_status"
-          type="text"
-          [value]="expandedRow.approval_status"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="production_date">Production Date:</label>
-        <input
-          id="production_date"
-          type="text"
-          [value]="expandedRow.production_date"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="expiry_date">Expiry Date:</label>
-        <input
-          id="expiry_date"
-          type="text"
-          [value]="expandedRow.expiry_date"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="vacc_batch">Vaccine Batch:</label>
-        <input
-          id="vacc_batch"
-          type="text"
-          [value]="expandedRow.vacc_batch"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="dosage_instruction">Dosage Instruction:</label>
-        <input
-          id="dosage_instruction"
-          type="text"
-          [value]="expandedRow.dosage_instruction"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="dosage_before">Dosage Before:</label>
-        <input
-          id="dosage_before"
-          type="text"
-          [value]="expandedRow.dosage_before"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="dosage_after">Dosage After:</label>
-        <input
-          id="dosage_after"
-          type="text"
-          [value]="expandedRow.dosage_after"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="dosage_frequency">Dosage Frequency:</label>
-        <input
-          id="dosage_frequency"
-          type="text"
-          [value]="expandedRow.dosage_frequency"
-          class="output-field"
-          readonly
-        />
-      </div>
     </div>
-  </mat-expansion-panel>
 
-
- <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>Target Age Group</mat-panel-title>
-              </mat-expansion-panel-header>
-              <div class="form-grid">
-      <div class="form-field">
-        <label for="age_group_name">Age Group Name:</label>
-        <input
-          id="age_group_name"
-          type="text"
-          [value]="expandedRow.age_group_name"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="minimum_age">Minimum Age:</label>
-        <input
-          id="minimum_age"
-          type="text"
-          [value]="expandedRow.minimum_age"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="maximum_age">Maximum Age:</label>
-        <input
-          id="maximum_age"
-          type="text"
-          [value]="expandedRow.maximum_age"
-          class="output-field"
-          readonly
-        />
-      </div>
+    <div class="form-field">
+      <label for="vacc_type">Vaccine Type:</label>
+      <input
+        id="vacc_type"
+        type="text"
+        [value]="expandedRow.vacc_type"
+        class="output-field"
+        readonly
+      />
     </div>
-  </mat-expansion-panel>
 
-
-
-
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>Contact Information</mat-panel-title>
-    </mat-expansion-panel-header>
-    <div class="form-grid">
-      <div class="form-field">
-        <label for="manufacture_name">Manufacturer Name:</label>
-        <input
-          id="manufacture_name"
-          type="text"
-          [value]="expandedRow.manufacture_name"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="established_year">Established Year:</label>
-        <input
-          id="established_year"
-          type="text"
-          [value]="expandedRow.established_year"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="contact_person_name">Contact Person Name:</label>
-        <input
-          id="contact_person_name"
-          type="text"
-          [value]="expandedRow.contact_person_name"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="email">Email:</label>
-        <input
-          id="email"
-          type="text"
-          [value]="expandedRow.email"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="countryName">Country Name:</label>
-        <input
-          id="countryName"
-          type="text"
-          [value]="expandedRow.countryName"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="phone_number">Phone Number:</label>
-        <input
-          id="phone_number"
-          type="text"
-          [value]="expandedRow.phone_number"
-          class="output-field"
-          readonly
-        />
-      </div>
+    <div class="form-field">
+      <label for="approval_status">Approval Status:</label>
+      <input
+        id="approval_status"
+        type="text"
+        [value]="expandedRow.approval_status"
+        class="output-field"
+        readonly
+      />
     </div>
-  </mat-expansion-panel>
 
-
-
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>Vaccine Deatils</mat-panel-title>
-    </mat-expansion-panel-header>
-    <div class="form-grid">
-      <div class="form-field">
-        <label for="description">Description:</label>
-        <input
-          id="description"
-          type="text"
-          [value]="expandedRow.description"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="side_effects">Side Effects:</label>
-        <input
-          id="side_effects"
-          type="text"
-          [value]="expandedRow.side_effects"
-          class="output-field"
-          readonly
-        />
-      </div>
-
-      <div class="form-field">
-        <label for="contraindications">Contraindications:</label>
-        <input
-          id="contraindications"
-          type="text"
-          [value]="expandedRow.contraindications"
-          class="output-field"
-          readonly
-        />
-      </div>
+    <div class="form-field">
+      <label for="production_date">Production Date:</label>
+      <input
+        id="production_date"
+        type="text"
+        [value]="expandedRow.production_date"
+        class="output-field"
+        readonly
+      />
     </div>
-  </mat-expansion-panel>
+
+    <div class="form-field">
+      <label for="expiry_date">Expiry Date:</label>
+      <input
+        id="expiry_date"
+        type="text"
+        [value]="expandedRow.expiry_date"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="vacc_batch">Vaccine Batch:</label>
+      <input
+        id="vacc_batch"
+        type="text"
+        [value]="expandedRow.vacc_batch"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="dosage_instruction">Dosage Instruction:</label>
+      <input
+        id="dosage_instruction"
+        type="text"
+        [value]="expandedRow.dosage_instruction"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="dosage_before">Dosage Before:</label>
+      <input
+        id="dosage_before"
+        type="text"
+        [value]="expandedRow.dosage_before"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="dosage_after">Dosage After:</label>
+      <input
+        id="dosage_after"
+        type="text"
+        [value]="expandedRow.dosage_after"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="dosage_frequency">Dosage Frequency:</label>
+      <input
+        id="dosage_frequency"
+        type="text"
+        [value]="expandedRow.dosage_frequency"
+        class="output-field"
+        readonly
+      />
+    </div>
+  </div>
+</mat-expansion-panel>
+
+
+<mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Target Age Group</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="form-grid">
+    <div class="form-field">
+      <label for="age_group_name">Age Group Name:</label>
+      <input
+        id="age_group_name"
+        type="text"
+        [value]="expandedRow.age_group_name"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="minimum_age">Minimum Age:</label>
+      <input
+        id="minimum_age"
+        type="text"
+        [value]="expandedRow.minimum_age"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="maximum_age">Maximum Age:</label>
+      <input
+        id="maximum_age"
+        type="text"
+        [value]="expandedRow.maximum_age"
+        class="output-field"
+        readonly
+      />
+    </div>
+  </div>
+</mat-expansion-panel>
+
+
+
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Contact Information</mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="form-grid">
+    <div class="form-field">
+      <label for="manufacture_name">Manufacturer Name:</label>
+      <input
+        id="manufacture_name"
+        type="text"
+        [value]="expandedRow.manufacture_name"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="established_year">Established Year:</label>
+      <input
+        id="established_year"
+        type="text"
+        [value]="expandedRow.established_year"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="contact_person_name">Contact Person Name:</label>
+      <input
+        id="contact_person_name"
+        type="text"
+        [value]="expandedRow.contact_person_name"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="email">Email:</label>
+      <input
+        id="email"
+        type="text"
+        [value]="expandedRow.email"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="countryName">Country Name:</label>
+      <input
+        id="countryName"
+        type="text"
+        [value]="expandedRow.countryName"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="phone_number">Phone Number:</label>
+      <input
+        id="phone_number"
+        type="text"
+        [value]="expandedRow.phone_number"
+        class="output-field"
+        readonly
+      />
+    </div>
+  </div>
+</mat-expansion-panel>
+
+
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Vaccine Deatils</mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="form-grid">
+    <div class="form-field">
+      <label for="description">Description:</label>
+      <input
+        id="description"
+        type="text"
+        [value]="expandedRow.description"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="side_effects">Side Effects:</label>
+      <input
+        id="side_effects"
+        type="text"
+        [value]="expandedRow.side_effects"
+        class="output-field"
+        readonly
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="contraindications">Contraindications:</label>
+      <input
+        id="contraindications"
+        type="text"
+        [value]="expandedRow.contraindications"
+        class="output-field"
+        readonly
+      />
+    </div>
+  </div>
+</mat-expansion-panel>
 
 </mat-accordion>
-    </form>
-  </div>
-
+  </form>
+</div>
