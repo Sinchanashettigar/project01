@@ -57,6 +57,7 @@ export class DetailsrecipientComponent implements OnInit {
 
   saveChanges() {
     this.isEditing = true;
+
    
 console.log('Saved data:', this.expandedRow);
 
@@ -67,8 +68,13 @@ console.log('Saved data:', this.expandedRow);
         this._snackBar.open('Patient  Data Updated successfully ','Done',{
           duration: 3000,
           });
-          this.router.navigate(['/recipient-details']);
-        
+          if (data && data.updatedPatient){
+          this.router.navigate(['/recipient-details'], { state: { updatedPatient: data.updatedPatient } }); // Pass data
+          }
+          else{
+            this.router.navigate(['/recipient-details'], { state: { updatedPatient: this.expandedRow } });
+
+          }
       },
       error: (error) => {
         console.error('Error updating patient data:',error);

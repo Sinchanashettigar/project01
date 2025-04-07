@@ -16,7 +16,6 @@ connectDb();
 
 app.use("/api/patient", require("./routers/patientRoutes"));
 app.use("/api/patients", require("./routers/patientRoutes"))
-
 app.use("/api/manufacture", require("./routers/manufactureRoutes"));
 app.use("/api/manufacturers", require("./routers/manufactureRoutes"));
 app.listen(PORT, () => {

@@ -49,6 +49,7 @@ const insertPatientDetails = async (req, res) => {
     }
     console.log("Formatted Data:", patientData);
 
+
     const patient = await patientModels.create(patientData);
     const allPatients = await patientModels.find();
     res.status(200).json({ status: "auth-01"  });
@@ -95,15 +96,50 @@ const getAllPatients = async (req,res) =>
 
   }
 };
-const updatePatientsDetails = async (req,res) =>
-{
+// const updatePatientsDetails = async (req,res) =>
+// {
+//   try {
+//     const patients = await patientModels.find({});
+//     res.status(200).json(patients);
+//   }catch(error)
+//   {
+//     console.log(error);
+//     res.status(500).json({status:" Error fetching all patients"});
+//   }
+// }
+
+const updatePatientsDetails = async (req, res) => {
   try {
-    const patients = await patientModels.find({});
-    res.status(200).json(patients);
-  }catch(error)
-  {
-    console.log(error);
-    res.status(500).json({status:" Error fetching all patients"});
+    // Ensure the patient ID is valid
+    const id = req.params.id; // Get patient ID from the route parameter
+
+    // Check if patientId is provided
+    if (!id) {
+      return res.status(400).json({ status: "Error", message: " ID is required" });
+    }
+
+    // The body should contain the fields you want to update (e.g., first_name, dob, etc.)
+    const updatedPatientData = req.body;
+
+    // Perform the update operation using the patientId
+    const updatedPatient = await patientModels.findByIdAndUpdate(id, updatedPatientData, { new: true });
+
+    // Check if the update operation was successful
+    if (!updatedPatient) {
+      return res.status(404).json({ status: "Error", message: "Patient not found or update failed" });
+    }
+
+    // Return the updated patient data
+    res.status(200).json({ status: "auth-01", updatedPatient });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: "Error", message: "Error updating patient details" });
   }
-}
-module.exports = { insertPatientDetails, getPatientDetails ,getAllPatients,updatePatientsDetails};
+};
+
+
+
+
+module.exports = { insertPatientDetails, getPatientDetails, getAllPatients, updatePatientsDetails };
+

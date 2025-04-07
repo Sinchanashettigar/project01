@@ -9,5 +9,5 @@ const { updatePatientsDetails } = require ("../controller/patientcontroller");
 router.post("/", insertPatientDetails);
 router.get( "/:id", getPatientDetails);
 router.get("/",getAllPatients)
-router.post("/update",updatePatientsDetails)
+router.post("/update", updatePatientsDetails);
 module.exports = router;
