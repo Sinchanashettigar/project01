@@ -294,11 +294,7 @@ export class PatientComponent {
             duration: 5000,
           });
           console.log('Added successfully');
-
-        
-        
-
-          this.router.navigate(['/recipient-details']);{
+this.router.navigate(['/recipient-details']);{
             
           }
 

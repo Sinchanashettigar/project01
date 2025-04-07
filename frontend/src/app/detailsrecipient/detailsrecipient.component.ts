@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PatientService } from '../services/patient.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface UserData {
   first_name: string;
@@ -26,18 +27,25 @@ export interface UserData {
   styleUrls: ['./detailsrecipient.component.css']
 })
 export class DetailsrecipientComponent implements OnInit {
+ myForm: FormGroup;
   expandedRow: any = null;
   isEditing: boolean = false;
 
 
-  constructor(private router: Router , private patientService : PatientService,private _snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder,private router: Router , private patientService : PatientService,private _snackBar: MatSnackBar) {
     const navigation = this.router.getCurrentNavigation();
   
   if (navigation?.extras.state?.['data']) {
     this.expandedRow = navigation.extras.state['data'];
     console.log('Received Data:', this.expandedRow);
   } 
-  
+  this.myForm = this.fb.group({
+    street: ['', Validators.required],
+    city: ['', Validators.required],
+    state: ['', Validators.required],
+    postal_code: ['', Validators.required],
+    country: ['', Validators.required],
+  });
    }
 
   ngOnInit(): void {
@@ -49,14 +57,9 @@ export class DetailsrecipientComponent implements OnInit {
 
   saveChanges() {
     this.isEditing = true;
-    this.expandedRow.address = {
-      street: this.expandedRow.street,
-      city: this.expandedRow.city,
-      state: this.expandedRow.state,
-      postal_code: this.expandedRow.postal_code,
-      country: this.expandedRow.country,
-    };
+   
 console.log('Saved data:', this.expandedRow);
+
 /* POST API FOR UPDATE*/
      this.patientService.postPatients(this.expandedRow).subscribe({
       next: (data) => {

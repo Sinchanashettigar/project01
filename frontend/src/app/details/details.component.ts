@@ -37,12 +37,5 @@ export class DetailsComponent implements OnInit {
     ngOnInit(): void {
       // console.log('ExpandedRow:', this.expandedRow);
     }
-// toggleRow(row: UserData) {
-   
-//     console.log('Selected row:', row);
 
-//     this.expandedRow = this.expandedRow === row ? null : row;
-//     console.log('Expanded row set to:', this.expandedRow);
-//   }
-  
 }

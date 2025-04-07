@@ -60,12 +60,12 @@ const validatePatientData = (data) => {
     errors.push("Blood group is required");
   }
 
-  if (!data.address.street) errors.push("Street is required");
-  if (!data.address.city) errors.push("City is required");
-  if (!data.address.state) errors.push("State is required");
-  if (!data.address.postal_code) errors.push("Postal code is required");
-  if (!data.address.country) errors.push("Country is required");
-console.log(data.address);
+//   // if (!data.address.street) errors.push("Street is required");
+//   if (!data.address.city) errors.push("City is required");
+//   if (!data.address.state) errors.push("State is required");
+//   if (!data.address.postal_code) errors.push("Postal code is required");
+//   if (!data.address.country) errors.push("Country is required");
+// console.log(data.address);
 
  
   if (errors.length > 0) {
