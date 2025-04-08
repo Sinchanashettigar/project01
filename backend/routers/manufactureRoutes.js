@@ -8,7 +8,7 @@ const { getAllManufactures,updateManufacturerDetails } =require('../controller/m
 router.get("/:id", getManufactureDetails); 
 router.post("/", insertManufactureDetails);
 router.get("/", getAllManufactures);
-router.put('/:id', updateManufacturerDetails);
+router.put('/', updateManufacturerDetails);
 
 module.exports = router;
 

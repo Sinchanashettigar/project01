@@ -14,6 +14,7 @@ export interface UserData {
   ageGroup: string;
   manufactureName: string;
   description: string;
+  [key: string]: any;
 
 }
 

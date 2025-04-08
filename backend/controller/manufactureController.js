@@ -117,17 +117,17 @@ const getManufactureDetails = async (req, res) => {
 };
 const updateManufacturerDetails = async (req, res) => {
   try {
-    const updatedManufacturer = await Manufacturer.findByIdAndUpdate(
+    const updatedManufacture = await Manufacture.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
 
-    if (!updatedManufacturer) {
+    if (!updatedManufacture) {
       return res.status(404).json({ message: 'Manufacturer not found' });
     }
 
-    res.json(updatedManufacturer);
+    res.json(updatedManufacture);
   } catch (error) {
     res.status(500).json({ message: 'Error updating manufacturer', error: error.message });
   }
