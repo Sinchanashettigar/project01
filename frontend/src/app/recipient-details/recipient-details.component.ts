@@ -74,21 +74,38 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  fetchpatientData() {
-    this.patientService.getPatients().subscribe(
-      (data) => {
-        console.log('data received:', data);
+  // fetchpatientData() {
+  //   this.patientService.getPatients().subscribe(
+  //     (data) => {
+  //       console.log('data received:', data);
 
-        this.dataSource.data = data;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      (error) => {
-        console.error('Error fetching patient data:', error);
-      }
-    );
-  }
-  
+  //       this.dataSource.data = data;
+  //       this.dataSource.paginator = this.paginator;
+  //       this.dataSource.sort = this.sort;
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching patient data:', error);
+  //     }
+  //   );
+  // }
+  isLoading = false;
+
+fetchpatientData() {
+  this.isLoading = true;
+  this.patientService.getPatients().subscribe(
+    (data) => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.isLoading = false;  // Stop loading when data is fetched
+    },
+    (error) => {
+      console.error('Error fetching patient data:', error);
+      this.isLoading = false;  // Stop loading in case of error
+    }
+  );
+}
+
   
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -100,7 +117,7 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
   }
   applyDateFilter() {
     if (this.fromDate && this.toDate) {
-      // if (this.fromDate && this.toDate) {
+      
       this.filteredData = this.allData.filter(
         (item) => item.date >= this.fromDate! && item.date <= this.toDate!
       );
@@ -113,6 +130,11 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
       this.dataFound = false;
     }
   }
+
+
+
+
+  
   goToDetails(row: any) {
     console.log('Navigating with data:', row); 
     this.router.navigate(['/detailsrecipient'],{ state: { data: row } });

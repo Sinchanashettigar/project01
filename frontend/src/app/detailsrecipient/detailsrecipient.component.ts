@@ -27,26 +27,18 @@ export interface UserData {
   styleUrls: ['./detailsrecipient.component.css']
 })
 export class DetailsrecipientComponent implements OnInit {
- myForm: FormGroup;
   expandedRow: any = null;
   isEditing: boolean = false;
 
 
-  constructor(private fb: FormBuilder,private router: Router , private patientService : PatientService,private _snackBar: MatSnackBar) {
+  constructor(private router: Router , private patientService : PatientService,private _snackBar: MatSnackBar) {
     const navigation = this.router.getCurrentNavigation();
   
   if (navigation?.extras.state?.['data']) {
     this.expandedRow = navigation.extras.state['data'];
     console.log('Received Data:', this.expandedRow);
   } 
-  this.myForm = this.fb.group({
-    street: ['', Validators.required],
-    city: ['', Validators.required],
-    state: ['', Validators.required],
-    postal_code: ['', Validators.required],
-    country: ['', Validators.required],
-  });
-   }
+}
 
   ngOnInit(): void {
 
