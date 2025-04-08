@@ -35,8 +35,7 @@ const manufactureSchema = new mongoose.Schema({
     // side_effects: [{ type: String }],
     contraindications:[{type:Array}],
     // contraindications: [{ type: String }],
-
-});
+},{ timestamps: true });
 
   module.exports =  mongoose.model('manufacture_details',manufactureSchema)
  

@@ -90,7 +90,6 @@ const getAllManufactures = async (req, res) =>
 {
   try {
     const manufacturers = await manufactureModels.find();
-    // return res.status(201).json({status: "valid" });
     return res.status(200).json(manufacturers);
 }catch (error) {
   console.error(error);
@@ -116,4 +115,24 @@ const getManufactureDetails = async (req, res) => {
     return res.status(500).json({ status: "Internal server error" });
   }
 };
-module.exports = { insertManufactureDetails, getManufactureDetails, getAllManufactures };
+const updateManufacturerDetails = async (req, res) => {
+  try {
+    const updatedManufacturer = await Manufacturer.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    if (!updatedManufacturer) {
+      return res.status(404).json({ message: 'Manufacturer not found' });
+    }
+
+    res.json(updatedManufacturer);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating manufacturer', error: error.message });
+  }
+};
+
+
+
+module.exports = { insertManufactureDetails, getManufactureDetails, getAllManufactures ,updateManufacturerDetails};

@@ -10,9 +10,13 @@ export class ManufactureService {
 
   constructor(private http: HttpClient) {}
 
-  
-
-  getManufacturers(): Observable<any> {
+   getManufacturers(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}`);
   }
-}
+  updateManufacture(id: string, data: any) {
+    return this.http.put(`http://localhost:3000/api/manufacturers/${id}`, data);
+  }
+  
+  
+  }
+

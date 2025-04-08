@@ -74,34 +74,21 @@ export class RecipientDetailsComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  // fetchpatientData() {
-  //   this.patientService.getPatients().subscribe(
-  //     (data) => {
-  //       console.log('data received:', data);
-
-  //       this.dataSource.data = data;
-  //       this.dataSource.paginator = this.paginator;
-  //       this.dataSource.sort = this.sort;
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching patient data:', error);
-  //     }
-  //   );
-  // }
-  isLoading = false;
+ 
+  // isLoading = false;
 
 fetchpatientData() {
-  this.isLoading = true;
+  // this.isLoading = true;
   this.patientService.getPatients().subscribe(
     (data) => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.isLoading = false;  // Stop loading when data is fetched
+      // this.isLoading = false;  // Stop loading when data is fetched
     },
     (error) => {
       console.error('Error fetching patient data:', error);
-      this.isLoading = false;  // Stop loading in case of error
+      // this.isLoading = false;  // Stop loading in case of error
     }
   );
 }

@@ -97,27 +97,6 @@ const getAllPatients = async (req,res) =>
 
   }
 };
-
-// const updatePatientsDetails = async (req, res) => {
-//   try {
-//     console.log("Update request received:", req.params.id, req.body); // 🔍 Debug log
-
-//     const updatedPatient = await patientModels.findByIdAndUpdate(
-//       req.params.id,
-//       req.body,
-//       { new: true } 
-//     );
-
-//     if (!updatedPatient) {
-//       return res.status(404).json({ message: "Patient not found" });
-//     }
-
-//     res.json(updatedPatient);
-//   } catch (error) {
-//     console.error("Error in updatePatientsDetails:", error); // 🔥 Log error
-//     res.status(500).json({ message: "Error updating patient", error: error.message });
-//   }
-// };
 const updatePatientsDetails = async (req, res) => {
   try {
     console.log("Update request received:", req.params.id, req.body);
@@ -125,7 +104,7 @@ const updatePatientsDetails = async (req, res) => {
     const updatedPatient = await patientModels.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true ,runValidators: true }
+      { new: true }
     );
 
     if (!updatedPatient) {

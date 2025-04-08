@@ -27,7 +27,8 @@ export class DetailsrecipientComponent implements OnInit {
     private router: Router,
     private patientService: PatientService,
     private _snackBar: MatSnackBar
-  ) {
+  ) 
+  {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state?.['data']) {
       this.expandedRow = navigation.extras.state['data'];
