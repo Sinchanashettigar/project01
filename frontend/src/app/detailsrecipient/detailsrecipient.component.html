@@ -1,156 +1,141 @@
-
 <div *ngIf="expandedRow" class="expanded-row-container">
   <h3>
-    <mat-icon class="custom-icon">account_circle</mat-icon> 
+    <mat-icon class="custom-icon">account_circle</mat-icon>
     {{ expandedRow.first_name }} {{ expandedRow.last_name }}
   </h3>
 
   <form class="expanded-details-form">
     <mat-accordion>
 
-     
+      <!-- Personal Info -->
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Personal Information</mat-panel-title>
         
         </mat-expansion-panel-header>
-
         <div class="action-buttons">
-          <button mat-stroked-button color="grey" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
-          <button mat-raised-button color="grey" (click)="saveChanges()" *ngIf="isEditing">Save</button>
+          <button mat-stroked-button (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+          <button mat-raised-button  (click)="saveChanges()" *ngIf="isEditing">Save</button>
         </div>
         <div class="form-grid">
           <div class="form-field">
-            <label for="first_name">First Name:</label>
-            <input id="first_name" type="text" [value]="expandedRow.first_name" class="output-field" [readonly]="!isEditing" />
+            <label>First Name:</label>
+            <input type="text" [(ngModel)]="expandedRow.first_name" name="first_name" [readonly]="!isEditing" class="output-field"/>
           </div>
-        
+
           <div class="form-field">
-            <label for="last_name">Last Name:</label>
-            <input id="last_name" type="text" [value]="expandedRow.last_name" class="output-field" [readonly]="!isEditing" />
+            <label>Last Name:</label>
+            <input type="text" [(ngModel)]="expandedRow.last_name" name="last_name" [readonly]="!isEditing" class="output-field"/>
           </div>
+
           <div class="form-field">
-            <label for="dob">Date of Birth:</label>
-            <input id="dob" type="text" [value]="expandedRow.dob | date:'MM/dd/yyyy'" class="output-field" [readonly]="!isEditing" />
+            <label>Date of Birth:</label>
+            <input type="date" 
+            [ngModel]="expandedRow.dob | date:'yyyy-MM-dd'" 
+            (ngModelChange)="expandedRow.dob = $event" 
+            name="dob"
+            [readonly]="!isEditing" 
+            class="output-field">
           </div>
+
           <div class="form-field">
-            <label for="gender">Gender:</label>
-            <input id="gender" type="text" [value]="expandedRow.gender" class="output-field" [readonly]="!isEditing" />
+            <label>Gender:</label>
+            <input type="text" [(ngModel)]="expandedRow.gender" name="gender" [readonly]="!isEditing" class="output-field"/>
           </div>
+
           <div class="form-field">
-            <label for="email">Email:</label>
-            <input id="email" type="text" [value]="expandedRow.email" class="output-field" [readonly]="!isEditing" />
+            <label>Email:</label>
+            <input type="email" [(ngModel)]="expandedRow.email" name="email" [readonly]="!isEditing" class="output-field"/>
           </div>
+
           <div class="form-field">
-            <label for="phone_number">Phone Number:</label>
-            <input id="phone_number" type="text" [value]="expandedRow.phone_number" class="output-field" [readonly]="!isEditing" />
+            <label>Phone Number:</label>
+            <input type="text" [(ngModel)]="expandedRow.phone_number" name="phone_number" [readonly]="!isEditing" class="output-field"/>
           </div>
         </div>
       </mat-expansion-panel>
 
-    
+      <!-- Address -->
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Address</mat-panel-title>
         </mat-expansion-panel-header>
         <div class="action-buttons">
-          <button mat-stroked-button color="grey" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
-          <button mat-raised-button color="grey" (click)="saveChanges()" *ngIf="isEditing">Save</button>
+          <button mat-stroked-button  (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+          <button mat-raised-button  (click)="saveChanges()" *ngIf="isEditing">Save</button>
         </div>
         <div class="form-grid">
           <div class="form-field">
-            <label for="street">Street:</label>
-            <input id="street" type="text" [value]="expandedRow.address?.street" class="output-field" [readonly]="!isEditing"  />
+            <label>Street:</label>
+            <input type="text" [(ngModel)]="expandedRow.address.street" name="street" [readonly]="!isEditing" class="output-field"/>
           </div>
+
           <div class="form-field">
-            <label for="city">City:</label>
-            <input id="city" type="text" [value]="expandedRow.address?.city" class="output-field" [readonly]="!isEditing"  />
+            <label>City:</label>
+            <input type="text" [(ngModel)]="expandedRow.address.city" name="city" [readonly]="!isEditing" class="output-field"/>
           </div>
+
           <div class="form-field">
-            <label for="state">State:</label>
-            <input id="state" type="text" [value]="expandedRow.address?.state" class="output-field" [readonly]="!isEditing"  />
+            <label>State:</label>
+            <input type="text" [(ngModel)]="expandedRow.address.state" name="state" [readonly]="!isEditing" class="output-field"/>
           </div>
+
           <div class="form-field">
-            <label for="postalCode">Postal Code:</label>
-            <input id="postalCode" type="text" [value]="expandedRow.address?.postal_code" class="output-field" [readonly]="!isEditing"  />
+            <label>Postal Code:</label>
+            <input type="text" [(ngModel)]="expandedRow.address.postal_code" name="postal_code" [readonly]="!isEditing" class="output-field"/>
           </div>
+
           <div class="form-field">
-            <label for="country">Country:</label>
-            <input id="country" type="text" [value]="expandedRow.address?.country" class="output-field" [readonly]="!isEditing"  />
+            <label>Country:</label>
+            <input type="text" [(ngModel)]="expandedRow.address.country" name="country" [readonly]="!isEditing" class="output-field"/>
           </div>
         </div>
       </mat-expansion-panel>
 
-    
+      <!-- Medication Info -->
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Medication Information</mat-panel-title>
         </mat-expansion-panel-header>
         <div class="action-buttons">
-          <button mat-stroked-button color="grey" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
-          <button mat-raised-button color="grey" (click)="saveChanges()" *ngIf="isEditing">Save</button>
+          <button mat-stroked-button  (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+          <button mat-raised-button  (click)="saveChanges()" *ngIf="isEditing">Save</button>
         </div>
         <div class="form-grid">
           <div class="form-field">
-            <label for="vaccinename">Vaccine Name:</label>
-            <input id="vaccinename" type="text" [value]="vaccinename" class="output-field" [readonly]="!isEditing" />
+            <label>Vaccine Name:</label>
+            <input type="text" [(ngModel)]="expandedRow.vaccinename" name="vaccinename" [readonly]="!isEditing" class="output-field"/>
           </div>
           <div class="form-field">
-            <label for="dosageform">Dosage Form:</label>
-            <input id="dosageform" type="text" [value]="dosageform" class="output-field" [readonly]="!isEditing" />
+            <label>Dosage Form:</label>
+            <input type="text" [(ngModel)]="expandedRow.dosageform" name="dosageform" [readonly]="!isEditing" class="output-field"/>
           </div>
           <div class="form-field">
-            <label for="vaccinedatepicker">Vaccine Date:</label>
-            <input id="vaccinedatepicker" type="date" [value]="vaccinedatepicker" class="output-field" [readonly]="!isEditing" />
+            <label>Vaccine Date:</label>
+            <input type="date" [(ngModel)]="expandedRow.vaccinedatepicker" name="vaccinedatepicker" [readonly]="!isEditing" class="output-field"/>
           </div>
         </div>
       </mat-expansion-panel>
 
-    
+      <!-- Medical History -->
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Medical History</mat-panel-title>
         </mat-expansion-panel-header>
         <div class="action-buttons">
-          <button mat-stroked-button color="grey" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
-          <button mat-raised-button color="grey" (click)="saveChanges()" *ngIf="isEditing">Save</button>
+          <button mat-stroked-button  (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+          <button mat-raised-button  (click)="saveChanges()" *ngIf="isEditing">Save</button>
         </div>
         <div class="form-grid">
-          <div class="form-field">
-            <label for="hasChronicIllness">Has Chronic Illness:</label>
-            <input id="hasChronicIllness" type="text" [value]="hasChronicIllness" class="output-field" [readonly]="!isEditing" />
-          </div>
-          <div class="form-field">
-            <label for="hasAllergies">Has Allergies:</label>
-            <input id="hasAllergies" type="text" [value]="hasAllergies" class="output-field" [readonly]="!isEditing" />
-          </div>
-          <div class="form-field">
-            <label for="allergyDetails">Allergy Details:</label>
-            <input id="allergyDetails" type="text" [value]="allergyDetails" class="output-field" [readonly]="!isEditing" />
-          </div>
-          <div class="form-field">
-            <label for="hasmedications">Has Medications:</label>
-            <input id="hasmedications" type="text" [value]="hasmedications" class="output-field" [readonly]="!isEditing" />
-          </div>
-          <div class="form-field">
-            <label for="medicationsDetails">Medications Details:</label>
-            <input id="medicationsDetails" type="text" [value]="medicationsDetails" class="output-field" [readonly]="!isEditing" />
-          </div>
-          <div class="form-field">
-            <label for="hasillnesses">Has Illnesses:</label>
-            <input id="hasillnesses" type="text" [value]="hasillnesses" class="output-field" [readonly]="!isEditing" />
-          </div>
-          <div class="form-field">
-            <label for="illnessesDetails">Illnesses Details:</label>
-            <input id="illnessesDetails" type="text" [value]="illnessesDetails" class="output-field" [readonly]="!isEditing" />
-          </div>
-          <div class="form-field">
-            <label for="hasPhysicalDisabilities">Has Physical Disabilities:</label>
-            <input id="hasPhysicalDisabilities" type="text" [value]="hasPhysicalDisabilities" class="output-field" [readonly]="!isEditing" />
+          <div class="form-field" *ngFor="let field of medicalFields">
+            <label>{{ field.label }}:</label>
+            <input type="text" [(ngModel)]="expandedRow[field.key]" [name]="field.key" [readonly]="!isEditing" class="output-field"/>
           </div>
         </div>
       </mat-expansion-panel>
 
     </mat-accordion>
+
+
   </form>
 </div>

@@ -1,5 +1,6 @@
 const patientModels = require("../models/patientModels");
 const { validatePatientData } = require("../services/validatePatient");
+
 const insertPatientDetails = async (req, res) => {
   try {
     console.log(req.body);
@@ -96,47 +97,51 @@ const getAllPatients = async (req,res) =>
 
   }
 };
-// const updatePatientsDetails = async (req,res) =>
-// {
-//   try {
-//     const patients = await patientModels.find({});
-//     res.status(200).json(patients);
-//   }catch(error)
-//   {
-//     console.log(error);
-//     res.status(500).json({status:" Error fetching all patients"});
-//   }
-// }
 
+// const updatePatientsDetails = async (req, res) => {
+//   try {
+//     console.log("Update request received:", req.params.id, req.body); // 🔍 Debug log
+
+//     const updatedPatient = await patientModels.findByIdAndUpdate(
+//       req.params.id,
+//       req.body,
+//       { new: true } 
+//     );
+
+//     if (!updatedPatient) {
+//       return res.status(404).json({ message: "Patient not found" });
+//     }
+
+//     res.json(updatedPatient);
+//   } catch (error) {
+//     console.error("Error in updatePatientsDetails:", error); // 🔥 Log error
+//     res.status(500).json({ message: "Error updating patient", error: error.message });
+//   }
+// };
 const updatePatientsDetails = async (req, res) => {
   try {
-    // Ensure the patient ID is valid
-    const id = req.params.id; // Get patient ID from the route parameter
+    console.log("Update request received:", req.params.id, req.body);
 
-    // Check if patientId is provided
-    if (!id) {
-      return res.status(400).json({ status: "Error", message: " ID is required" });
-    }
+    const updatedPatient = await patientModels.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true ,runValidators: true }
+    );
 
-    // The body should contain the fields you want to update (e.g., first_name, dob, etc.)
-    const updatedPatientData = req.body;
-
-    // Perform the update operation using the patientId
-    const updatedPatient = await patientModels.findByIdAndUpdate(id, updatedPatientData, { new: true });
-
-    // Check if the update operation was successful
     if (!updatedPatient) {
-      return res.status(404).json({ status: "Error", message: "Patient not found or update failed" });
+      console.log(" Patient not found with _id:", req.params.id);
+      return res.status(404).json({ message: "Patient not found" });
     }
 
-    // Return the updated patient data
-    res.status(200).json({ status: "auth-01", updatedPatient });
+    console.log("Patient updated:", updatedPatient);
+    res.json(updatedPatient);
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ status: "Error", message: "Error updating patient details" });
+    console.error(" Error in updatePatientsDetails:", error);
+    res.status(500).json({ message: "Error updating patient", error: error.message });
   }
 };
+
 
 
 

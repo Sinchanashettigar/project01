@@ -12,9 +12,8 @@ export class PatientService {
   getPatients():Observable<any>{
     return this.http.get<any>(this.apiUrl);
   }
-  postPatients(patient: any): Observable<any>{
-    return this.http.post(this.apiUrl,patient);
-
+  updatePatient(id: string, data: any): Observable<any> {
+    return this.http.put(`http://localhost:3000/api/patients/${id}`, data);
   }
  
 }

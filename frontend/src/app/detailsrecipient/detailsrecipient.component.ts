@@ -2,25 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PatientService } from '../services/patient.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-export interface UserData {
-  first_name: string;
-  last_name: string;
-  gender: string;
-  phone_number: string;
-  id: string;
-  dob: string;
-  email?: string;
-  bloodgroup?: string;
-  address?: {
-    street: string;
-    city: string;
-    postal_code: string;
-    country: string;
-    
-  };
-}
 @Component({
   selector: 'app-detailsrecipient',
   templateUrl: './detailsrecipient.component.html',
@@ -30,51 +12,52 @@ export class DetailsrecipientComponent implements OnInit {
   expandedRow: any = null;
   isEditing: boolean = false;
 
+  medicalFields = [
+    { label: 'Has Chronic Illness', key: 'hasChronicIllness' },
+    { label: 'Has Allergies', key: 'hasAllergies' },
+    { label: 'Allergy Details', key: 'allergyDetails' },
+    { label: 'Has Medications', key: 'hasmedications' },
+    { label: 'Medications Details', key: 'medicationsDetails' },
+    { label: 'Has Illnesses', key: 'hasillnesses' },
+    { label: 'Illnesses Details', key: 'illnessesDetails' },
+    { label: 'Has Physical Disabilities', key: 'hasPhysicalDisabilities' }
+  ];
 
-  constructor(private router: Router , private patientService : PatientService,private _snackBar: MatSnackBar) {
+  constructor(
+    private router: Router,
+    private patientService: PatientService,
+    private _snackBar: MatSnackBar
+  ) {
     const navigation = this.router.getCurrentNavigation();
-  
-  if (navigation?.extras.state?.['data']) {
-    this.expandedRow = navigation.extras.state['data'];
-    console.log('Received Data:', this.expandedRow);
-  } 
-}
-
-  ngOnInit(): void {
-
+    if (navigation?.extras.state?.['data']) {
+      this.expandedRow = navigation.extras.state['data'];
+      console.log('Received Data:', this.expandedRow);
+    }
   }
-   enableEditing() {
+
+  ngOnInit(): void {}
+
+  enableEditing() {
     this.isEditing = true;
   }
 
   saveChanges() {
-    this.isEditing = true;
+    if (!this.expandedRow?._id) return;
 
-   
-console.log('Saved data:', this.expandedRow);
-
-/* POST API FOR UPDATE*/
-     this.patientService.postPatients(this.expandedRow).subscribe({
+    this.patientService.updatePatient(this.expandedRow._id, this.expandedRow).subscribe({
       next: (data) => {
-        console.log('patient data updated',data);
-        this._snackBar.open('Patient  Data Updated successfully ','Done',{
-          duration: 3000,
-          });
-          if (data && data.updatedPatient){
-          this.router.navigate(['/recipient-details'], { state: { updatedPatient: data.updatedPatient } }); // Pass data
-          }
-          else{
-            this.router.navigate(['/recipient-details'], { state: { updatedPatient: this.expandedRow } });
+        console.log('Patient data updated:', data);
+        this._snackBar.open('Patient data updated successfully!', 'Close', { duration: 3000 });
 
-          }
+        this.isEditing = false;
+
+        const updatedPatient = data?.updatedPatient || this.expandedRow;
+        this.router.navigate(['/recipient-details'], { state: { updatedPatient } });
       },
       error: (error) => {
-        console.error('Error updating patient data:',error);
-        this._snackBar.open('Update Failed.Try again.','close',{
-          duration: 3000,
-        });
+        console.error('Error updating patient:', error);
+        this._snackBar.open('Update failed. Please try again.', 'Close', { duration: 3000 });
       }
-     });
+    });
   }
-
 }
