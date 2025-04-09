@@ -36,7 +36,7 @@ export class DetailsrecipientComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   enableEditing() {
     this.isEditing = true;
@@ -44,8 +44,7 @@ export class DetailsrecipientComponent implements OnInit {
 
   saveChanges() {
     if (!this.expandedRow?._id) return;
-
-    this.patientService.updatePatient(this.expandedRow._id, this.expandedRow).subscribe({
+ this.patientService.updatePatient(this.expandedRow._id, this.expandedRow).subscribe({
       next: (data) => {
         console.log('Patient data updated:', data);
         this._snackBar.open('Patient data updated successfully!', 'Close', { duration: 3000 });
