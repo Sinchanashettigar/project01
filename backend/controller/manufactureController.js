@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Manufacture = require('../models/manufactureModels');
 
 const manufactureModels = require("../models/manufactureModels");
 const { validateManufactureData } = require("../services/validateManufacture");
@@ -117,21 +118,22 @@ const getManufactureDetails = async (req, res) => {
 };
 const updateManufacturerDetails = async (req, res) => {
   try {
-    const updatedManufacture = await Manufacture.findByIdAndUpdate(
+    const updatedManufacturer = await Manufacture.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
 
-    if (!updatedManufacture) {
-      return res.status(404).json({ message: 'Manufacturer not found' });
+    if (!updatedManufacturer) {
+      return res.status(404).json({ message: "Manufacturer not found" });
     }
 
-    res.json(updatedManufacture);
+    res.json(updatedManufacturer);
   } catch (error) {
-    res.status(500).json({ message: 'Error updating manufacturer', error: error.message });
+    res.status(500).json({ message: "Error updating manufacturer", error: error.message });
   }
 };
+
 
 
 

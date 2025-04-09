@@ -1,24 +1,26 @@
-
 <div *ngIf="expandedRow" class="expanded-row-container">
   <h3><mat-icon class="custom-icon">business</mat-icon> Vaccine Manufacturer History</h3>
 
   <form class="expanded-details-form">
     <mat-accordion>
 
+     
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Vaccine Produced</mat-panel-title>
         </mat-expansion-panel-header>
-
+        <div class="action-buttons">
+          <button mat-stroked-button  (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+          <button mat-raised-button  (click)="saveChanges()" *ngIf="isEditing">Save</button>
+        </div>
         <div class="form-grid">
           <ng-container *ngFor="let field of [
-            { label: 'Vaccine Name', id: 'vaccineName' },
-            { label: 'Vaccine Type', id: 'vaccineType' },
+            { label: 'Vaccine Name', id: 'vacc_name' },
+            { label: 'Vaccine Type', id: 'vacc_type' },
             { label: 'Approval Status', id: 'approval_status' },
-            { label: 'Production Date', id: 'productionDate' },
-            { label: 'Expiry Date', id: 'expiryDate' },
+            { label: 'Production Date', id: 'production_date' },
+            { label: 'Expiry Date', id: 'expiry_date' },
             { label: 'Vaccine Batch', id: 'vacc_batch' },
-            { label: 'Dosage Instruction', id: 'dosage_instruction' },
             { label: 'Dosage Before', id: 'dosage_before' },
             { label: 'Dosage After', id: 'dosage_after' },
             { label: 'Dosage Frequency', id: 'dosage_frequency' }
@@ -28,7 +30,64 @@
               <input
                 [id]="field.id"
                 type="text"
-                [(ngModel)]="expandedRow[field.id]"
+                [(ngModel)]="expandedRow.vaccine_produced[field.id]"
+                [readonly]="!isEditing"
+                [name]="field.id"
+                class="output-field"
+              />
+            </div>
+          </ng-container>
+        </div>
+      </mat-expansion-panel>
+
+     
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Target Age Group</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="action-buttons">
+          <button mat-stroked-button  (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+          <button mat-raised-button  (click)="saveChanges()" *ngIf="isEditing">Save</button>
+        </div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="age_group_name">Age Group Name</label>
+            <input id="age_group_name" type="text" [(ngModel)]="expandedRow.target_age_group.age_group_name" name="age_group_name" [readonly]="!isEditing" class="output-field" />
+          </div>
+          <div class="form-field">
+            <label for="minimum_age">Minimum Age</label>
+            <input id="minimum_age" type="text" [(ngModel)]="expandedRow.target_age_group.minimum_age" name="minimum_age" [readonly]="!isEditing" class="output-field" />
+          </div>
+          <div class="form-field">
+            <label for="maximum_age">Maximum Age</label>
+            <input id="maximum_age" type="text" [(ngModel)]="expandedRow.target_age_group.maximum_age" name="maximum_age" [readonly]="!isEditing" class="output-field" />
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Contact Information</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="action-buttons">
+          <button mat-stroked-button (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+          <button mat-raised-button  (click)="saveChanges()" *ngIf="isEditing">Save</button>
+        </div>
+        <div class="form-grid">
+          <ng-container *ngFor="let field of [
+            { label: 'Manufacturer Name', id: 'manufacture_name' },
+            { label: 'Established Year', id: 'established_year' },
+            { label: 'Contact Person Name', id: 'contact_person_name' },
+            { label: 'Email', id: 'email' },
+           
+            { label: 'Phone Number', id: 'phone_number' }
+          ]">
+            <div class="form-field">
+              <label [for]="field.id">{{ field.label }}</label>
+              <input
+                [id]="field.id"
+                type="text"
+                [(ngModel)]="expandedRow.contact_information[field.id]"
                 [readonly]="!isEditing"
                 [name]="field.id"
                 class="output-field"
@@ -40,80 +99,41 @@
 
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>Target Age Group</mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="form-grid">
-          <div class="form-field">
-            <label for="age_group_name">Age Group Name:</label>
-            <input id="age_group_name" type="text" [(ngModel)]="expandedRow.ageGroup" name="ageGroup" class="output-field" [readonly]="!isEditing" />
-          </div>
-          <div class="form-field">
-            <label for="minimum_age">Minimum Age:</label>
-            <input id="minimum_age" type="text" [(ngModel)]="expandedRow.minimum_age" name="minimum_age" class="output-field" [readonly]="!isEditing" />
-          </div>
-          <div class="form-field">
-            <label for="maximum_age">Maximum Age:</label>
-            <input id="maximum_age" type="text" [(ngModel)]="expandedRow.maximum_age" name="maximum_age" class="output-field" [readonly]="!isEditing" />
-          </div>
-        </div>
-      </mat-expansion-panel>
-
-  
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Contact Information</mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="form-grid">
-          <div class="form-field" *ngFor="let contactField of [
-            { label: 'Manufacturer Name', id: 'manufactureName' },
-            { label: 'Established Year', id: 'established_year' },
-            { label: 'Contact Person Name', id: 'contact_person_name' },
-            { label: 'Email', id: 'email' },
-            { label: 'Country Name', id: 'countryName' },
-            { label: 'Phone Number', id: 'phone_number' }
-          ]">
-            <label [for]="contactField.id">{{ contactField.label }}</label>
-            <input
-              [id]="contactField.id"
-              type="text"
-              [(ngModel)]="expandedRow[contactField.id]"
-              [readonly]="!isEditing"
-              [name]="contactField.id"
-              class="output-field"
-            />
-          </div>
-        </div>
-      </mat-expansion-panel>
-
-   
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
           <mat-panel-title>Vaccine Details</mat-panel-title>
         </mat-expansion-panel-header>
+        <div class="action-buttons">
+          <button mat-stroked-button (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
+          <button mat-raised-button (click)="saveChanges()" *ngIf="isEditing">Save</button>
+        </div>
         <div class="form-grid">
-          <div class="form-field" *ngFor="let detailsField of [
-            { label: 'Description', id: 'description' },
-            { label: 'Side Effects', id: 'side_effects' },
-            { label: 'Contraindications', id: 'contraindications' }
-          ]">
-            <label [for]="detailsField.id">{{ detailsField.label }}</label>
-            <input
-              [id]="detailsField.id"
-              type="text"
-              [(ngModel)]="expandedRow[detailsField.id]"
-              [readonly]="!isEditing"
-              [name]="detailsField.id"
-              class="output-field"
-            />
+          
+          <div class="form-field">
+            <label for="description">Description</label>
+            <input id="description" type="text" [(ngModel)]="expandedRow.vaccine_detail.description" name="description" [readonly]="!isEditing" class="output-field" />
+          </div>
+
+         
+          <div class="form-field">
+            <label for="dosage_instruction">Dosage Instruction</label>
+            <input id="dosage_instruction" type="text" [(ngModel)]="expandedRow.vaccine_detail.dosage_instruction" name="dosage_instruction" [readonly]="!isEditing" class="output-field" />
+          </div>
+
+          
+          <div class="form-field">
+            <label for="side_effects">Side Effects</label>
+            <input id="side_effects" type="text" [(ngModel)]="expandedRow.side_effects[0]" name="side_effects" [readonly]="!isEditing" class="output-field" />
+          </div>
+
+          
+          <div class="form-field">
+            <label for="contraindications">Contraindications</label>
+            <input id="contraindications" type="text" [(ngModel)]="expandedRow.contraindications[0]" name="contraindications" [readonly]="!isEditing" class="output-field" />
           </div>
         </div>
       </mat-expansion-panel>
 
     </mat-accordion>
 
-    <div class="action-buttons">
-      <button mat-stroked-button color="primary" (click)="enableEditing()" *ngIf="!isEditing">Edit</button>
-      <button mat-raised-button color="accent" (click)="saveChanges()" *ngIf="isEditing">Save</button>
-    </div>
+  
   </form>
 </div>
