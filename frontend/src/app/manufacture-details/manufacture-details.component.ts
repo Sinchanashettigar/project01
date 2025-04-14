@@ -91,6 +91,7 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
         ageGroup: item.target_age_group?.age_group_name ?? '',  
         manufactureName: item.contact_information?.manufacture_name ?? '',  
         description: item.vaccine_detail?.description ?? '',  
+        id: item._id
       }));
             
         this.dataSource.paginator = this.paginator;
@@ -128,6 +129,6 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
  
   goToDetails(row: any) {
     console.log('Navigating with data:', row); 
-    this.router.navigate(['/details'],{ state: { data: row } });
+    this.router.navigate(['/manufacture-details',row.id],{ state: { data: row } });
   }
 }
