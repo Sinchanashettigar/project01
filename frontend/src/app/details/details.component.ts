@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ManufactureService } from '../services/manufacture.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -15,22 +15,27 @@ export class DetailsComponent implements OnInit {
   expandedRow: any = null;
   isEditing = false;
 
+  id:string | null = null;
+
   constructor(
     private manufactureService: ManufactureService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar, 
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.loadManufacturers();
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.id = params.get('id');
+      this.getManufacturerInfo();
+      console.log("this is the id : ",this.id)
+    });
+
   }
 
-  loadManufacturers(): void {
-    this.manufactureService.getAllManufacturers().subscribe(data => {
-      console.log('API response:', data);
-      this.manufacturers = data;
-      this.expandedRow = data[0]; 
-      console.log('ExpandedRow _id:', this.expandedRow?._id);
+  getManufacturerInfo() {
+    this.manufactureService.getManufacturerById(this.id!).subscribe(data => {
+      this.expandedRow = data;
     });
   }
 
