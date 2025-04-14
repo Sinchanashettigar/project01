@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from '../services/patient.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -23,10 +23,13 @@ export class DetailsrecipientComponent implements OnInit {
     { label: 'Has Physical Disabilities', key: 'hasPhysicalDisabilities' }
   ];
 
+  id:string | null = null;
+
   constructor(
     private router: Router,
     private patientService: PatientService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute
   ) 
   {
     const navigation = this.router.getCurrentNavigation();
@@ -36,7 +39,25 @@ export class DetailsrecipientComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.id = params.get('id');
+      this.getRecipientDetails();
+      console.log("this is the id : ",this.id)
+    });
+  }
+
+  getRecipientDetails() {
+    this.patientService.getPatientById(this.id).subscribe({
+      next: (data) => {
+        this.expandedRow = data;
+        console.log("Recipient Data : ", data);
+      },
+      error: (error) => {
+        console.error('Error fetching patient details:', error);
+      }
+    });
+  }
 
   enableEditing() {
     this.isEditing = true;
