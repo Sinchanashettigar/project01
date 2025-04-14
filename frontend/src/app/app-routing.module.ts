@@ -14,12 +14,12 @@ const routes: Routes = [
   {
     path:'patient',component:PatientComponent
    },
-  {path:'recipient-details',component:RecipientDetailsComponent},
-  
-  {path:'manufacture-details',component:ManufactureDetailsComponent},
-
-  { path: 'details', component: DetailsComponent },  
-  {path: 'detailsrecipient',component:DetailsrecipientComponent},
+   
+   {path:'manufacture-details',component:ManufactureDetailsComponent},
+  { path: 'manufacture-details/:id', component: DetailsComponent },
+   
+   {path:'recipient-details',component:RecipientDetailsComponent},
+  {path: 'recipient-details/:id',component:DetailsrecipientComponent},
  
    {
     path:'',redirectTo:'/manufacture', pathMatch:'full'
