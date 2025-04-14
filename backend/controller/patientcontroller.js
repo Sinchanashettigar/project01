@@ -74,9 +74,13 @@ const insertPatientDetails = async (req, res) => {
 const getPatientDetails = async (req, res) => {
   try {
     const { id } = req.params;
-    const patient = await patientModels.find({ id });
+    console.log("id :", id);
+    
+    const patient = await patientModels.findById(id);
 
     if (patient.length !== 0) {
+      console.log("PAtient found :", patient );
+      
       res.status(200).json(patient);
     } else {
       res.status(200).json({ status: "No data found" });
