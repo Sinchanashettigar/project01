@@ -3,7 +3,7 @@ const { validatePatientData } = require("../services/validatePatient");
 
 const insertPatientDetails = async (req, res) => {
   try {
-    console.log(req.body);
+    console.log("Patient body ", req.body);
 
     const {
       first_name,
@@ -21,38 +21,84 @@ const insertPatientDetails = async (req, res) => {
       state,
       postal_code,
       country,
+      hasAllergies,
+      allergyDetails,
+      hasChronicIllness,
+      chronicIllnessDetails,
+      hasDietaryRestrictions,
+      hasPhysicalDisabilities,
+      hashospitalized,
+      hospitalizedDetais,
+      hasillnesses,
+      illnessesDetails,
+      hasmedicalconditions,
+      medicalconditionsDetails,
+      hasmedications,
+      medicationsDetails,
+      hassurgeries,
+      surgeriesDetails,
+      mentalhealthDetails,
+      vaccinename,
+      vaccinedatepicker,
+      dosageform,
+      isAdditionalVaccineDetailsUsed,
+      additionalFields
     } = req.body;
     
  const patientData = {
-      first_name,
-      last_name,
-      gender,
-      email,
-      id,
-      height,
-      weight,
-      phone_number,
-      bloodgroup,
-      address: {
-        street,
-        city,
-        state,
-        postal_code,
-        country,
-      },
-      dob,
+  first_name,
+  last_name,
+  gender,
+  email,
+  phone_number,
+  id,
+  height,
+  weight,
+  bloodgroup,
+  dob,
+  address: {
+    street,
+    city,
+    state,
+    postal_code,
+    country,
+  },
+  hasAllergies,
+  allergyDetails,
+  hasChronicIllness,
+  chronicIllnessDetails,
+  hasDietaryRestrictions,
+  hasPhysicalDisabilities,
+  hashospitalized,
+  hospitalizedDetais,
+  hasillnesses,
+  illnessesDetails,
+  hasmedicalconditions,
+  medicalconditionsDetails,
+  hasmedications,
+  medicationsDetails,
+  hassurgeries,
+  surgeriesDetails,
+  mentalhealthDetails,
+  vaccinename,
+  vaccinedatepicker,
+  dosageform,
+  isAdditionalVaccineDetailsUsed,
+  additionalFields: Array.isArray(additionalFields) ? additionalFields : []
     };
 
+    
     const validationResult = validatePatientData(patientData);
-
+    
     if(validationResult.isValid === false){
-       return res.status(200).json(validationResult);
+      return res.status(200).json(validationResult);
     }
-    console.log("Formatted Data:", patientData);
+    console.log("Req body:", req.body);
+    console.log("Form Data :" , patientData)
 
 
     const patient = await patientModels.create(patientData);
-    const allPatients = await patientModels.find();
+    // const allPatients = await patientModels.find();
     res.status(200).json({ status: "auth-01"  });
   } catch (error) {
     console.log(error);
