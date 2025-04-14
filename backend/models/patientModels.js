@@ -40,12 +40,15 @@ const patientSchema = new mongoose.Schema({
     city: {
       type: String,
     },
+    state: {
+      type: String,
+    },
     postal_code: {
       type: Number,
     },
     country: {
       type: String,
-    },
+    }
   },
   dob: {
     type: Date,
