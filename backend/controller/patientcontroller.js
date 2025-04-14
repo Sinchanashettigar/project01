@@ -83,8 +83,8 @@ const insertPatientDetails = async (req, res) => {
   vaccinename,
   vaccinedatepicker,
   dosageform,
-  isAdditionalVaccineDetailsUsed,
-  additionalFields: Array.isArray(additionalFields) ? additionalFields : []
+  // isAdditionalVaccineDetailsUsed,
+  // additionalFields: Array.isArray(additionalFields) ? additionalFields : []
     };
 
     

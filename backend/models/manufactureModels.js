@@ -38,4 +38,3 @@ const manufactureSchema = new mongoose.Schema({
 },{ timestamps: true });
 
   module.exports =  mongoose.model('manufacture_details',manufactureSchema)
- 
