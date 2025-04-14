@@ -13,16 +13,14 @@ export class ManufactureService {
    getManufacturers(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}`);
   }
-  getAllManufacturers(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/api/manufacturers');
-  }
-  
- updateManufacture(id: string, manufacturer: any): Observable<any> {
-  return this.http.put<any>(`http://localhost:3000/api/manufacturers/${id}`, manufacturer);
-}
 
-  
- 
-  
+  updateManufacture(id: string, manufacturer: any): Observable<any> {
+  return this.http.put<any>(`http://localhost:3000/api/manufacturers/${id}`, manufacturer);
   }
+  
+  getManufacturerById(id: string): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/api/manufacturers/${id}`);
+  }
+  
+}
 
