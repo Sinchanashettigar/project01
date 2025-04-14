@@ -124,7 +124,7 @@ fetchpatientData() {
   
   goToDetails(row: any) {
     console.log('Navigating with data:', row); 
-    this.router.navigate(['/detailsrecipient'],{ state: { data: row } });
+    this.router.navigate(['/recipient-details', row._id],{ state: { data: row } });
   }
 }
         
