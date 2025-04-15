@@ -75,7 +75,7 @@ const patientSchema = new mongoose.Schema({
   vaccinename: { type: String },
   vaccinedatepicker: { type: Date },
   dosageform: { type: String },
-  // isAdditionalVaccineDetailsUsed: { type: String },
-  // additionalFields: { type: [mongoose.Schema.Types.Mixed], default: [] },
+isAdditionalVaccineDetailsUsed: { type: String },
+    additionalFields: { type: [mongoose.Schema.Types.Mixed], default: [] },
 });
 module.exports = mongoose.model("patient_details", patientSchema);

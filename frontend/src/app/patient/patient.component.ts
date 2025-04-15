@@ -123,6 +123,7 @@ export class PatientComponent {
       hasmedicalconditions: [''],
       medicalconditionsDetails: [''],
       hasDietaryRestrictions: [''],
+      DietaryRestrictionsDetails:[''],
       isAdditionalVaccineDetailsUsed: [''],
 
 
