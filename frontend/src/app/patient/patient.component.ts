@@ -122,8 +122,8 @@ export class PatientComponent {
       hospitalizedDetais: [''],
       hasmedicalconditions: [''],
       medicalconditionsDetails: [''],
-      hasDietaryRestrictions: [''],
-      DietaryRestrictionsDetails:[''],
+      hasdietaryRestrictions: [''],
+      dietaryRestrictionsDetails:[''],
       isAdditionalVaccineDetailsUsed: [''],
 
 

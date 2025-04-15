@@ -20,7 +20,8 @@ export class DetailsrecipientComponent implements OnInit {
     { label: 'Medications Details', key: 'medicationsDetails' },
     { label: 'Has Illnesses', key: 'hasillnesses' },
     { label: 'Illnesses Details', key: 'illnessesDetails' },
-    { label: 'Has Physical Disabilities', key: 'hasPhysicalDisabilities' }
+    { label: ' Physical Disabilities', key: 'hasPhysicalDisabilities' },
+    {label : 'Has dietary Restrictions',key: 'dietaryRestrictions'}
   ];
 
   id:string | null = null;

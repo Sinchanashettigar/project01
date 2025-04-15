@@ -441,11 +441,11 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Do you have any dietary restrictions ? (Yes/No)</mat-label>
-          <input matInput formControlName="hasDietaryRestrictions" />
+          <input matInput formControlName="hasdietaryRestrictions" />
         </mat-form-field>
         <div
           *ngIf="
-            myForm.get('hasDietaryRestrictions')?.value?.toLowerCase() === 'yes'
+            myForm.get('hasdietaryRestrictions')?.value?.toLowerCase() === 'yes'
           "
         >
           <mat-form-field appearance="outline">
@@ -596,9 +596,9 @@
 
         <p>
           <strong>Dietary Restrictions:</strong>
-          {{ myForm.get("hasDietaryRestrictions")?.value }}
+          {{ myForm.get("hasdietaryRestrictions")?.value }}
         </p>
-        <p *ngIf="myForm.get('hasDietaryRestrictions')?.value === 'Yes'">
+        <p *ngIf="myForm.get('hasdietaryRestrictions')?.value === 'Yes'">
           <strong>Details:</strong>
           {{ myForm.get("dietaryRestrictionsDetails")?.value }}
         </p>

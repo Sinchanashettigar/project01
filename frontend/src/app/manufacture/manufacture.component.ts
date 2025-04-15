@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./manufacture.component.css'],
 })
 export class ManufactureComponent implements OnInit {
+
   vaccineForm!: FormGroup;
 
   myCountryCodesObject: {

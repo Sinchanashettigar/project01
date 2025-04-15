@@ -112,7 +112,13 @@
           </div>
           <div class="form-field">
             <label>Vaccine Date:</label>
-            <input type="date" [(ngModel)]="expandedRow.vaccinedatepicker" name="vaccinedatepicker" [readonly]="!isEditing" class="output-field"/>
+            <input
+  type="date"
+  [(ngModel)]="formattedVaccineDate"
+  name="vaccinedatepicker"
+  [readonly]="!isEditing"
+  class="output-field"
+/>
           </div>
         </div>
       </mat-expansion-panel>

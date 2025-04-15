@@ -24,7 +24,7 @@ export interface UserData {
   templateUrl: './manufacture-details.component.html',
 })
 export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
-  // vaccineForm: FormGroup;
+  
   displayedColumns: string[] = [
     'vaccineName', 
     'vaccineType', 
@@ -105,27 +105,37 @@ export class ManufactureDetailsComponent implements OnInit ,AfterViewInit{
     const filterValue = (event.target as HTMLInputElement).value;
     if (this.dataSource) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
-      this.dataSource.filter = filterValue;
+      // this.dataSource.filter = filterValue;
       this.isSearchApplied = filterValue.length > 0;
     }
   }
-  applyDateFilter(){
-    if(this.fromDate && this.toDate){
-      this.filteredData=this.allData.filter(item =>
-        item.date >= this.fromDate! && item.date <= this.toDate!
-      );
-      this.noRecords =  this.filteredData.length === 0;
-      this.dataFound = this.filteredData.length > 0;
 
-    }else
-    {
-      this.filteredData =  [...this.allData];
+
+  applyDateFilter() {
+    if (this.fromDate && this.toDate) {
+      const from = new Date(this.fromDate);
+      const to = new Date(this.toDate);
+  
+     
+      from.setHours(0, 0, 0, 0); 
+      to.setHours(23, 59, 59, 999);  
+  
+      
+  
+     
+  
+     
+      this.noRecords = this.filteredData.length === 0;
+      this.dataFound = this.filteredData.length > 0;
+    } else {
+      
+      this.filteredData = [...this.allData];
+      this.dataSource.data = this.filteredData;
       this.noRecords = false;
       this.dataFound = false;
     }
   }
-
- 
+  
  
   goToDetails(row: any) {
     console.log('Navigating with data:', row); 

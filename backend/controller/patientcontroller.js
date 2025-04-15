@@ -25,7 +25,7 @@ const insertPatientDetails = async (req, res) => {
       allergyDetails,
       hasChronicIllness,
       chronicIllnessDetails,
-      hasDietaryRestrictions,
+      hasdietaryRestrictions,
       hasPhysicalDisabilities,
       hashospitalized,
       hospitalizedDetais,
@@ -67,7 +67,7 @@ const insertPatientDetails = async (req, res) => {
   allergyDetails,
   hasChronicIllness,
   chronicIllnessDetails,
-  hasDietaryRestrictions,
+  hasdietaryRestrictions,
   hasPhysicalDisabilities,
   hashospitalized,
   hospitalizedDetais,
@@ -106,16 +106,6 @@ const insertPatientDetails = async (req, res) => {
   }
 };
 
-// const getAllPatients =  async(req ,res) =>
-// {
-//   try{
-//     const patients = await patient.find();
-//     return res.status(200).json(patients);
-//   }catch(error){
-//     console.log(error);
-//     res.status(500).json({status: "error", message:error.message});
-//   }
-// }
 
 const getPatientDetails = async (req, res) => {
   try {

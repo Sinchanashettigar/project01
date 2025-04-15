@@ -1,7 +1,4 @@
-
-
-
-<mat-horizontal-stepper #stepper>
+<mat-horizontal-stepper [linear]="true"  #stepper>
   <mat-step [stepControl]="vaccineForm">
     <form [formGroup]="vaccineForm">
       <ng-template matStepLabel>Vaccine Produced</ng-template>
@@ -25,17 +22,9 @@
         <mat-form-field appearance="outline">
           <mat-label>Approval Status</mat-label>
           <mat-select formControlName="approval_status">
-            <!-- <mat-option value="Preclinical">Preclinical</mat-option>
-            <mat-option value="Phase 1 Trial">Phase 1 Trial</mat-option>
-            <mat-option value="Phase 2 Trial">Phase 2 Trial</mat-option>
-            <mat-option value="Phase 3 Trial">Phase 3 Trial</mat-option>
-            <mat-option value="Under Review">Under Review</mat-option> -->
-            <mat-option value="Approved">Approved</mat-option>
-            <!-- <mat-option value="Emergency Use Authorization (EUA)"
-              >Emergency Use Authorization (EUA)</mat-option > -->
-            <mat-option value="Rejected">Rejected</mat-option>
-            <!-- <mat-option value="Withdrawn">Withdrawn</mat-option> -->
-          </mat-select>
+      <mat-option value="Approved">Approved</mat-option>
+  <mat-option value="Rejected">Rejected</mat-option>
+         </mat-select>
           <mat-error
             *ngIf="vaccineForm.get('approval_status')?.hasError('required')"
           >
